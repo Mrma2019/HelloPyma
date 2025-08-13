@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "我的",
+  "usingComponents": {
+    "uni-tab-bar": "../../components/tab-bar/tab-bar"
+  }
+}

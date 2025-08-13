@@ -1,0 +1,1 @@
+<view class="nav-bar flex-row data-v-e9345f2e" style="{{'height:' + d + ';' + ('justify-content:' + e) + ';' + ('color:' + f)}}"><text class="title data-v-e9345f2e" style="{{'bottom:' + b + ';' + ('max-width:' + c)}}">{{a}}</text></view>
