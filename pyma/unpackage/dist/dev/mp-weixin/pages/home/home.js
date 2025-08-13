@@ -9,16 +9,22 @@ const _sfc_main = {
       color: "white",
       navBarHeight: 0,
       swiperHeight: 0,
-      scrollViewPaddingBottom: 0
+      contentPanelPaddingBottom: 0,
+      weatherData: {
+        "temp": 38,
+        "time": "23:15",
+        "desc": "晴",
+        "windy": "東南風3級",
+        "humidity": "空氣濕度52"
+      }
     };
   },
   methods: {
     getNavBarHeight(height) {
       this.navBarHeight = height;
     },
-    setScrollViewPaddingBottom(height) {
-      common_vendor.index.__f__("log", "at pages/home/home.vue:40", height);
-      this.scrollViewPaddingBottom = height;
+    setContentPanelPaddingBottom(height) {
+      this.contentPanelPaddingBottom = height;
     }
   },
   onReady() {
@@ -49,16 +55,14 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     c: common_assets._imports_0,
     d: $data.navBarHeight + "px",
     e: $data.navBarHeight + $data.swiperHeight / 2 + "px",
-    f: common_vendor.t($data.scrollViewPaddingBottom),
-    g: common_vendor.f(100, (i, k0, i0) => {
-      return {
-        a: common_vendor.t(i),
-        b: i
-      };
-    }),
-    h: $data.swiperHeight / 2 + 10 + "px",
-    i: $data.scrollViewPaddingBottom + "px",
-    j: common_vendor.o($options.setScrollViewPaddingBottom)
+    f: common_vendor.t($data.weatherData.temp),
+    g: common_vendor.t($data.weatherData.time),
+    h: common_vendor.t($data.weatherData.desc),
+    i: common_vendor.t($data.weatherData.windy),
+    j: common_vendor.t($data.weatherData.humidity),
+    k: $data.swiperHeight / 2 + 10 + "px",
+    l: $data.contentPanelPaddingBottom + "px",
+    m: common_vendor.o($options.setContentPanelPaddingBottom)
   };
 }
 const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render]]);

@@ -2,7 +2,7 @@
 	<view class="content">
 		<uni-nav-bar class="nav-bar__component" :title="title" :algin="algin" :color="color"
 			@sendNavBarHeight="getNavBarHeight" />
-		<scroll-view id="page-content" scroll-y enable-flex :style="{paddingBottom: scrollViewPaddingBottom + 'px'}">
+		<scroll-view id="page-content" scroll-y enable-flex>
 			<view class="box flex-row" :style="{height: navBarHeight + swiperHeight/2 + 'px'}">
 				<swiper class="swiper" :style="{top: navBarHeight + 'px'}">
 					<swiper-item>
@@ -10,12 +10,31 @@
 					</swiper-item>
 				</swiper>
 			</view>
-			<view class="panel" :style="{marginTop: swiperHeight/2 + 10 + 'px'}">
-				<view>{{scrollViewPaddingBottom}}</view>
-				<view v-for="i in 100" :key="i">行号：{{i}}</view>
+			<view class="content-panel"
+				:style="{marginTop: swiperHeight/2 + 10 + 'px', paddingBottom: contentPanelPaddingBottom + 'px'} ">
+				<view class="weather-placard__panel flex-row">
+					<view class="weather flex-col">
+						<view class="icon-part flex-row">
+							<icon class="weather-icon iconfont icon-a-1"></icon>
+							<text class="temp">{{weatherData.temp}}</text>
+							<view class="time flex-col">
+								<icon class="temp-icon iconfont icon-wenduji"></icon>
+								<text>{{weatherData.time}}</text>
+							</view>
+						</view>
+						<view class="info-part flex-col">
+							<text>{{weatherData.desc}}</text>
+							<text>{{weatherData.windy}}</text>
+							<text>{{weatherData.humidity}}</text>
+						</view>
+					</view>
+					<view class="placard">
+
+					</view>
+				</view>
 			</view>
 		</scroll-view>
-		<uni-tab-bar class="tab-bar__component" @sendTabBarHeight="setScrollViewPaddingBottom"/>
+		<uni-tab-bar class="tab-bar__component" @sendTabBarHeight="setContentPanelPaddingBottom" />
 	</view>
 </template>
 
@@ -28,7 +47,14 @@
 				color: "white",
 				navBarHeight: 0,
 				swiperHeight: 0,
-				scrollViewPaddingBottom: 0
+				contentPanelPaddingBottom: 0,
+				weatherData: {
+					"temp": 38,
+					"time": "23:15",
+					"desc": "晴",
+					"windy": "東南風3級",
+					"humidity":"空氣濕度52"
+				}
 			}
 		},
 		methods: {
@@ -36,9 +62,9 @@
 				this.navBarHeight = height;
 				// console.log(this.navBarHeight);
 			},
-			setScrollViewPaddingBottom(height){
-				console.log(height);
-				this.scrollViewPaddingBottom = height;
+			setContentPanelPaddingBottom(height) {
+				// console.log('首页获取到的tab-bar高度：' + height);
+				this.contentPanelPaddingBottom = height;
 			}
 		},
 		onReady() {
@@ -53,6 +79,7 @@
 <style lang="scss">
 	$panel-width: 95%;
 	$ele-border-radius: 10px;
+	$ele-margin: 10px;
 
 	.box {
 		width: 100%;
@@ -73,5 +100,55 @@
 		}
 	}
 
-	.panel {}
+	.content-panel {
+		width: $panel-width;
+
+		.weather-placard__panel {
+			justify-content: space-between;
+
+			.weather {
+				width: max-content;
+				padding: 10px;
+				background-color: #fff;
+				border-radius: $ele-border-radius;
+				justify-content: center;
+				align-items: center;
+				font-weight: bold;
+				color: $uni-color-primary;
+
+				.icon-part {
+					align-items: center;
+
+					.weather-icon {
+						font-size: 80rpx;
+					}
+
+					.temp {
+						font-size: 45rpx;
+						margin: 0 5px;
+					}
+
+					.temp-icon {
+						font-size: 25rpx;
+					}
+
+					.time {
+						font-size: 20rpx;
+					}
+				}
+				
+				.info-part{
+					align-items: center;
+					font-size: 22rpx;
+				}
+			}
+
+			.placard {
+				flex: 1;
+				margin-left: $ele-margin;
+				background-color: #fff;
+				border-radius: $ele-border-radius;
+			}
+		}
+	}
 </style>

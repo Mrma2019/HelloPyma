@@ -16,8 +16,8 @@ const _sfc_main = {
     const query = common_vendor.index.createSelectorQuery().in(this);
     query.select(".tab-bar").boundingClientRect((rect) => {
       this.tabBarHeight = rect.height;
+      this.$emit("sendTabBarHeight", this.tabBarHeight);
     }).exec();
-    this.$emit("sendTabBarHeight", this.tabBarHeight);
   },
   computed: {
     currentPagePath() {

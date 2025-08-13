@@ -28,10 +28,9 @@
 			const query = uni.createSelectorQuery().in(this);
 			query.select(".tab-bar").boundingClientRect(rect => {
 				this.tabBarHeight = rect.height;
-				// console.log(this.tabBarHeight);
+				// console.log('tab-bar高度：' + this.tabBarHeight);
+				this.$emit("sendTabBarHeight", this.tabBarHeight);
 			}).exec();
-			
-			this.$emit("sendTabBarHeight", this.tabBarHeight);
 		},
 		computed: {
 			currentPagePath() {
