@@ -6,30 +6,29 @@
 			<view class="box flex-row" :style="{height: navBarHeight + swiperHeight/2 + 'px'}">
 				<swiper class="swiper" :style="{top: navBarHeight + 'px'}">
 					<swiper-item>
-						<image class="image" src="/static/logo.png" mode="scaleToFill"></image>
+						<image class="image" src="/static/bg_1.jpg" mode="aspectFill"></image>
 					</swiper-item>
 				</swiper>
 			</view>
 			<view class="content-panel"
 				:style="{marginTop: swiperHeight/2 + 10 + 'px', paddingBottom: contentPanelPaddingBottom + 'px'} ">
-				<view class="weather-placard__panel flex-row">
-					<view class="weather flex-col">
-						<uni-overlay></uni-overlay>
-						<view class="icon-part flex-row">
-							<icon class="weather-icon iconfont icon-a-1"></icon>
-							<text class="temp">{{weatherData.temp}}</text>
-							<view class="time flex-col">
-								<icon class="temp-icon iconfont icon-wenduji"></icon>
-								<text class="time-text">{{weatherData.time}}</text>
+				<view class="weather-card flex-row">
+					<view class="weather-card__content flex-col" data-pagepath = '/pages/weather/weather' @click="navigatorTo">
+						<view class="weather-card__icon-row flex-row">
+							<icon class="weather-card__weather-icon iconfont icon-a-1"></icon>
+							<text class="weather-card__temp">{{weatherData.temp}}</text>
+							<view class="weather-card__time flex-col">
+								<icon class="weather-card__temp-icon iconfont icon-wenduji"></icon>
+								<text class="weather-card__time-text">{{weatherData.time}}</text>
 							</view>
 						</view>
-						<view class="info-part flex-col">
+						<view class="weather-card__info-col flex-col">
 							<text>{{weatherData.desc}}</text>
 							<text>{{weatherData.windy}}</text>
 							<text>{{weatherData.humidity}}</text>
 						</view>
 					</view>
-					<view class="placard">
+					<view class="weather-card__date">
 
 					</view>
 				</view>
@@ -53,8 +52,8 @@
 					"temp": 38,
 					"time": "23:15",
 					"desc": "晴",
-					"windy": "東南風3級",
-					"humidity":"空氣濕度52"
+					"windy": "东南风3级",
+					"humidity": "空气湿度52"
 				}
 			}
 		},
@@ -66,6 +65,13 @@
 			setContentPanelPaddingBottom(height) {
 				// console.log('首页获取到的tab-bar高度：' + height);
 				this.contentPanelPaddingBottom = height;
+			},
+			navigatorTo(e){
+				const pagepath = e.currentTarget.dataset.pagepath;
+				// console.log(pagepath);
+				uni.navigateTo({
+					url: `${pagepath}`
+				})
 			}
 		},
 		onReady() {
@@ -104,10 +110,10 @@
 	.content-panel {
 		width: $panel-width;
 
-		.weather-placard__panel {
+		.weather-card {
 			justify-content: space-between;
 
-			.weather {
+			.weather-card__content {
 				width: max-content;
 				position: relative;
 				padding: 10px;
@@ -117,34 +123,36 @@
 				align-items: center;
 				color: $uni-color-primary;
 
-				.icon-part {
+				.weather-card__icon-row {
 					align-items: center;
 
-					.weather-icon {
+					.weather-card__weather-icon {
 						font-size: 80rpx;
 					}
 
-					.temp {
+					.weather-card__temp {
 						font-size: 50rpx;
 						margin: 0 5px;
+						font-weight: bold;
 					}
 
-					.temp-icon {
+					.weather-card__temp-icon {
 						font-size: 25rpx;
 					}
 
-					.time {
+					.weather-card__time {
 						font-size: 20rpx;
 					}
 				}
-				
-				.info-part{
+
+				.weather-card__info-col {
 					align-items: center;
 					font-size: 22rpx;
+					font-weight: bold;
 				}
 			}
 
-			.placard {
+			.weather-card__date {
 				flex: 1;
 				margin-left: $ele-margin;
 				background-color: #fff;

@@ -14,8 +14,8 @@ const _sfc_main = {
         "temp": 38,
         "time": "23:15",
         "desc": "晴",
-        "windy": "東南風3級",
-        "humidity": "空氣濕度52"
+        "windy": "东南风3级",
+        "humidity": "空气湿度52"
       }
     };
   },
@@ -25,6 +25,12 @@ const _sfc_main = {
     },
     setContentPanelPaddingBottom(height) {
       this.contentPanelPaddingBottom = height;
+    },
+    navigatorTo(e) {
+      const pagepath = e.currentTarget.dataset.pagepath;
+      common_vendor.index.navigateTo({
+        url: `${pagepath}`
+      });
     }
   },
   onReady() {
@@ -36,15 +42,13 @@ const _sfc_main = {
 };
 if (!Array) {
   const _easycom_uni_nav_bar2 = common_vendor.resolveComponent("uni-nav-bar");
-  const _easycom_uni_overlay2 = common_vendor.resolveComponent("uni-overlay");
   const _easycom_uni_tab_bar2 = common_vendor.resolveComponent("uni-tab-bar");
-  (_easycom_uni_nav_bar2 + _easycom_uni_overlay2 + _easycom_uni_tab_bar2)();
+  (_easycom_uni_nav_bar2 + _easycom_uni_tab_bar2)();
 }
 const _easycom_uni_nav_bar = () => "../../components/nav-bar/nav-bar.js";
-const _easycom_uni_overlay = () => "../../components/overlay/overlay.js";
 const _easycom_uni_tab_bar = () => "../../components/tab-bar/tab-bar.js";
 if (!Math) {
-  (_easycom_uni_nav_bar + _easycom_uni_overlay + _easycom_uni_tab_bar)();
+  (_easycom_uni_nav_bar + _easycom_uni_tab_bar)();
 }
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   return {
@@ -62,9 +66,10 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     h: common_vendor.t($data.weatherData.desc),
     i: common_vendor.t($data.weatherData.windy),
     j: common_vendor.t($data.weatherData.humidity),
-    k: $data.swiperHeight / 2 + 10 + "px",
-    l: $data.contentPanelPaddingBottom + "px",
-    m: common_vendor.o($options.setContentPanelPaddingBottom)
+    k: common_vendor.o((...args) => $options.navigatorTo && $options.navigatorTo(...args)),
+    l: $data.swiperHeight / 2 + 10 + "px",
+    m: $data.contentPanelPaddingBottom + "px",
+    n: common_vendor.o($options.setContentPanelPaddingBottom)
   };
 }
 const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render]]);

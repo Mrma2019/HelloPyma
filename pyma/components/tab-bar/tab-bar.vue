@@ -69,7 +69,7 @@
 			flex: 1;
 
 			.text {
-				font-size: 14px;
+				font-size: 20rpx;
 			}
 		}
 

@@ -42,10 +42,10 @@
 .content-panel {
   width: 95%;
 }
-.content-panel .weather-placard__panel {
+.content-panel .weather-card {
   justify-content: space-between;
 }
-.content-panel .weather-placard__panel .weather {
+.content-panel .weather-card .weather-card__content {
   width: -webkit-max-content;
   width: max-content;
   position: relative;
@@ -56,27 +56,29 @@
   align-items: center;
   color: #1A4190;
 }
-.content-panel .weather-placard__panel .weather .icon-part {
+.content-panel .weather-card .weather-card__content .weather-card__icon-row {
   align-items: center;
 }
-.content-panel .weather-placard__panel .weather .icon-part .weather-icon {
+.content-panel .weather-card .weather-card__content .weather-card__icon-row .weather-card__weather-icon {
   font-size: 80rpx;
 }
-.content-panel .weather-placard__panel .weather .icon-part .temp {
+.content-panel .weather-card .weather-card__content .weather-card__icon-row .weather-card__temp {
   font-size: 50rpx;
   margin: 0 5px;
+  font-weight: bold;
 }
-.content-panel .weather-placard__panel .weather .icon-part .temp-icon {
+.content-panel .weather-card .weather-card__content .weather-card__icon-row .weather-card__temp-icon {
   font-size: 25rpx;
 }
-.content-panel .weather-placard__panel .weather .icon-part .time {
+.content-panel .weather-card .weather-card__content .weather-card__icon-row .weather-card__time {
   font-size: 20rpx;
 }
-.content-panel .weather-placard__panel .weather .info-part {
+.content-panel .weather-card .weather-card__content .weather-card__info-col {
   align-items: center;
   font-size: 22rpx;
+  font-weight: bold;
 }
-.content-panel .weather-placard__panel .placard {
+.content-panel .weather-card .weather-card__date {
   flex: 1;
   margin-left: 10px;
   background-color: #fff;
