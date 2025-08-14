@@ -48,12 +48,12 @@
 .content-panel .weather-placard__panel .weather {
   width: -webkit-max-content;
   width: max-content;
+  position: relative;
   padding: 10px;
   background-color: #fff;
   border-radius: 10px;
   justify-content: center;
   align-items: center;
-  font-weight: bold;
   color: #1A4190;
 }
 .content-panel .weather-placard__panel .weather .icon-part {
@@ -63,7 +63,7 @@
   font-size: 80rpx;
 }
 .content-panel .weather-placard__panel .weather .icon-part .temp {
-  font-size: 45rpx;
+  font-size: 50rpx;
   margin: 0 5px;
 }
 .content-panel .weather-placard__panel .weather .icon-part .temp-icon {

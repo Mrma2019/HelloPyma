@@ -36,13 +36,15 @@ const _sfc_main = {
 };
 if (!Array) {
   const _easycom_uni_nav_bar2 = common_vendor.resolveComponent("uni-nav-bar");
+  const _easycom_uni_overlay2 = common_vendor.resolveComponent("uni-overlay");
   const _easycom_uni_tab_bar2 = common_vendor.resolveComponent("uni-tab-bar");
-  (_easycom_uni_nav_bar2 + _easycom_uni_tab_bar2)();
+  (_easycom_uni_nav_bar2 + _easycom_uni_overlay2 + _easycom_uni_tab_bar2)();
 }
 const _easycom_uni_nav_bar = () => "../../components/nav-bar/nav-bar.js";
+const _easycom_uni_overlay = () => "../../components/overlay/overlay.js";
 const _easycom_uni_tab_bar = () => "../../components/tab-bar/tab-bar.js";
 if (!Math) {
-  (_easycom_uni_nav_bar + _easycom_uni_tab_bar)();
+  (_easycom_uni_nav_bar + _easycom_uni_overlay + _easycom_uni_tab_bar)();
 }
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   return {

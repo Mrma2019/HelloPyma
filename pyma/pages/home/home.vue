@@ -14,12 +14,13 @@
 				:style="{marginTop: swiperHeight/2 + 10 + 'px', paddingBottom: contentPanelPaddingBottom + 'px'} ">
 				<view class="weather-placard__panel flex-row">
 					<view class="weather flex-col">
+						<uni-overlay></uni-overlay>
 						<view class="icon-part flex-row">
 							<icon class="weather-icon iconfont icon-a-1"></icon>
 							<text class="temp">{{weatherData.temp}}</text>
 							<view class="time flex-col">
 								<icon class="temp-icon iconfont icon-wenduji"></icon>
-								<text>{{weatherData.time}}</text>
+								<text class="time-text">{{weatherData.time}}</text>
 							</view>
 						</view>
 						<view class="info-part flex-col">
@@ -108,12 +109,12 @@
 
 			.weather {
 				width: max-content;
+				position: relative;
 				padding: 10px;
 				background-color: #fff;
 				border-radius: $ele-border-radius;
 				justify-content: center;
 				align-items: center;
-				font-weight: bold;
 				color: $uni-color-primary;
 
 				.icon-part {
@@ -124,7 +125,7 @@
 					}
 
 					.temp {
-						font-size: 45rpx;
+						font-size: 50rpx;
 						margin: 0 5px;
 					}
 
