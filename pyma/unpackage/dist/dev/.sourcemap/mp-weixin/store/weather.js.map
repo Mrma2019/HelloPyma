@@ -1,0 +1,1 @@
+{"version":3,"file":"weather.js","sources":["store/weather.js"],"sourcesContent":["import {\r\n\treactive\r\n} from 'vue'\r\n\r\nexport const weatherStore = reactive({\r\n\tdata: null,\r\n\tloading: false\r\n})"],"names":["reactive"],"mappings":";;AAIY,MAAC,eAAeA,cAAAA,SAAS;AAAA,EACpC,MAAM;AAAA,EACN,SAAS;AACV,CAAC;;"}

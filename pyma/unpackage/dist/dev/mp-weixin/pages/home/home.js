@@ -1,5 +1,7 @@
 "use strict";
 const common_vendor = require("../../common/vendor.js");
+const store_weather = require("../../store/weather.js");
+const store_date = require("../../store/date.js");
 const common_assets = require("../../common/assets.js");
 const _sfc_main = {
   data() {
@@ -9,14 +11,7 @@ const _sfc_main = {
       color: "white",
       navBarHeight: 0,
       swiperHeight: 0,
-      contentPanelPaddingBottom: 0,
-      weatherData: {
-        "temp": 38,
-        "time": "23:15",
-        "desc": "晴",
-        "windy": "东南风3级",
-        "humidity": "空气湿度52"
-      }
+      contentPanelPaddingBottom: 0
     };
   },
   methods: {
@@ -26,14 +21,27 @@ const _sfc_main = {
     setContentPanelPaddingBottom(height) {
       this.contentPanelPaddingBottom = height;
     },
+    //页面跳转
     navigatorTo(e) {
       const pagepath = e.currentTarget.dataset.pagepath;
       common_vendor.index.navigateTo({
         url: `${pagepath}`
       });
+      common_vendor.index.__f__("log", "at pages/home/home.vue:85", this.weatherData);
     }
   },
-  onReady() {
+  computed: {
+    weatherData() {
+      return store_weather.weatherStore.data || {};
+    },
+    formatDate() {
+      return store_date.dateStore.date || {};
+    },
+    formatTime() {
+      return store_date.dateStore.time || {};
+    }
+  },
+  onLoad() {
     const query = common_vendor.index.createSelectorQuery().in(this);
     query.select(".swiper").boundingClientRect((rect) => {
       this.swiperHeight = rect.height;
@@ -61,15 +69,20 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     c: common_assets._imports_0,
     d: $data.navBarHeight + "px",
     e: $data.navBarHeight + $data.swiperHeight / 2 + "px",
-    f: common_vendor.t($data.weatherData.temp),
-    g: common_vendor.t($data.weatherData.time),
-    h: common_vendor.t($data.weatherData.desc),
-    i: common_vendor.t($data.weatherData.windy),
-    j: common_vendor.t($data.weatherData.humidity),
+    f: common_vendor.t($options.weatherData.temp),
+    g: common_vendor.t($options.formatTime),
+    h: common_vendor.t($options.weatherData.text),
+    i: common_vendor.t($options.weatherData.windDir + $options.weatherData.windScale + "级"),
+    j: common_vendor.t("空气湿度" + $options.weatherData.humidity),
     k: common_vendor.o((...args) => $options.navigatorTo && $options.navigatorTo(...args)),
-    l: $data.swiperHeight / 2 + 10 + "px",
-    m: $data.contentPanelPaddingBottom + "px",
-    n: common_vendor.o($options.setContentPanelPaddingBottom)
+    l: common_vendor.f($options.formatDate.split(":"), (item, k0, i0) => {
+      return {
+        a: common_vendor.t(item)
+      };
+    }),
+    m: $data.swiperHeight / 2 + 10 + "px",
+    n: $data.contentPanelPaddingBottom + "px",
+    o: common_vendor.o($options.setContentPanelPaddingBottom)
   };
 }
 const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render]]);

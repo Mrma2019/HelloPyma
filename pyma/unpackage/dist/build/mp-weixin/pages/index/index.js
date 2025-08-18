@@ -1,1 +1,0 @@
-"use strict";const e=require("../../common/vendor.js"),t=require("../../common/assets.js"),o={data:()=>({title:"Hello"}),onLoad(){},methods:{}};if(!Array){e.resolveComponent("uni-nav-bar")()}Math;const r=e._export_sfc(o,[["render",function(o,r,n,s,a,i){return{a:t._imports_0,b:e.t(a.title)}}]]);wx.createPage(r);

@@ -13,23 +13,31 @@
 			<view class="content-panel"
 				:style="{marginTop: swiperHeight/2 + 10 + 'px', paddingBottom: contentPanelPaddingBottom + 'px'} ">
 				<view class="weather-card flex-row">
-					<view class="weather-card__content flex-col" data-pagepath = '/pages/weather/weather' @click="navigatorTo">
+					<view class="weather-card__content flex-col" data-pagepath='/pages/weather/weather'
+						@click="navigatorTo">
 						<view class="weather-card__icon-row flex-row">
-							<icon class="weather-card__weather-icon iconfont icon-a-1"></icon>
+							<icon class="weather-card__weather-icon breath iconfont icon-a-1"></icon>
 							<text class="weather-card__temp">{{weatherData.temp}}</text>
 							<view class="weather-card__time flex-col">
 								<icon class="weather-card__temp-icon iconfont icon-wenduji"></icon>
-								<text class="weather-card__time-text">{{weatherData.time}}</text>
+								<text class="weather-card__time-text">{{formatTime}}</text>
 							</view>
 						</view>
 						<view class="weather-card__info-col flex-col">
-							<text>{{weatherData.desc}}</text>
-							<text>{{weatherData.windy}}</text>
-							<text>{{weatherData.humidity}}</text>
+							<text>{{weatherData.text}}</text>
+							<text>{{weatherData.windDir + weatherData.windScale + '级'}}</text>
+							<text>{{'空气湿度' + weatherData.humidity}}</text>
 						</view>
 					</view>
-					<view class="weather-card__date">
-
+					<view class="weather-card__date flex-col">
+						<view class="title">
+							<text>日期</text>
+						</view>
+						<view class="date flex-row">
+							<view class="date-item" v-for="item in formatDate.split(':')" key="index">
+								<text>{{item}}</text>
+							</view>
+						</view>
 					</view>
 				</view>
 			</view>
@@ -39,6 +47,13 @@
 </template>
 
 <script>
+	import {
+		weatherStore
+	} from '@/store/weather';
+	import {
+		dateStore
+	} from '@/store/date.js'
+
 	export default {
 		data() {
 			return {
@@ -47,14 +62,7 @@
 				color: "white",
 				navBarHeight: 0,
 				swiperHeight: 0,
-				contentPanelPaddingBottom: 0,
-				weatherData: {
-					"temp": 38,
-					"time": "23:15",
-					"desc": "晴",
-					"windy": "东南风3级",
-					"humidity": "空气湿度52"
-				}
+				contentPanelPaddingBottom: 0
 			}
 		},
 		methods: {
@@ -66,15 +74,31 @@
 				// console.log('首页获取到的tab-bar高度：' + height);
 				this.contentPanelPaddingBottom = height;
 			},
-			navigatorTo(e){
+
+			//页面跳转
+			navigatorTo(e) {
 				const pagepath = e.currentTarget.dataset.pagepath;
 				// console.log(pagepath);
 				uni.navigateTo({
 					url: `${pagepath}`
-				})
+				});
+				console.log(this.weatherData);
 			}
 		},
-		onReady() {
+
+		computed: {
+			weatherData() {
+				return weatherStore.data || {};
+			},
+			formatDate() {
+				return dateStore.date || {};
+			},
+			formatTime() {
+				return dateStore.time || {};
+			}
+		},
+
+		onLoad() {
 			const query = uni.createSelectorQuery().in(this);
 			query.select(".swiper").boundingClientRect(rect => {
 				this.swiperHeight = rect.height;
@@ -116,7 +140,7 @@
 			.weather-card__content {
 				width: max-content;
 				position: relative;
-				padding: 10px;
+				padding: 15px;
 				background-color: #fff;
 				border-radius: $ele-border-radius;
 				justify-content: center;
@@ -127,13 +151,11 @@
 					align-items: center;
 
 					.weather-card__weather-icon {
-						font-size: 80rpx;
+						font-size: 90rpx;
 					}
 
 					.weather-card__temp {
-						font-size: 50rpx;
-						margin: 0 5px;
-						font-weight: bold;
+						font-size: 60rpx;
 					}
 
 					.weather-card__temp-icon {
@@ -141,14 +163,13 @@
 					}
 
 					.weather-card__time {
-						font-size: 20rpx;
+						font-size: 22rpx;
 					}
 				}
 
 				.weather-card__info-col {
 					align-items: center;
-					font-size: 22rpx;
-					font-weight: bold;
+					font-size: 23rpx;
 				}
 			}
 
@@ -157,7 +178,50 @@
 				margin-left: $ele-margin;
 				background-color: #fff;
 				border-radius: $ele-border-radius;
+				justify-content: center;
+				align-items: center;
+				box-sizing: border-box;
+				padding: 10px;
+				position: relative;
+
+				.title {
+					color: $uni-color-primary;
+					font-size: 22rpx;
+					padding: 20rpx;
+					position: absolute;
+					top: 0;
+				}
+
+				.date {
+					.date-item {
+						background-color: $uni-color-primary;
+						color: #fff;
+						padding: 20rpx;
+						margin: 0 10rpx;
+						font-size: 35rpx;
+					}
+				}
 			}
+
+			//天气图标动画
+			.breath {
+				animation: breath 2s ease-in-out infinite;
+			}
+
+			@keyframes breath {
+				0% {
+					opacity: 1;
+				}
+
+				50% {
+					opacity: 0.6;
+				}
+
+				100% {
+					opacity: 1;
+				}
+			}
+
 		}
 	}
 </style>

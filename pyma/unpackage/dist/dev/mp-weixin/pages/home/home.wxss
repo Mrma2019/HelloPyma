@@ -49,7 +49,7 @@
   width: -webkit-max-content;
   width: max-content;
   position: relative;
-  padding: 10px;
+  padding: 15px;
   background-color: #fff;
   border-radius: 10px;
   justify-content: center;
@@ -60,27 +60,57 @@
   align-items: center;
 }
 .content-panel .weather-card .weather-card__content .weather-card__icon-row .weather-card__weather-icon {
-  font-size: 80rpx;
+  font-size: 90rpx;
 }
 .content-panel .weather-card .weather-card__content .weather-card__icon-row .weather-card__temp {
-  font-size: 50rpx;
-  margin: 0 5px;
-  font-weight: bold;
+  font-size: 60rpx;
 }
 .content-panel .weather-card .weather-card__content .weather-card__icon-row .weather-card__temp-icon {
   font-size: 25rpx;
 }
 .content-panel .weather-card .weather-card__content .weather-card__icon-row .weather-card__time {
-  font-size: 20rpx;
+  font-size: 22rpx;
 }
 .content-panel .weather-card .weather-card__content .weather-card__info-col {
   align-items: center;
-  font-size: 22rpx;
-  font-weight: bold;
+  font-size: 23rpx;
 }
 .content-panel .weather-card .weather-card__date {
   flex: 1;
   margin-left: 10px;
   background-color: #fff;
   border-radius: 10px;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 10px;
+  position: relative;
+}
+.content-panel .weather-card .weather-card__date .title {
+  color: #1A4190;
+  font-size: 22rpx;
+  padding: 20rpx;
+  position: absolute;
+  top: 0;
+}
+.content-panel .weather-card .weather-card__date .date .date-item {
+  background-color: #1A4190;
+  color: #fff;
+  padding: 20rpx;
+  margin: 0 10rpx;
+  font-size: 35rpx;
+}
+.content-panel .weather-card .breath {
+  animation: breath 2s ease-in-out infinite;
+}
+@keyframes breath {
+0% {
+    opacity: 1;
+}
+50% {
+    opacity: 0.6;
+}
+100% {
+    opacity: 1;
+}
 }
