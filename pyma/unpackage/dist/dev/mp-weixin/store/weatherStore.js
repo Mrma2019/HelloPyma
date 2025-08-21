@@ -2,7 +2,7 @@
 const common_vendor = require("../common/vendor.js");
 const weatherStore = common_vendor.reactive({
   data: null,
-  loading: false
+  loading: true
 });
 exports.weatherStore = weatherStore;
-//# sourceMappingURL=../../.sourcemap/mp-weixin/store/weather.js.map
+//# sourceMappingURL=../../.sourcemap/mp-weixin/store/weatherStore.js.map

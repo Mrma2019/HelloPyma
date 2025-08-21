@@ -21,7 +21,7 @@
 			};
 		},
 		created() {
-			const sysInfo = uni.getSystemInfoSync();
+			const sysInfo = uni.getWindowInfo();
 			this.tabBarPaddingBottom = sysInfo.safeAreaInsets.bottom;
 			// console.log(this.tabBarPaddingBottom);
 			

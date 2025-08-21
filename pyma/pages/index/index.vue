@@ -1,52 +1,81 @@
 <template>
 	<view class="content">
-		<image class="logo" src="/static/logo.png"></image>
-		<view class="text-area">
-			<text class="title">{{title}}</text>
+		<view class="logo-wrapper">
+			<image class="logo" src="/static/logo.jpg"></image>
+		</view>
+		<view>
+			<text class="app-name">{{appName}}</text>
 		</view>
 	</view>
 </template>
 
-<script>
-	export default {
-		data() {
-			return {
-				title: 'Hello'
-			}
-		},
-		onLoad() {
+<script setup>
+	import {
+		watch
+	} from 'vue';
+	import {
+		weatherStore
+	} from '@/store/weatherStore.js'
 
-		},
-		methods: {
-
+	const appName = 'HelloPyma'
+	const pagepath = '/pages/home/home'
+	watch(() => weatherStore.loading, (newVal) => {
+		if (!newVal) {
+			uni.switchTab({
+				url: `${pagepath}`
+			});
 		}
-	}
+	});
 </script>
 
-<style>
+
+<style lang="scss" scoped>
 	.content {
-		display: flex;
-		flex-direction: column;
+		justify-content: center;
 		align-items: center;
-		justify-content: center;
+
+		.logo-wrapper {
+			width: 120rpx;
+			height: 120rpx;
+			position: relative;
+			border-radius: 50%;
+
+			.logo {
+				width: 100%;
+				height: 100%;
+				border-radius: 50%;
+				display: block;
+				object-fit: cover;
+			}
+
+			&::before {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				border: 3px solid #aaa;
+				border-top: 3px solid $uni-color-primary;
+				border-radius: 50%;
+				box-sizing: border-box;
+				animation: spin 1s linear infinite;
+			}
+		}
+
+		.app-name {
+			margin-top: 20rpx;
+			font-size: 25rpx;
+		}
 	}
 
-	.logo {
-		height: 200rpx;
-		width: 200rpx;
-		margin-top: 200rpx;
-		margin-left: auto;
-		margin-right: auto;
-		margin-bottom: 50rpx;
-	}
+	@keyframes spin {
+		0% {
+			transform: rotate(0deg);
+		}
 
-	.text-area {
-		display: flex;
-		justify-content: center;
-	}
-
-	.title {
-		font-size: 36rpx;
-		color: #8f8f94;
+		100% {
+			transform: rotate(360deg);
+		}
 	}
 </style>

@@ -13,31 +13,39 @@
 			<view class="content-panel"
 				:style="{marginTop: swiperHeight/2 + 10 + 'px', paddingBottom: contentPanelPaddingBottom + 'px'} ">
 				<view class="weather-card flex-row">
-					<view class="weather-card__content flex-col" data-pagepath='/pages/weather/weather'
+					<view class="weather-card__info flex-col" data-pagepath='/pages/weather/weather'
 						@click="navigatorTo">
 						<view class="weather-card__icon-row flex-row">
-							<icon class="weather-card__weather-icon breath iconfont icon-a-1"></icon>
-							<text class="weather-card__temp">{{weatherData.temp}}</text>
+							<icon class="weather-card__weather-icon breath iconfont icon-qingtian"></icon>
+							<text class="weather-card__temp">{{weatherCardInfo.temp}}</text>
 							<view class="weather-card__time flex-col">
-								<icon class="weather-card__temp-icon iconfont icon-wenduji"></icon>
+								<icon class="weather-card__temp-icon iconfont icon-sheshidu"></icon>
 								<text class="weather-card__time-text">{{formatTime}}</text>
 							</view>
 						</view>
 						<view class="weather-card__info-col flex-col">
-							<text>{{weatherData.text}}</text>
-							<text>{{weatherData.windDir + weatherData.windScale + '级'}}</text>
-							<text>{{'空气湿度' + weatherData.humidity}}</text>
+							<text>{{weatherCardInfo.text}}</text>
+							<text>{{weatherCardInfo.windDir}}</text>
+							<text>{{weatherCardInfo.humidity}}</text>
 						</view>
 					</view>
 					<view class="weather-card__date flex-col">
 						<view class="title">
-							<text>日期</text>
+							<text>{{weatherCardInfo.dateTitle}}</text>
 						</view>
 						<view class="date flex-row">
-							<view class="date-item" v-for="item in formatDate.split(':')" key="index">
-								<text>{{item}}</text>
+							<view class="date-item" v-for="item, index in formatDate.split(':')" :key="index">
+								<text class="text">{{item}}</text>
+								<text class="desc">{{ index === 0 ? 'year' : index === 1 ? 'month' : 'day' }}</text>
 							</view>
 						</view>
+					</view>
+				</view>
+				<view class="btn-card flex-row">
+					<view class="btn-card__post btn flex-col">
+						<text class="text">{{buttonCardInfo.post.text}}</text>
+						<text class="desc">{{buttonCardInfo.post.desc}}</text>
+						<icon :class="['iconfont', buttonCardInfo.post.icon]"></icon>
 					</view>
 				</view>
 			</view>
@@ -49,10 +57,10 @@
 <script>
 	import {
 		weatherStore
-	} from '@/store/weather';
+	} from '@/store/weatherStore.js';
 	import {
-		dateStore
-	} from '@/store/date.js'
+		formatStore
+	} from '@/store/formatStore.js'
 
 	export default {
 		data() {
@@ -62,7 +70,14 @@
 				color: "white",
 				navBarHeight: 0,
 				swiperHeight: 0,
-				contentPanelPaddingBottom: 0
+				contentPanelPaddingBottom: 0,
+				buttonCardInfo: {
+					post: {
+						text: '立即发布',
+						desc: '找搭子',
+						icon: 'icon-xunzhao'
+					}
+				}
 			}
 		},
 		methods: {
@@ -87,14 +102,21 @@
 		},
 
 		computed: {
-			weatherData() {
-				return weatherStore.data || {};
+			weatherCardInfo() {
+				const weatherInfo = weatherStore.data;
+				return {
+					temp: weatherInfo.temp,
+					text: weatherInfo.text,
+					windDir: `${weatherInfo.windDir} ${weatherInfo.windScale}级`,
+					humidity: `空气湿度 ${weatherInfo.humidity}`,
+					dateTitle: '当前日期 年/月/日'
+				}
 			},
 			formatDate() {
-				return dateStore.date || {};
+				return formatStore.data.date || "";
 			},
 			formatTime() {
-				return dateStore.time || {};
+				return formatStore.data.time || "";
 			}
 		},
 
@@ -109,7 +131,7 @@
 
 <style lang="scss">
 	$panel-width: 95%;
-	$ele-border-radius: 10px;
+	$ele-border-radius: 10rpx;
 	$ele-margin: 10px;
 
 	.box {
@@ -124,6 +146,10 @@
 			border-radius: $ele-border-radius;
 			overflow: hidden;
 
+			@media screen and (min-width:768px) {
+				height: 200rpx;
+			}
+
 			.image {
 				width: 100%;
 				height: 100%;
@@ -135,12 +161,15 @@
 		width: $panel-width;
 
 		.weather-card {
+			height: 200rpx;
 			justify-content: space-between;
+			box-sizing: border-box;
+			overflow: hidden;
 
-			.weather-card__content {
+			.weather-card__info {
 				width: max-content;
 				position: relative;
-				padding: 15px;
+				padding: 15rpx 25rpx;
 				background-color: #fff;
 				border-radius: $ele-border-radius;
 				justify-content: center;
@@ -152,6 +181,7 @@
 
 					.weather-card__weather-icon {
 						font-size: 90rpx;
+						color: #E6DB74;
 					}
 
 					.weather-card__temp {
@@ -159,7 +189,7 @@
 					}
 
 					.weather-card__temp-icon {
-						font-size: 25rpx;
+						font-size: 35rpx;
 					}
 
 					.weather-card__time {
@@ -181,24 +211,36 @@
 				justify-content: center;
 				align-items: center;
 				box-sizing: border-box;
-				padding: 10px;
+				padding: 20rpx;
 				position: relative;
 
 				.title {
 					color: $uni-color-primary;
 					font-size: 22rpx;
-					padding: 20rpx;
+					margin: 20rpx;
 					position: absolute;
 					top: 0;
 				}
 
 				.date {
+					width: 90%;
+					justify-content: space-between;
+
 					.date-item {
+						width: 28%;
 						background-color: $uni-color-primary;
 						color: #fff;
-						padding: 20rpx;
-						margin: 0 10rpx;
+						padding: 18rpx 0;
 						font-size: 35rpx;
+						text-align: center;
+						position: relative;
+
+						.desc {
+							font-size: 18rpx;
+							position: absolute;
+							right: 8rpx;
+							bottom: 5rpx;
+						}
 					}
 				}
 			}
@@ -210,18 +252,64 @@
 
 			@keyframes breath {
 				0% {
+					transform: scale(1);
 					opacity: 1;
 				}
 
 				50% {
+					transform: scale(1.1);
 					opacity: 0.6;
 				}
 
 				100% {
+					transform: scale(1);
 					opacity: 1;
 				}
 			}
 
+		}
+
+		.btn-card {
+			height: 250rpx;
+			justify-content: space-between;
+			background-color: #fff;
+			margin-top: $ele-margin;
+			border-radius: $ele-border-radius;
+			padding: 20rpx;
+			box-sizing: border-box;
+			overflow: hidden;
+			color: #fff;
+
+			.btn {
+				position: relative;
+				box-sizing: border-box;
+				overflow: hidden;
+			}
+
+			.text {
+				font-size: 32rpx;
+				margin: 15rpx 40rpx;
+			}
+
+			.desc {
+				font-size: 20rpx;
+				margin: 15rpx 40rpx;
+			}
+
+			.iconfont {
+				font-size: 50rpx;
+				position: absolute;
+				right: 25rpx;
+				bottom: 25rpx;
+			}
+
+			.btn-card__post {
+				width: 49%;
+				height: 100%;
+				justify-content: center;
+				background-color: $uni-color-primary;
+				border-radius: $ele-border-radius;
+			}
 		}
 	}
 </style>

@@ -20,7 +20,7 @@
 			color: String
 		},
 		created() {
-			const sysInfo = uni.getSystemInfoSync();
+			const sysInfo = uni.getWindowInfo();
 			const menuInfo = uni.getMenuButtonBoundingClientRect();
 
 			this.navBarHeight = menuInfo.top * 2 + menuInfo.height - sysInfo.statusBarHeight;

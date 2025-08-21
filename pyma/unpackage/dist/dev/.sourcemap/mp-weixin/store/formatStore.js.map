@@ -1,0 +1,1 @@
+{"version":3,"file":"formatStore.js","sources":["store/formatStore.js"],"sourcesContent":["import {reactive} from 'vue'\r\n\r\nexport const formatStore = reactive({\r\n\tdata: {}\r\n})"],"names":["reactive"],"mappings":";;AAEY,MAAC,cAAcA,cAAAA,SAAS;AAAA,EACnC,MAAM,CAAE;AACT,CAAC;;"}

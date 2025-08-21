@@ -1,1 +1,0 @@
-{"version":3,"file":"date.js","sources":["store/date.js"],"sourcesContent":["import {reactive} from 'vue'\r\n\r\nexport const dateStore = reactive({\r\n\tdate: null,\r\n\ttime: null\r\n})"],"names":["reactive"],"mappings":";;AAEY,MAAC,YAAYA,cAAAA,SAAS;AAAA,EACjC,MAAM;AAAA,EACN,MAAM;AACP,CAAC;;"}

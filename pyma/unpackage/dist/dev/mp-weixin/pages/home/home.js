@@ -1,7 +1,7 @@
 "use strict";
 const common_vendor = require("../../common/vendor.js");
-const store_weather = require("../../store/weather.js");
-const store_date = require("../../store/date.js");
+const store_weatherStore = require("../../store/weatherStore.js");
+const store_formatStore = require("../../store/formatStore.js");
 const common_assets = require("../../common/assets.js");
 const _sfc_main = {
   data() {
@@ -11,7 +11,14 @@ const _sfc_main = {
       color: "white",
       navBarHeight: 0,
       swiperHeight: 0,
-      contentPanelPaddingBottom: 0
+      contentPanelPaddingBottom: 0,
+      buttonCardInfo: {
+        post: {
+          text: "立即发布",
+          desc: "找搭子",
+          icon: "icon-xunzhao"
+        }
+      }
     };
   },
   methods: {
@@ -27,18 +34,25 @@ const _sfc_main = {
       common_vendor.index.navigateTo({
         url: `${pagepath}`
       });
-      common_vendor.index.__f__("log", "at pages/home/home.vue:85", this.weatherData);
+      common_vendor.index.__f__("log", "at pages/home/home.vue:100", this.weatherData);
     }
   },
   computed: {
-    weatherData() {
-      return store_weather.weatherStore.data || {};
+    weatherCardInfo() {
+      const weatherInfo = store_weatherStore.weatherStore.data;
+      return {
+        temp: weatherInfo.temp,
+        text: weatherInfo.text,
+        windDir: `${weatherInfo.windDir} ${weatherInfo.windScale}级`,
+        humidity: `空气湿度 ${weatherInfo.humidity}`,
+        dateTitle: "当前日期 年/月/日"
+      };
     },
     formatDate() {
-      return store_date.dateStore.date || {};
+      return store_formatStore.formatStore.data.date || "";
     },
     formatTime() {
-      return store_date.dateStore.time || {};
+      return store_formatStore.formatStore.data.time || "";
     }
   },
   onLoad() {
@@ -66,23 +80,29 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       algin: $data.algin,
       color: $data.color
     }),
-    c: common_assets._imports_0,
+    c: common_assets._imports_0$1,
     d: $data.navBarHeight + "px",
     e: $data.navBarHeight + $data.swiperHeight / 2 + "px",
-    f: common_vendor.t($options.weatherData.temp),
+    f: common_vendor.t($options.weatherCardInfo.temp),
     g: common_vendor.t($options.formatTime),
-    h: common_vendor.t($options.weatherData.text),
-    i: common_vendor.t($options.weatherData.windDir + $options.weatherData.windScale + "级"),
-    j: common_vendor.t("空气湿度" + $options.weatherData.humidity),
+    h: common_vendor.t($options.weatherCardInfo.text),
+    i: common_vendor.t($options.weatherCardInfo.windDir),
+    j: common_vendor.t($options.weatherCardInfo.humidity),
     k: common_vendor.o((...args) => $options.navigatorTo && $options.navigatorTo(...args)),
-    l: common_vendor.f($options.formatDate.split(":"), (item, k0, i0) => {
+    l: common_vendor.t($options.weatherCardInfo.dateTitle),
+    m: common_vendor.f($options.formatDate.split(":"), (item, index, i0) => {
       return {
-        a: common_vendor.t(item)
+        a: common_vendor.t(item),
+        b: common_vendor.t(index === 0 ? "year" : index === 1 ? "month" : "day"),
+        c: index
       };
     }),
-    m: $data.swiperHeight / 2 + 10 + "px",
-    n: $data.contentPanelPaddingBottom + "px",
-    o: common_vendor.o($options.setContentPanelPaddingBottom)
+    n: common_vendor.t($data.buttonCardInfo.post.text),
+    o: common_vendor.t($data.buttonCardInfo.post.desc),
+    p: common_vendor.n($data.buttonCardInfo.post.icon),
+    q: $data.swiperHeight / 2 + 10 + "px",
+    r: $data.contentPanelPaddingBottom + "px",
+    s: common_vendor.o($options.setContentPanelPaddingBottom)
   };
 }
 const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render]]);

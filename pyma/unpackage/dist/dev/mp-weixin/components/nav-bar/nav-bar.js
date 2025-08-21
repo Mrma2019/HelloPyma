@@ -15,7 +15,7 @@ const _sfc_main = {
     color: String
   },
   created() {
-    const sysInfo = common_vendor.index.getSystemInfoSync();
+    const sysInfo = common_vendor.index.getWindowInfo();
     const menuInfo = common_vendor.index.getMenuButtonBoundingClientRect();
     this.navBarHeight = menuInfo.top * 2 + menuInfo.height - sysInfo.statusBarHeight;
     this.titleBottom = menuInfo.top - sysInfo.statusBarHeight;
