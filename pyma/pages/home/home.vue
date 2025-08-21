@@ -3,55 +3,59 @@
 		<uni-nav-bar class="nav-bar__component" :title="title" :algin="algin" :color="color"
 			@sendNavBarHeight="getNavBarHeight" />
 		<scroll-view id="page-content" scroll-y enable-flex refresher-enabled="true">
-			<view class="box flex-row" :style="{height: navBarHeight + swiperHeight/2 + 'px'}">
-				<swiper class="swiper" :style="{top: navBarHeight + 'px'}">
-					<swiper-item>
-						<image class="image" src="/static/bg_1.jpg" mode="aspectFill"></image>
-					</swiper-item>
-				</swiper>
-			</view>
-			<view class="content-panel"
-				:style="{marginTop: swiperHeight/2 + 10 + 'px', paddingBottom: contentPanelPaddingBottom + 'px'} ">
-				<view class="weather-card flex-row">
-					<view class="weather-card__info flex-col" data-pagepath='/pages/weather/weather'
-						@click="navigatorTo">
-						<view class="weather-card__icon-row flex-row">
-							<icon class="weather-card__weather-icon breath iconfont icon-qingtian"></icon>
-							<text class="weather-card__temp">{{weatherCardInfo.temp}}</text>
-							<view class="weather-card__time flex-col">
-								<icon class="weather-card__temp-icon iconfont icon-sheshidu"></icon>
-								<text class="weather-card__time-text">{{formatTime}}</text>
-							</view>
-						</view>
-						<view class="weather-card__info-col flex-col">
-							<text>{{weatherCardInfo.text}}</text>
-							<text>{{weatherCardInfo.windDir}}</text>
-							<text>{{weatherCardInfo.humidity}}</text>
-						</view>
-					</view>
-					<view class="weather-card__date flex-col">
-						<view class="title">
-							<text>{{weatherCardInfo.dateTitle}}</text>
-						</view>
-						<view class="date flex-row">
-							<view class="date-item" v-for="item, index in formatDate.split(':')" :key="index">
-								<text class="text">{{item}}</text>
-								<text class="desc">{{ index === 0 ? 'year' : index === 1 ? 'month' : 'day' }}</text>
-							</view>
-						</view>
-					</view>
+			<view class="content-wrapper">
+				<view class="box flex-row" :style="{height: navBarHeight + swiperHeight/2 + 'px'}">
+					<swiper class="swiper" :style="{top: navBarHeight + 'px'}">
+						<swiper-item>
+							<image class="image" src="/static/pictures/827d7d49-a85d-4c47-8773-8a9c3275c034.jpg"
+								mode="aspectFill"></image>
+						</swiper-item>
+					</swiper>
 				</view>
-				<view class="btn-card flex-row">
-					<view class="btn-card__main btn flex-col">
-						<text class="text">{{buttonCardInfo.mainBtn.text}}</text>
-						<text class="desc">{{buttonCardInfo.mainBtn.desc}}</text>
-						<icon :class="['iconfont', buttonCardInfo.mainBtn.icon]"></icon>
+				<view class="content-panel"
+					:style="{marginTop: swiperHeight/2 + 10 + 'px', paddingBottom: contentPanelPaddingBottom + 'px'} ">
+					<view class="weather-card flex-row">
+						<view class="weather-card__info flex-col" data-pagepath='/pages/weather/weather'
+							@click="navigatorTo">
+							<view class="weather-card__icon-row flex-row">
+								<icon class="weather-card__weather-icon breath iconfont icon-qingtian"></icon>
+								<text class="weather-card__temp">{{weatherCardInfo.temp}}</text>
+								<view class="weather-card__time flex-col">
+									<icon class="weather-card__temp-icon iconfont icon-sheshidu"></icon>
+									<text class="weather-card__time-text">{{formatTime}}</text>
+								</view>
+							</view>
+							<view class="weather-card__info-col flex-col">
+								<text>{{weatherCardInfo.text}}</text>
+								<text>{{weatherCardInfo.windDir}}</text>
+								<text>{{weatherCardInfo.humidity}}</text>
+							</view>
+						</view>
+						<view class="weather-card__date flex-col">
+							<view class="title">
+								<text>{{weatherCardInfo.dateTitle}}</text>
+							</view>
+							<view class="date flex-row">
+								<view class="date-item" v-for="item, index in formatDate.split(':')" :key="index">
+									<text class="text">{{item}}</text>
+									<text class="desc">{{ index === 0 ? 'year' : index === 1 ? 'month' : 'day' }}</text>
+								</view>
+							</view>
+						</view>
 					</view>
-					<view class="btn-card__box flex-col">
-						<view class="btn-card__sub btn flex-col" v-for="item, index in buttonCardInfo.subBtns" :key="index">
-							<text class="text">{{item.text}}</text>
-							<text class="desc">{{item.desc}}</text>
-							<icon :class="['iconfont', item.icon]"></icon>
+					<view class="btn-card flex-row">
+						<view class="btn-card__main btn flex-col">
+							<text class="text">{{buttonCardInfo.mainBtn.text}}</text>
+							<text class="desc">{{buttonCardInfo.mainBtn.desc}}</text>
+							<icon :class="['iconfont', buttonCardInfo.mainBtn.icon]"></icon>
+						</view>
+						<view class="btn-card__box flex-col">
+							<view class="btn-card__sub btn flex-col" v-for="item, index in buttonCardInfo.subBtns"
+								:key="index">
+								<text class="text">{{item.text}}</text>
+								<text class="desc">{{item.desc}}</text>
+								<icon :class="['iconfont', item.icon]"></icon>
+							</view>
 						</view>
 					</view>
 				</view>
@@ -85,9 +89,9 @@
 						icon: 'icon-xunzhao'
 					},
 					subBtns: [{
-						text: '留言板',
-						desc: '去留言',
-						icon: 'icon-liuyan'
+						text: '已参与',
+						desc: '进入',
+						icon: 'icon-liebiao1'
 					}, {
 						text: '声明',
 						desc: '查看',
@@ -202,11 +206,11 @@
 
 					.weather-card__temp {
 						font-size: 60rpx;
+						padding-left: 10rpx;
 					}
 
 					.weather-card__temp-icon {
 						font-size: 35rpx;
-						font-weight: bold;
 					}
 
 					.weather-card__time {
@@ -327,18 +331,21 @@
 				width: 49%;
 				height: 100%;
 			}
-			
-			.btn-card__box{
+
+			.btn-card__box {
 				width: 49%;
 				height: 100%;
 				justify-content: space-between;
-				.btn-card__sub{
+
+				.btn-card__sub {
 					width: 100%;
 					height: 49%;
-					.text{
+
+					.text {
 						margin: 0 0 10rpx 25rpx;
 					}
-					.desc{
+
+					.desc {
 						margin: 0 0 0 25rpx;
 					}
 				}

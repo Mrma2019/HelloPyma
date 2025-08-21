@@ -19,9 +19,9 @@ const _sfc_main = {
           icon: "icon-xunzhao"
         },
         subBtns: [{
-          text: "留言板",
-          desc: "去留言",
-          icon: "icon-liuyan"
+          text: "已参与",
+          desc: "进入",
+          icon: "icon-liebiao1"
         }, {
           text: "声明",
           desc: "查看",
@@ -43,7 +43,7 @@ const _sfc_main = {
       common_vendor.index.navigateTo({
         url: `${pagepath}`
       });
-      common_vendor.index.__f__("log", "at pages/home/home.vue:116", this.weatherData);
+      common_vendor.index.__f__("log", "at pages/home/home.vue:120", this.weatherData);
     }
   },
   computed: {

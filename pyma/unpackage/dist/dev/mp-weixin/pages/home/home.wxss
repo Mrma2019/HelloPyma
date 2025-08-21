@@ -73,10 +73,10 @@
 }
 .content-panel .weather-card .weather-card__info .weather-card__icon-row .weather-card__temp {
   font-size: 60rpx;
+  padding-left: 10rpx;
 }
 .content-panel .weather-card .weather-card__info .weather-card__icon-row .weather-card__temp-icon {
   font-size: 35rpx;
-  font-weight: bold;
 }
 .content-panel .weather-card .weather-card__info .weather-card__icon-row .weather-card__time {
   font-size: 22rpx;
