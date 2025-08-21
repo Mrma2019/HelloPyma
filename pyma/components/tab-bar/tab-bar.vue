@@ -22,8 +22,13 @@
 		},
 		created() {
 			const sysInfo = uni.getWindowInfo();
-			this.tabBarPaddingBottom = sysInfo.safeAreaInsets.bottom;
-			// console.log(this.tabBarPaddingBottom);
+			const platform = uni.getDeviceInfo().platform;
+			if(platform !== 'ios') {
+				this.tabBarPaddingBottom = 10;
+				// console.log(this.tabBarPaddingBottom);
+			}else{
+				this.tabBarPaddingBottom = sysInfo.safeAreaInsets.bottom;
+			}
 			
 			const query = uni.createSelectorQuery().in(this);
 			query.select(".tab-bar").boundingClientRect(rect => {
@@ -69,7 +74,7 @@
 			flex: 1;
 
 			.text {
-				font-size: 20rpx;
+				font-size: 25rpx;
 			}
 		}
 

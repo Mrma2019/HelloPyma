@@ -42,10 +42,17 @@
 					</view>
 				</view>
 				<view class="btn-card flex-row">
-					<view class="btn-card__post btn flex-col">
-						<text class="text">{{buttonCardInfo.post.text}}</text>
-						<text class="desc">{{buttonCardInfo.post.desc}}</text>
-						<icon :class="['iconfont', buttonCardInfo.post.icon]"></icon>
+					<view class="btn-card__main btn flex-col">
+						<text class="text">{{buttonCardInfo.mainBtn.text}}</text>
+						<text class="desc">{{buttonCardInfo.mainBtn.desc}}</text>
+						<icon :class="['iconfont', buttonCardInfo.mainBtn.icon]"></icon>
+					</view>
+					<view class="btn-card__box flex-col">
+						<view class="btn-card__sub btn flex-col" v-for="item, index in buttonCardInfo.subBtns" :key="index">
+							<text class="text">{{item.text}}</text>
+							<text class="desc">{{item.desc}}</text>
+							<icon :class="['iconfont', item.icon]"></icon>
+						</view>
 					</view>
 				</view>
 			</view>
@@ -72,11 +79,20 @@
 				swiperHeight: 0,
 				contentPanelPaddingBottom: 0,
 				buttonCardInfo: {
-					post: {
+					mainBtn: {
 						text: '立即发布',
 						desc: '找搭子',
 						icon: 'icon-xunzhao'
-					}
+					},
+					subBtns: [{
+						text: '留言板',
+						desc: '去留言',
+						icon: 'icon-liuyan'
+					}, {
+						text: '声明',
+						desc: '查看',
+						icon: 'icon-guanyuapp'
+					}]
 				}
 			}
 		},
@@ -177,7 +193,7 @@
 				color: $uni-color-primary;
 
 				.weather-card__icon-row {
-					align-items: center;
+					align-items: flex-end;
 
 					.weather-card__weather-icon {
 						font-size: 90rpx;
@@ -190,6 +206,7 @@
 
 					.weather-card__temp-icon {
 						font-size: 35rpx;
+						font-weight: bold;
 					}
 
 					.weather-card__time {
@@ -284,16 +301,19 @@
 				position: relative;
 				box-sizing: border-box;
 				overflow: hidden;
+				justify-content: center;
+				background-color: $uni-color-primary;
+				border-radius: $ele-border-radius;
 			}
 
 			.text {
 				font-size: 32rpx;
-				margin: 15rpx 40rpx;
+				margin: 0 0 25rpx 40rpx;
 			}
 
 			.desc {
 				font-size: 20rpx;
-				margin: 15rpx 40rpx;
+				margin: 20rpx 0 0 40rpx;
 			}
 
 			.iconfont {
@@ -303,12 +323,25 @@
 				bottom: 25rpx;
 			}
 
-			.btn-card__post {
+			.btn-card__main {
 				width: 49%;
 				height: 100%;
-				justify-content: center;
-				background-color: $uni-color-primary;
-				border-radius: $ele-border-radius;
+			}
+			
+			.btn-card__box{
+				width: 49%;
+				height: 100%;
+				justify-content: space-between;
+				.btn-card__sub{
+					width: 100%;
+					height: 49%;
+					.text{
+						margin: 0 0 10rpx 25rpx;
+					}
+					.desc{
+						margin: 0 0 0 25rpx;
+					}
+				}
 			}
 		}
 	}

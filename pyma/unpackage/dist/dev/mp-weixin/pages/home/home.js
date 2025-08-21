@@ -13,11 +13,20 @@ const _sfc_main = {
       swiperHeight: 0,
       contentPanelPaddingBottom: 0,
       buttonCardInfo: {
-        post: {
+        mainBtn: {
           text: "立即发布",
           desc: "找搭子",
           icon: "icon-xunzhao"
-        }
+        },
+        subBtns: [{
+          text: "留言板",
+          desc: "去留言",
+          icon: "icon-liuyan"
+        }, {
+          text: "声明",
+          desc: "查看",
+          icon: "icon-guanyuapp"
+        }]
       }
     };
   },
@@ -34,7 +43,7 @@ const _sfc_main = {
       common_vendor.index.navigateTo({
         url: `${pagepath}`
       });
-      common_vendor.index.__f__("log", "at pages/home/home.vue:100", this.weatherData);
+      common_vendor.index.__f__("log", "at pages/home/home.vue:116", this.weatherData);
     }
   },
   computed: {
@@ -97,12 +106,20 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
         c: index
       };
     }),
-    n: common_vendor.t($data.buttonCardInfo.post.text),
-    o: common_vendor.t($data.buttonCardInfo.post.desc),
-    p: common_vendor.n($data.buttonCardInfo.post.icon),
-    q: $data.swiperHeight / 2 + 10 + "px",
-    r: $data.contentPanelPaddingBottom + "px",
-    s: common_vendor.o($options.setContentPanelPaddingBottom)
+    n: common_vendor.t($data.buttonCardInfo.mainBtn.text),
+    o: common_vendor.t($data.buttonCardInfo.mainBtn.desc),
+    p: common_vendor.n($data.buttonCardInfo.mainBtn.icon),
+    q: common_vendor.f($data.buttonCardInfo.subBtns, (item, index, i0) => {
+      return {
+        a: common_vendor.t(item.text),
+        b: common_vendor.t(item.desc),
+        c: common_vendor.n(item.icon),
+        d: index
+      };
+    }),
+    r: $data.swiperHeight / 2 + 10 + "px",
+    s: $data.contentPanelPaddingBottom + "px",
+    t: common_vendor.o($options.setContentPanelPaddingBottom)
   };
 }
 const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render]]);

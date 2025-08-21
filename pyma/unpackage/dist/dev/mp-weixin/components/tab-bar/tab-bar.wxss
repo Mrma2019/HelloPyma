@@ -36,7 +36,7 @@
   flex: 1;
 }
 .tab-bar .tab-item .text.data-v-ffb3232c {
-  font-size: 20rpx;
+  font-size: 25rpx;
 }
 .tab-bar .active.data-v-ffb3232c {
   color: #1A4190;

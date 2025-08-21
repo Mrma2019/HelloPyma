@@ -12,7 +12,12 @@ const _sfc_main = {
   },
   created() {
     const sysInfo = common_vendor.index.getWindowInfo();
-    this.tabBarPaddingBottom = sysInfo.safeAreaInsets.bottom;
+    const platform = common_vendor.index.getDeviceInfo().platform;
+    if (platform !== "ios") {
+      this.tabBarPaddingBottom = 10;
+    } else {
+      this.tabBarPaddingBottom = sysInfo.safeAreaInsets.bottom;
+    }
     const query = common_vendor.index.createSelectorQuery().in(this);
     query.select(".tab-bar").boundingClientRect((rect) => {
       this.tabBarHeight = rect.height;
