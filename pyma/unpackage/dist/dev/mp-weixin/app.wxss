@@ -10,8 +10,6 @@
 	flex: 1;
 	width: 100%;
 	height: 100%;
-	display: flex;
-	flex-direction: column;
 	background-color: #f8f8f8;
 	align-items: center;
 }
@@ -24,9 +22,9 @@
 }
 @font-face {
   font-family: "iconfont"; /* Project id 4847973 */
-  src: url('//at.alicdn.com/t/c/font_4847973_6wjmkiuuimn.woff2?t=1755791113740') format('woff2'),
-       url('//at.alicdn.com/t/c/font_4847973_6wjmkiuuimn.woff?t=1755791113740') format('woff'),
-       url('//at.alicdn.com/t/c/font_4847973_6wjmkiuuimn.ttf?t=1755791113740') format('truetype');
+  src: url('//at.alicdn.com/t/c/font_4847973_l4sh49yn6db.woff2?t=1755793472081') format('woff2'),
+       url('//at.alicdn.com/t/c/font_4847973_l4sh49yn6db.woff?t=1755793472081') format('woff'),
+       url('//at.alicdn.com/t/c/font_4847973_l4sh49yn6db.ttf?t=1755793472081') format('truetype');
 }
 .iconfont {
   font-family: "iconfont" !important;
@@ -34,6 +32,18 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+.icon-a-004-sunflower:before {
+  content: "\e7a0";
+}
+.icon-a-022-lily:before {
+  content: "\e7a1";
+}
+.icon-a-027-geranium:before {
+  content: "\e7a2";
+}
+.icon-wode:before {
+  content: "\e600";
 }
 .icon-liuyan:before {
   content: "\e638";

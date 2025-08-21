@@ -2,12 +2,12 @@
 const tabList = [
   {
     "pagePath": "pages/home/home",
-    "iconfont": "icon-shouye-zhihui",
+    "iconfont": "icon-a-027-geranium",
     "text": "首页"
   },
   {
     "pagePath": "pages/info/info",
-    "iconfont": "icon-fujin",
+    "iconfont": "icon-a-022-lily",
     "text": "我的"
   }
 ];

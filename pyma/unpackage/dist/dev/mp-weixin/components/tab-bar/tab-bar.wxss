@@ -38,6 +38,10 @@
 .tab-bar .tab-item .text.data-v-ffb3232c {
   font-size: 25rpx;
 }
+.tab-bar .tab-item .iconfont.data-v-ffb3232c {
+  font-size: 40rpx;
+}
 .tab-bar .active.data-v-ffb3232c {
   color: #1A4190;
+  font-weight: bold;
 }

@@ -2,7 +2,7 @@
 	<view class="content">
 		<uni-nav-bar class="nav-bar__component" :title="title" :algin="algin" :color="color"
 			@sendNavBarHeight="getNavBarHeight" />
-		<scroll-view id="page-content" scroll-y enable-flex>
+		<scroll-view id="page-content" scroll-y enable-flex refresher-enabled="true">
 			<view class="box flex-row" :style="{height: navBarHeight + swiperHeight/2 + 'px'}">
 				<swiper class="swiper" :style="{top: navBarHeight + 'px'}">
 					<swiper-item>
@@ -177,7 +177,7 @@
 		width: $panel-width;
 
 		.weather-card {
-			height: 200rpx;
+			height: 220rpx;
 			justify-content: space-between;
 			box-sizing: border-box;
 			overflow: hidden;
@@ -185,7 +185,7 @@
 			.weather-card__info {
 				width: max-content;
 				position: relative;
-				padding: 15rpx 25rpx;
+				padding: 18rpx 28rpx;
 				background-color: #fff;
 				border-radius: $ele-border-radius;
 				justify-content: center;
@@ -216,7 +216,7 @@
 
 				.weather-card__info-col {
 					align-items: center;
-					font-size: 23rpx;
+					font-size: 25rpx;
 				}
 			}
 

@@ -72,14 +72,19 @@
 		.tab-item {
 			align-items: center;
 			flex: 1;
-
+				
 			.text {
 				font-size: 25rpx;
+			}
+			
+			.iconfont{
+				font-size: 40rpx;
 			}
 		}
 
 		.active {
 			color: $uni-color-primary;
+			font-weight: bold;
 		}
 	}
 </style>

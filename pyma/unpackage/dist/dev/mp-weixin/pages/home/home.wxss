@@ -48,7 +48,7 @@
   width: 95%;
 }
 .content-panel .weather-card {
-  height: 200rpx;
+  height: 220rpx;
   justify-content: space-between;
   box-sizing: border-box;
   overflow: hidden;
@@ -57,7 +57,7 @@
   width: -webkit-max-content;
   width: max-content;
   position: relative;
-  padding: 15rpx 25rpx;
+  padding: 18rpx 28rpx;
   background-color: #fff;
   border-radius: 10rpx;
   justify-content: center;
@@ -83,7 +83,7 @@
 }
 .content-panel .weather-card .weather-card__info .weather-card__info-col {
   align-items: center;
-  font-size: 23rpx;
+  font-size: 25rpx;
 }
 .content-panel .weather-card .weather-card__date {
   flex: 1;
