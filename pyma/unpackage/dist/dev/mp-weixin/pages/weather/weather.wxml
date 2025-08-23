@@ -1,1 +1,1 @@
-<view></view>
+<view class="content data-v-54774d74"><uni-nav-bar wx:if="{{b}}" class="nav-bar__component data-v-54774d74" bindsendNavBarHeight="{{a}}" u-i="54774d74-0" bind:__l="__l" u-p="{{b}}"></uni-nav-bar><scroll-view class="data-v-54774d74" id="page-content" scroll-y enable-flex><view class="content-wrapper data-v-54774d74" style="{{'margin-top:' + e}}"><view class="addr-card flex-row data-v-54774d74"><text class="addr data-v-54774d74">{{c}}</text><text class="update_time data-v-54774d74">{{d}}</text></view></view></scroll-view></view>

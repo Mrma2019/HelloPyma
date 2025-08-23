@@ -1,28 +1,36 @@
 <template>
 	<view class="content">
 		<view class="logo-wrapper">
-			<image class="logo" src="/static/logo.jpg"></image>
+			<image class="logo" :src="pageInfo.logo"></image>
 		</view>
 		<view>
-			<text class="app-name">{{appName}}</text>
+			<text class="app-name">{{pageInfo.appName}}</text>
 		</view>
 	</view>
 </template>
 
 <script setup>
 	import {
-		watch
+		onMounted,
+		watch,
+		ref
 	} from 'vue';
 	import {
 		weatherStore
-	} from '@/store/weatherStore.js'
+	} from '@/store/weatherStore.js';
+	import {
+		getPageInfo
+	} from './index.js'
 
-	const appName = 'HelloPyma'
-	const pagepath = '/pages/home/home'
+	const pageInfo = ref({});
+
+	onMounted(async () => {
+		pageInfo.value = await getPageInfo();
+	})
 	watch(() => weatherStore.loading, (newVal) => {
 		if (!newVal) {
 			uni.switchTab({
-				url: `${pagepath}`
+				url: pageInfo.value.pagepath
 			});
 		}
 	});
@@ -64,8 +72,8 @@
 		}
 
 		.app-name {
-			margin-top: 20rpx;
-			font-size: 25rpx;
+			margin-top: 30rpx;
+			font-size: 35rpx;
 		}
 	}
 

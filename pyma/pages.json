@@ -25,7 +25,8 @@
 			"path" : "pages/weather/weather",
 			"style" : 
 			{
-				"navigationBarTitleText" : ""
+				"navigationBarTitleText" : "",
+				"navigationStyle": "custom"
 			}
 		}
 	],

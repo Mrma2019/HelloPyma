@@ -18,9 +18,10 @@ async function getWeather() {
             location: `${longitude},${latitude}`
           },
           success: (res2) => {
-            var _a;
-            if (((_a = res2.data.location) == null ? void 0 : _a.length) > 0 && res2.data.location[0].id != null) {
-              const adcode = res2.data.location[0].id;
+            if (res2.data.code == 200) {
+              const location = res2.data.location[0];
+              store_weatherStore.weatherStore.location = location;
+              const adcode = location.id;
               getWeatherByAdcode(adcode).then(resolve).catch(reject);
             }
           },

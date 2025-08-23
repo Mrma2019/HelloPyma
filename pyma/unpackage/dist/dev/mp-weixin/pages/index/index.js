@@ -1,23 +1,32 @@
 "use strict";
 const common_vendor = require("../../common/vendor.js");
-const common_assets = require("../../common/assets.js");
 const store_weatherStore = require("../../store/weatherStore.js");
-const appName = "HelloPyma";
-const pagepath = "/pages/home/home";
+async function getPageInfo() {
+  const pageInfo = {
+    logo: "/static/logo.jpg",
+    appName: "HelloPyma",
+    pagepath: "/pages/home/home"
+  };
+  return pageInfo;
+}
 const _sfc_main = {
   __name: "index",
   setup(__props) {
+    const pageInfo = common_vendor.ref({});
+    common_vendor.onMounted(async () => {
+      pageInfo.value = await getPageInfo();
+    });
     common_vendor.watch(() => store_weatherStore.weatherStore.loading, (newVal) => {
       if (!newVal) {
         common_vendor.index.switchTab({
-          url: `${pagepath}`
+          url: pageInfo.value.pagepath
         });
       }
     });
     return (_ctx, _cache) => {
       return {
-        a: common_assets._imports_0,
-        b: common_vendor.t(appName)
+        a: pageInfo.value.logo,
+        b: common_vendor.t(pageInfo.value.appName)
       };
     };
   }

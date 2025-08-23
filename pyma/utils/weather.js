@@ -19,9 +19,11 @@ export async function getWeather() {
 						location: `${longitude},${latitude}`
 					},
 					success: (res) => {
-						if (res.data.location?.length > 0 && res.data.location[0]
-							.id != null) {
-							const adcode = res.data.location[0].id;
+						if (res.data.code == 200) {
+							const location = res.data.location[0];
+							// console.log('位置信息',location);
+							weatherStore.location = location;
+							const adcode = location.id;
 							getWeatherByAdcode(adcode).then(resolve).catch(reject);
 						}
 					},

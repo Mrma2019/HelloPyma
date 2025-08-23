@@ -1,14 +1,14 @@
 <template>
 	<view class="content">
-		<uni-nav-bar class="nav-bar__component" :title="title" :algin="algin" :color="color"
-			@sendNavBarHeight="getNavBarHeight" />
+		<uni-nav-bar class="nav-bar__component" :title="pageInfo?.navTitle" :align="pageInfo?.navAlgin"
+			:is-back="pageInfo?.isBack" :color="pageInfo?.navColor" @sendNavBarHeight="getNavBarHeight">
+		</uni-nav-bar>
 		<scroll-view id="page-content" scroll-y enable-flex refresher-enabled="true">
 			<view class="content-wrapper">
-				<view class="box flex-row" :style="{height: navBarHeight + swiperHeight/2 + 'px'}">
-					<swiper class="swiper" :style="{top: navBarHeight + 'px'}">
-						<swiper-item>
-							<image class="image" src="/static/pictures/827d7d49-a85d-4c47-8773-8a9c3275c034.jpg"
-								mode="aspectFill"></image>
+				<view class="box flex-row" :style="{height: navBarHeight + 10 + swiperHeight/2 + 'px'}">
+					<swiper class="swiper" :style="{top: navBarHeight + 10 + 'px'}">
+						<swiper-item v-for="(item, index) in pageInfo?.swiperImageSrc" :key="index">
+							<image class="image" :src="item" mode="aspectFill"></image>
 						</swiper-item>
 					</swiper>
 				</view>
@@ -18,10 +18,10 @@
 						<view class="weather-card__info flex-col" data-pagepath='/pages/weather/weather'
 							@click="navigatorTo">
 							<view class="weather-card__icon-row flex-row">
-								<icon class="weather-card__weather-icon breath iconfont icon-qingtian"></icon>
+								<text class="weather-card__weather-icon breath iconfont icon-qingtian"></text>
 								<text class="weather-card__temp">{{weatherCardInfo.temp}}</text>
 								<view class="weather-card__time flex-col">
-									<icon class="weather-card__temp-icon iconfont icon-sheshidu"></icon>
+									<text class="weather-card__temp-icon iconfont icon-sheshidu"></text>
 									<text class="weather-card__time-text">{{formatTime}}</text>
 								</view>
 							</view>
@@ -38,23 +38,23 @@
 							<view class="date flex-row">
 								<view class="date-item" v-for="item, index in formatDate.split(':')" :key="index">
 									<text class="text">{{item}}</text>
-									<text class="desc">{{ index === 0 ? 'year' : index === 1 ? 'month' : 'day' }}</text>
+									<text class="desc">{{ index === 0 ? 'Year' : index === 1 ? 'Month' : 'Day' }}</text>
 								</view>
 							</view>
 						</view>
 					</view>
 					<view class="btn-card flex-row">
 						<view class="btn-card__main btn flex-col">
-							<text class="text">{{buttonCardInfo.mainBtn.text}}</text>
-							<text class="desc">{{buttonCardInfo.mainBtn.desc}}</text>
-							<icon :class="['iconfont', buttonCardInfo.mainBtn.icon]"></icon>
+							<text class="text">{{pageInfo.mainBtn?.text}}</text>
+							<text class="desc">{{pageInfo.mainBtn?.desc}}</text>
+							<text :class="['iconfont', pageInfo.mainBtn?.icon]"></text>
 						</view>
 						<view class="btn-card__box flex-col">
-							<view class="btn-card__sub btn flex-col" v-for="item, index in buttonCardInfo.subBtns"
+							<view class="btn-card__sub btn flex-col" v-for="item, index in pageInfo?.subBtns"
 								:key="index">
 								<text class="text">{{item.text}}</text>
 								<text class="desc">{{item.desc}}</text>
-								<icon :class="['iconfont', item.icon]"></icon>
+								<text :class="['iconfont', item.icon]"></text>
 							</view>
 						</view>
 					</view>
@@ -71,35 +71,33 @@
 	} from '@/store/weatherStore.js';
 	import {
 		formatStore
-	} from '@/store/formatStore.js'
+	} from '@/store/formatStore.js';
+	import {
+		getPageInfo
+	} from './index.js';
 
 	export default {
 		data() {
 			return {
-				title: "HelloPyMa",
-				algin: "left",
-				color: "white",
 				navBarHeight: 0,
 				swiperHeight: 0,
 				contentPanelPaddingBottom: 0,
-				buttonCardInfo: {
-					mainBtn: {
-						text: '立即发布',
-						desc: '找搭子',
-						icon: 'icon-xunzhao'
-					},
-					subBtns: [{
-						text: '已参与',
-						desc: '进入',
-						icon: 'icon-liebiao1'
-					}, {
-						text: '声明',
-						desc: '查看',
-						icon: 'icon-guanyuapp'
-					}]
-				}
+				pageInfo: {}
 			}
 		},
+
+		async onLoad() {
+			this.pageInfo = await getPageInfo();
+
+			this.$nextTick(() => {
+				const query = uni.createSelectorQuery().in(this);
+				query.select(".swiper").boundingClientRect(rect => {
+					this.swiperHeight = rect.height;
+					// console.log('swiper的高度', this.swiperHeight);
+				}).exec();
+			});
+		},
+
 		methods: {
 			getNavBarHeight(height) {
 				this.navBarHeight = height;
@@ -117,7 +115,6 @@
 				uni.navigateTo({
 					url: `${pagepath}`
 				});
-				console.log(this.weatherData);
 			}
 		},
 
@@ -138,13 +135,6 @@
 			formatTime() {
 				return formatStore.data.time || "";
 			}
-		},
-
-		onLoad() {
-			const query = uni.createSelectorQuery().in(this);
-			query.select(".swiper").boundingClientRect(rect => {
-				this.swiperHeight = rect.height;
-			}).exec();
 		}
 	}
 </script>
@@ -187,7 +177,8 @@
 			overflow: hidden;
 
 			.weather-card__info {
-				width: max-content;
+				width: 220rpx;
+				;
 				position: relative;
 				padding: 18rpx 28rpx;
 				background-color: #fff;

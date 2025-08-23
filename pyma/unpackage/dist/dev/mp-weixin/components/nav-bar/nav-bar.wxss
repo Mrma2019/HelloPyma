@@ -27,16 +27,25 @@
   width: 100%;
   background-color: #1A4190;
   box-sizing: border-box;
-  padding: 0 10px;
-  font-weight: bold;
-  font-size: 18px;
+  overflow: hidden;
   position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 999;
+  align-items: flex-end;
+  font-weight: bold;
+  font-size: 35rpx;
 }
-.nav-bar .title.data-v-e9345f2e {
+.nav-bar .title-wrapper.data-v-e9345f2e {
+  width: 100%;
+  align-items: center;
+  position: relative;
+}
+.nav-bar .title-wrapper .title.data-v-e9345f2e {
   position: absolute;
+  line-height: 1;
   white-space: nowrap;
-  overflow: hidden;
   text-overflow: ellipsis;
+  overflow: hidden;
 }

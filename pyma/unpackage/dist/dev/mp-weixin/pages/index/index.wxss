@@ -54,8 +54,8 @@
   animation: spin-1cf27b2a 1s linear infinite;
 }
 .content .app-name.data-v-1cf27b2a {
-  margin-top: 20rpx;
-  font-size: 25rpx;
+  margin-top: 30rpx;
+  font-size: 35rpx;
 }
 @keyframes spin-1cf27b2a {
 0% {

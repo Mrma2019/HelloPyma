@@ -54,8 +54,7 @@
   overflow: hidden;
 }
 .content-panel .weather-card .weather-card__info {
-  width: -webkit-max-content;
-  width: max-content;
+  width: 220rpx;
   position: relative;
   padding: 18rpx 28rpx;
   background-color: #fff;

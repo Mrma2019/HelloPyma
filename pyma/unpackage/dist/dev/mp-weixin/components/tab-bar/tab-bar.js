@@ -7,6 +7,7 @@ const _sfc_main = {
     return {
       tabList: components_tabBar_index.tabList,
       tabBarPaddingBottom: 0,
+      tabBarPaddingTop: 0,
       tabBarHeight: 0
     };
   },
@@ -14,9 +15,11 @@ const _sfc_main = {
     const sysInfo = common_vendor.index.getWindowInfo();
     const platform = common_vendor.index.getDeviceInfo().platform;
     if (platform !== "ios") {
-      this.tabBarPaddingBottom = 10;
+      this.tabBarPaddingBottom = 5;
+      this.tabBarPaddingTop = 5;
     } else {
       this.tabBarPaddingBottom = sysInfo.safeAreaInsets.bottom;
+      this.tabBarPaddingTop = 0;
     }
     const query = common_vendor.index.createSelectorQuery().in(this);
     query.select(".tab-bar").boundingClientRect((rect) => {
@@ -53,7 +56,8 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
         e: common_vendor.o(($event) => $options.switchTab(index), index)
       };
     }),
-    b: $data.tabBarPaddingBottom + "px"
+    b: $data.tabBarPaddingBottom + "px",
+    c: $data.tabBarPaddingTop + "px"
   };
 }
 const Component = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-ffb3232c"]]);

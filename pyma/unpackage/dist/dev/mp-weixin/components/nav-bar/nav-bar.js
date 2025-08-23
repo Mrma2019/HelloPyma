@@ -5,33 +5,75 @@ const _sfc_main = {
   data() {
     return {
       navBarHeight: 0,
-      titleBottom: 0,
-      menuWidth: 0
+      titlePaddingBottom: 0,
+      titlePaddingLeft: 15,
+      menuInfo: {}
     };
   },
   props: {
-    title: String,
-    algin: String,
-    color: String
+    title: {
+      type: String,
+      default: ""
+    },
+    align: {
+      type: String,
+      default: "center"
+    },
+    isBack: {
+      type: Boolean,
+      default: false
+    },
+    color: {
+      type: String,
+      default: "#000"
+    }
   },
-  created() {
+  mounted() {
     const sysInfo = common_vendor.index.getWindowInfo();
     const menuInfo = common_vendor.index.getMenuButtonBoundingClientRect();
+    this.menuInfo = menuInfo;
     this.navBarHeight = menuInfo.top * 2 + menuInfo.height - sysInfo.statusBarHeight;
-    this.titleBottom = menuInfo.top - sysInfo.statusBarHeight;
-    this.menuWidth = menuInfo.width + 20;
+    this.titlePaddingBottom = menuInfo.top - sysInfo.statusBarHeight;
     this.$emit("sendNavBarHeight", this.navBarHeight);
+  },
+  computed: {
+    titleStyle() {
+      const menuWidth = this.menuInfo.width + 10;
+      if (this.align == "left") {
+        return {
+          textAlign: this.align,
+          left: this.titlePaddingLeft + 5 + "px",
+          right: menuWidth + "px"
+        };
+      } else {
+        return {
+          textAlign: this.align,
+          left: menuWidth + "px",
+          right: menuWidth + "px"
+        };
+      }
+    }
+  },
+  methods: {
+    goBack() {
+      common_vendor.index.navigateBack();
+    }
   }
 };
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
-  return {
-    a: common_vendor.t($props.title),
-    b: $data.titleBottom + "px",
-    c: "calc(100% - " + $data.menuWidth + "px)",
-    d: $data.navBarHeight + "px",
-    e: $props.algin,
-    f: $props.color
-  };
+  return common_vendor.e({
+    a: $props.isBack
+  }, $props.isBack ? {
+    b: common_vendor.o((...args) => $options.goBack && $options.goBack(...args))
+  } : {}, {
+    c: common_vendor.t($props.title),
+    d: common_vendor.s($options.titleStyle),
+    e: $data.menuInfo.height + "px",
+    f: $data.titlePaddingLeft + "px",
+    g: $data.navBarHeight + "px",
+    h: $data.navBarHeight - $data.menuInfo.bottom + "px",
+    i: $props.color
+  });
 }
 const Component = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-e9345f2e"]]);
 wx.createComponent(Component);

@@ -1,6 +1,10 @@
 <template>
-	<view class="nav-bar flex-row" :style="{height: navBarHeight + 'px', justifyContent: algin, color: color}">
-		<text class="title" :style="{bottom: titleBottom + 'px', maxWidth: 'calc(100% - ' + menuWidth + 'px)'}">{{title}}</text>
+	<view class="nav-bar flex-row"
+		:style="{height: navBarHeight + 'px', paddingBottom: navBarHeight - menuInfo.bottom + 'px', color: color}">
+		<view class="title-wrapper flex-row" :style="{height: menuInfo.height + 'px', paddingLeft: titlePaddingLeft + 'px'}">
+			<text class="iconfont icon-fanhui1" v-if="isBack" @click="goBack"></text>
+			<text class="title" :style="titleStyle">{{title}}</text>
+		</view>
 	</view>
 </template>
 
@@ -10,26 +14,64 @@
 		data() {
 			return {
 				navBarHeight: 0,
-				titleBottom: 0,
-				menuWidth: 0
+				titlePaddingBottom: 0,
+				titlePaddingLeft: 15,
+				menuInfo: {},
 			};
 		},
 		props: {
-			title: String,
-			algin: String,
-			color: String
+			title: {
+				type: String,
+				default: ''
+			},
+			align: {
+				type: String,
+				default: 'center'
+			},
+			isBack: {
+				type: Boolean,
+				default: false
+			},
+			color: {
+				type: String,
+				default: '#000'
+			}
 		},
-		created() {
+		mounted() {
 			const sysInfo = uni.getWindowInfo();
 			const menuInfo = uni.getMenuButtonBoundingClientRect();
+			this.menuInfo = menuInfo;
 
 			this.navBarHeight = menuInfo.top * 2 + menuInfo.height - sysInfo.statusBarHeight;
 			// console.log('导航栏高度：' + this.navBarHeight);
-			this.titleBottom = menuInfo.top - sysInfo.statusBarHeight;
+			this.titlePaddingBottom = menuInfo.top - sysInfo.statusBarHeight;
 			//获取胶囊的宽度
-			this.menuWidth = menuInfo.width + 20;
-			
 			this.$emit("sendNavBarHeight", this.navBarHeight);
+		},
+		computed: {
+			titleStyle() {
+
+				const menuWidth = this.menuInfo.width + 10;
+
+				if (this.align == 'left') {
+					return {
+						textAlign: this.align,
+						left: this.titlePaddingLeft + 5 + 'px',
+						right: menuWidth + 'px'
+					}
+				} else {
+					return {
+						textAlign: this.align,
+						left: menuWidth + 'px',
+						right: menuWidth + 'px'
+					}
+				}
+			}
+		},
+		methods:{
+			goBack(){
+				uni.navigateBack();
+			}
 		}
 	}
 </script>
@@ -39,18 +81,28 @@
 		width: 100%;
 		background-color: $uni-color-primary;
 		box-sizing: border-box;
-		padding: 0 10px;
-		font-weight: bold;
-		font-size: 18px;
+		overflow: hidden;
 		position: fixed;
 		top: 0;
+		left: 0;
+		right: 0;
 		z-index: 999;
+		align-items: flex-end;
+		font-weight: bold;
+		font-size: 35rpx;
 
-		.title {
-			position: absolute;
-			white-space: nowrap;
-			overflow: hidden;
-			text-overflow: ellipsis;
+		.title-wrapper {
+			width: 100%;
+			align-items: center;
+			position: relative;
+
+			.title {
+				position: absolute;
+				line-height: 1;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+				overflow: hidden;
+			}
 		}
 	}
 </style>

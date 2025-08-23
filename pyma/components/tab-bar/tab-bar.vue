@@ -1,8 +1,8 @@
 <template>
-	<view class="tab-bar flex-row" :style="{paddingBottom: tabBarPaddingBottom + 'px'}">
+	<view class="tab-bar flex-row" :style="{paddingBottom: tabBarPaddingBottom + 'px', paddingTop: tabBarPaddingTop + 'px'}">
 		<view :class="['tab-item', 'flex-col', {active: item.pagePath === currentPagePath}]"
 			v-for="(item, index) in tabList" :key="index" @click="switchTab(index)">
-			<icon :class="['iconfont', item.iconfont]"></icon>
+			<text :class="['iconfont', item.iconfont]"></text>
 			<text class="text">{{item.text}}</text>
 		</view>
 	</view>
@@ -17,6 +17,7 @@
 			return {
 				tabList: tabList,
 				tabBarPaddingBottom: 0,
+				tabBarPaddingTop: 0,
 				tabBarHeight: 0
 			};
 		},
@@ -24,10 +25,12 @@
 			const sysInfo = uni.getWindowInfo();
 			const platform = uni.getDeviceInfo().platform;
 			if(platform !== 'ios') {
-				this.tabBarPaddingBottom = 10;
+				this.tabBarPaddingBottom = 5;
+				this.tabBarPaddingTop = 5;
 				// console.log(this.tabBarPaddingBottom);
 			}else{
 				this.tabBarPaddingBottom = sysInfo.safeAreaInsets.bottom;
+				this.tabBarPaddingTop = 0;
 			}
 			
 			const query = uni.createSelectorQuery().in(this);
