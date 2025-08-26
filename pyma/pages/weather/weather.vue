@@ -7,7 +7,7 @@
 				<view class="content-center flex-col">
 					<view class="addr-card flex-row">
 						<view class="flex-row" style="height: 100%; align-items: center;">
-							<text class="addr">{{weatherInfo.location?.name}}</text>
+							<text class="addr">{{weatherInfo.location?.name || '--'}}</text>
 							<text class="date">{{today}}</text>
 						</view>
 						<text class="update_time">{{weatherInfo?.updateTime}}</text>
@@ -75,8 +75,10 @@
 		computed: {
 			weatherInfo() {
 				const data = weatherStore.data;
-				const location = weatherStore.location;
-				const daily = (weatherStore.girdData?.daily).map(item => {
+				const girdData = weatherStore.girdData;
+				// console.log(data);
+				const location = data.location;
+				const daily = (girdData?.daily).map(item => {
 					const fd = formatDate(item.fxDate);
 					return {
 						...item,

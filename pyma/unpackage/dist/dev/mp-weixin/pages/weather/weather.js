@@ -22,17 +22,18 @@ const _sfc_main = {
   },
   computed: {
     weatherInfo() {
-      var _a, _b;
+      var _a;
       const data = store_weatherStore.weatherStore.data;
-      const location = store_weatherStore.weatherStore.location;
-      const daily = ((_a = store_weatherStore.weatherStore.girdData) == null ? void 0 : _a.daily).map((item) => {
+      const girdData = store_weatherStore.weatherStore.girdData;
+      const location = data.location;
+      const daily = (girdData == null ? void 0 : girdData.daily).map((item) => {
         const fd = utils_format.formatDate(item.fxDate);
         return {
           ...item,
           day: fd.day
         };
       });
-      const updateTimeMatch = (_b = data.obsTime) == null ? void 0 : _b.match(/\d{2}:\d{2}/);
+      const updateTimeMatch = (_a = data.obsTime) == null ? void 0 : _a.match(/\d{2}:\d{2}/);
       const updateTime = updateTimeMatch ? updateTimeMatch[0] + "更新" : "获取更新时间失败";
       return {
         data,
@@ -68,7 +69,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       [","]: true,
       ["is-back"]: (_d = $data.pageInfo) == null ? void 0 : _d.isBack
     }),
-    c: common_vendor.t((_e = $options.weatherInfo.location) == null ? void 0 : _e.name),
+    c: common_vendor.t(((_e = $options.weatherInfo.location) == null ? void 0 : _e.name) || "--"),
     d: common_vendor.t($options.today),
     e: common_vendor.t((_f = $options.weatherInfo) == null ? void 0 : _f.updateTime),
     f: common_vendor.t((_g = $options.weatherInfo.data) == null ? void 0 : _g.temp),

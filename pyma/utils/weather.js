@@ -22,10 +22,12 @@ export async function getWeather() {
 						if (res.data.code == 200) {
 							const location = res.data.location[0];
 							// console.log('位置信息',location);
-							weatherStore.location = location;
 							const adcode = location.id;
+
+							weatherStore.data.location = location;
 							getWeatherByAdcode(adcode).then(resolve).catch(reject);
-							getGridWeatherByAdcode(longitude, latitude).then(resolve).catch(reject);
+							getGridWeatherByAdcode(longitude, latitude).then(
+								resolve).catch(reject);
 						}
 					},
 					fail: reject
@@ -47,7 +49,10 @@ export async function getWeatherByAdcode(code) {
 			success: (res) => {
 				if (res.data.code == 200) {
 					const weatherInfo = res.data.now;
-					weatherStore.data = weatherInfo;
+					weatherStore.data = {
+						...weatherInfo,
+						...weatherStore.data
+					};
 					weatherStore.loading = false;
 
 					resolve(weatherInfo);
@@ -71,7 +76,7 @@ export async function getGridWeatherByAdcode(lon, lat) {
 			success: (res) => {
 				if (res.data.code == 200) {
 					const weatherInfo = res.data;
-					
+
 					weatherStore.girdData = weatherInfo;
 					resolve(weatherInfo);
 				} else {

@@ -20,10 +20,12 @@ async function getWeather() {
           success: (res2) => {
             if (res2.data.code == 200) {
               const location = res2.data.location[0];
-              store_weatherStore.weatherStore.location = location;
               const adcode = location.id;
+              store_weatherStore.weatherStore.data.location = location;
               getWeatherByAdcode(adcode).then(resolve).catch(reject);
-              getGridWeatherByAdcode(longitude, latitude).then(resolve).catch(reject);
+              getGridWeatherByAdcode(longitude, latitude).then(
+                resolve
+              ).catch(reject);
             }
           },
           fail: reject
@@ -44,7 +46,10 @@ async function getWeatherByAdcode(code) {
       success: (res) => {
         if (res.data.code == 200) {
           const weatherInfo = res.data.now;
-          store_weatherStore.weatherStore.data = weatherInfo;
+          store_weatherStore.weatherStore.data = {
+            ...weatherInfo,
+            ...store_weatherStore.weatherStore.data
+          };
           store_weatherStore.weatherStore.loading = false;
           resolve(weatherInfo);
         } else {

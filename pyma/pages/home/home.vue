@@ -19,25 +19,25 @@
 							@click="navigatorTo">
 							<view class="weather-card__icon-row flex-row">
 								<text
-									:class="['weather-card__weather-icon', 'iconfont', 'qi-' + weatherCardInfo.icon, weatherCardInfo.icon === 100 ? 'rotate':'breath']"></text>
-								<text class="weather-card__temp">{{weatherCardInfo.temp}}</text>
+									:class="['weather-card__weather-icon', 'iconfont', 'qi-' + weatherInfo.icon, weatherInfo.icon === 100 ? 'rotate':'breath']"></text>
+								<text class="weather-card__temp">{{weatherInfo.temp}}</text>
 								<view class="weather-card__time flex-col">
 									<text class="weather-card__temp-icon iconfont icon-sheshidu"></text>
-									<text class="weather-card__time-text">{{formatTime}}</text>
+									<text class="weather-card__time-text">{{time}}</text>
 								</view>
 							</view>
 							<view class="weather-card__info-col flex-col">
-								<text>{{weatherCardInfo.text}}</text>
-								<text>{{weatherCardInfo.windDir}}</text>
-								<text>{{weatherCardInfo.humidity}}</text>
+								<text>{{weatherInfo.text}}</text>
+								<text>{{weatherInfo.windDir}}</text>
+								<text>{{weatherInfo.humidity}}</text>
 							</view>
 						</view>
 						<view class="weather-card__date flex-col">
 							<view class="title">
-								<text>{{weatherCardInfo.dateTitle}}</text>
+								<text>{{weatherInfo.dateTitle}}</text>
 							</view>
 							<view class="date flex-row">
-								<view class="date-item" v-for="item, index in formatDate.split('-')" :key="index">
+								<view class="date-item" v-for="item, index in date.split('-')" :key="index">
 									<text class="text">{{item}}</text>
 									<text
 										class="desc">{{ index === 0 ? 'Year' : index === 1 ? 'Month' : 'Date' }}</text>
@@ -122,22 +122,22 @@
 		},
 
 		computed: {
-			weatherCardInfo() {
-				const weatherInfo = weatherStore.data;
+			weatherInfo() {
+				const data = weatherStore.data;
 				return {
-					temp: weatherInfo.temp,
-					text: weatherInfo.text,
-					windDir: `${weatherInfo.windDir} ${weatherInfo.windScale}级`,
-					humidity: `空气湿度 ${weatherInfo.humidity}`,
+					temp: data.temp,
+					text: data.text,
+					windDir: `${data.windDir} ${data.windScale}级`,
+					humidity: `空气湿度 ${data.humidity}`,
 					dateTitle: '当前日期 年/月/日',
-					icon: weatherInfo.icon
+					icon: data.icon
 				}
 			},
-			formatDate() {
-				return formatStore.data.date || "";
+			date() {
+				return formatStore.data.date;
 			},
-			formatTime() {
-				return formatStore.data.time || "";
+			time() {
+				return formatStore.data.time;
 			}
 		}
 	}

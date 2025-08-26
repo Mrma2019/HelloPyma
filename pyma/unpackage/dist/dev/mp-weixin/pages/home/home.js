@@ -38,22 +38,22 @@ const _sfc_main = {
     }
   },
   computed: {
-    weatherCardInfo() {
-      const weatherInfo = store_weatherStore.weatherStore.data;
+    weatherInfo() {
+      const data = store_weatherStore.weatherStore.data;
       return {
-        temp: weatherInfo.temp,
-        text: weatherInfo.text,
-        windDir: `${weatherInfo.windDir} ${weatherInfo.windScale}级`,
-        humidity: `空气湿度 ${weatherInfo.humidity}`,
+        temp: data.temp,
+        text: data.text,
+        windDir: `${data.windDir} ${data.windScale}级`,
+        humidity: `空气湿度 ${data.humidity}`,
         dateTitle: "当前日期 年/月/日",
-        icon: weatherInfo.icon
+        icon: data.icon
       };
     },
-    formatDate() {
-      return store_formatStore.formatStore.data.date || "";
+    date() {
+      return store_formatStore.formatStore.data.date;
     },
-    formatTime() {
-      return store_formatStore.formatStore.data.time || "";
+    time() {
+      return store_formatStore.formatStore.data.time;
     }
   }
 };
@@ -86,16 +86,16 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     d: $data.navBarHeight + $data.gap + "px",
     e: $data.navBarHeight + $data.gap + $data.swiperHeight / 2 + "px",
     f: $data.swiperHeight / 2 + "px",
-    g: common_vendor.n("qi-" + $options.weatherCardInfo.icon),
-    h: common_vendor.n($options.weatherCardInfo.icon === 100 ? "rotate" : "breath"),
-    i: common_vendor.t($options.weatherCardInfo.temp),
-    j: common_vendor.t($options.formatTime),
-    k: common_vendor.t($options.weatherCardInfo.text),
-    l: common_vendor.t($options.weatherCardInfo.windDir),
-    m: common_vendor.t($options.weatherCardInfo.humidity),
+    g: common_vendor.n("qi-" + $options.weatherInfo.icon),
+    h: common_vendor.n($options.weatherInfo.icon === 100 ? "rotate" : "breath"),
+    i: common_vendor.t($options.weatherInfo.temp),
+    j: common_vendor.t($options.time),
+    k: common_vendor.t($options.weatherInfo.text),
+    l: common_vendor.t($options.weatherInfo.windDir),
+    m: common_vendor.t($options.weatherInfo.humidity),
     n: common_vendor.o((...args) => $options.navigatorTo && $options.navigatorTo(...args)),
-    o: common_vendor.t($options.weatherCardInfo.dateTitle),
-    p: common_vendor.f($options.formatDate.split("-"), (item, index, i0) => {
+    o: common_vendor.t($options.weatherInfo.dateTitle),
+    p: common_vendor.f($options.date.split("-"), (item, index, i0) => {
       return {
         a: common_vendor.t(item),
         b: common_vendor.t(index === 0 ? "Year" : index === 1 ? "Month" : "Date"),
