@@ -25,6 +25,7 @@ export async function getWeather() {
 							weatherStore.location = location;
 							const adcode = location.id;
 							getWeatherByAdcode(adcode).then(resolve).catch(reject);
+							getGridWeatherByAdcode(longitude, latitude).then(resolve).catch(reject);
 						}
 					},
 					fail: reject
@@ -44,13 +45,37 @@ export async function getWeatherByAdcode(code) {
 				location: code
 			},
 			success: (res) => {
-				if (res.data.now) {
+				if (res.data.code == 200) {
 					const weatherInfo = res.data.now;
 					weatherStore.data = weatherInfo;
 					weatherStore.loading = false;
+
 					resolve(weatherInfo);
 				} else {
-					reject('天气数据为空');
+					reject('获取天气数据失败');
+				}
+			},
+			fail: reject
+		})
+	})
+}
+
+export async function getGridWeatherByAdcode(lon, lat) {
+	return new Promise((resolve, reject) => {
+		uni.request({
+			url: `${config.gridWeatherUrl}`,
+			data: {
+				key: `${config.apiKey}`,
+				location: `${lon},${lat}`
+			},
+			success: (res) => {
+				if (res.data.code == 200) {
+					const weatherInfo = res.data;
+					
+					weatherStore.girdData = weatherInfo;
+					resolve(weatherInfo);
+				} else {
+					reject('获取天气信息失败')
 				}
 			},
 			fail: reject

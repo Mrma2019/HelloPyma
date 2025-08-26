@@ -23,90 +23,90 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.box {
+.box.data-v-07e72d3c {
   width: 100%;
   justify-content: center;
   background-color: #1A4190;
   flex-shrink: 0;
 }
-.box .swiper {
+.box .swiper.data-v-07e72d3c {
   position: relative;
   width: 95%;
-  border-radius: 10rpx;
+  border-radius: 20rpx;
   overflow: hidden;
 }
 @media screen and (min-width: 768px) {
-.box .swiper {
+.box .swiper.data-v-07e72d3c {
     height: 200rpx;
 }
 }
-.box .swiper .image {
+.box .swiper .image.data-v-07e72d3c {
   width: 100%;
   height: 100%;
 }
-.content-panel {
+.content-panel.data-v-07e72d3c {
+  margin-top: 20rpx;
   width: 95%;
 }
-.content-panel .weather-card {
+.content-panel .weather-card.data-v-07e72d3c {
   height: 220rpx;
   justify-content: space-between;
   box-sizing: border-box;
   overflow: hidden;
 }
-.content-panel .weather-card .weather-card__info {
+.content-panel .weather-card .weather-card__info.data-v-07e72d3c {
   width: 220rpx;
   position: relative;
   padding: 18rpx 28rpx;
   background-color: #fff;
-  border-radius: 10rpx;
+  border-radius: 20rpx;
   justify-content: center;
   align-items: center;
   color: #1A4190;
 }
-.content-panel .weather-card .weather-card__info .weather-card__icon-row {
+.content-panel .weather-card .weather-card__info .weather-card__icon-row.data-v-07e72d3c {
   align-items: flex-end;
 }
-.content-panel .weather-card .weather-card__info .weather-card__icon-row .weather-card__weather-icon {
-  font-size: 90rpx;
-  color: #E6DB74;
+.content-panel .weather-card .weather-card__info .weather-card__icon-row .weather-card__weather-icon.data-v-07e72d3c {
+  font-size: 80rpx;
 }
-.content-panel .weather-card .weather-card__info .weather-card__icon-row .weather-card__temp {
+.content-panel .weather-card .weather-card__info .weather-card__icon-row .weather-card__temp.data-v-07e72d3c {
   font-size: 60rpx;
   padding-left: 10rpx;
 }
-.content-panel .weather-card .weather-card__info .weather-card__icon-row .weather-card__temp-icon {
-  font-size: 35rpx;
+.content-panel .weather-card .weather-card__info .weather-card__icon-row .weather-card__temp-icon.data-v-07e72d3c {
+  font-size: 32rpx;
 }
-.content-panel .weather-card .weather-card__info .weather-card__icon-row .weather-card__time {
+.content-panel .weather-card .weather-card__info .weather-card__icon-row .weather-card__time.data-v-07e72d3c {
   font-size: 22rpx;
 }
-.content-panel .weather-card .weather-card__info .weather-card__info-col {
+.content-panel .weather-card .weather-card__info .weather-card__info-col.data-v-07e72d3c {
   align-items: center;
-  font-size: 25rpx;
+  font-size: 22rpx;
 }
-.content-panel .weather-card .weather-card__date {
+.content-panel .weather-card .weather-card__date.data-v-07e72d3c {
   flex: 1;
-  margin-left: 10px;
+  margin-left: 20rpx;
   background-color: #fff;
-  border-radius: 10rpx;
+  border-radius: 20rpx;
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
   padding: 20rpx;
   position: relative;
 }
-.content-panel .weather-card .weather-card__date .title {
+.content-panel .weather-card .weather-card__date .title.data-v-07e72d3c {
   color: #1A4190;
   font-size: 22rpx;
   margin: 20rpx;
   position: absolute;
   top: 0;
 }
-.content-panel .weather-card .weather-card__date .date {
+.content-panel .weather-card .weather-card__date .date.data-v-07e72d3c {
   width: 90%;
   justify-content: space-between;
 }
-.content-panel .weather-card .weather-card__date .date .date-item {
+.content-panel .weather-card .weather-card__date .date .date-item.data-v-07e72d3c {
   width: 28%;
   background-color: #1A4190;
   color: #fff;
@@ -115,16 +115,16 @@
   text-align: center;
   position: relative;
 }
-.content-panel .weather-card .weather-card__date .date .date-item .desc {
+.content-panel .weather-card .weather-card__date .date .date-item .desc.data-v-07e72d3c {
   font-size: 18rpx;
   position: absolute;
   right: 8rpx;
   bottom: 5rpx;
 }
-.content-panel .weather-card .breath {
-  animation: breath 2s ease-in-out infinite;
+.content-panel .weather-card .breath.data-v-07e72d3c {
+  animation: breath-07e72d3c 2s ease-in-out infinite;
 }
-@keyframes breath {
+@keyframes breath-07e72d3c {
 0% {
     transform: scale(1);
     opacity: 1;
@@ -138,55 +138,67 @@
     opacity: 1;
 }
 }
-.content-panel .btn-card {
-  height: 250rpx;
+.content-panel .weather-card .rotate.data-v-07e72d3c {
+  color: #FFC107;
+  animation: rotate-07e72d3c 2s linear infinite;
+}
+@keyframes rotate-07e72d3c {
+from {
+    transform: rotate(0deg);
+}
+to {
+    transform: rotate(360deg);
+}
+}
+.content-panel .btn-card.data-v-07e72d3c {
+  height: 260rpx;
   justify-content: space-between;
   background-color: #fff;
-  margin-top: 10px;
-  border-radius: 10rpx;
+  margin-top: 20rpx;
+  border-radius: 20rpx;
   padding: 20rpx;
   box-sizing: border-box;
   overflow: hidden;
   color: #fff;
 }
-.content-panel .btn-card .btn {
+.content-panel .btn-card .btn.data-v-07e72d3c {
   position: relative;
   box-sizing: border-box;
   overflow: hidden;
   justify-content: center;
   background-color: #1A4190;
-  border-radius: 10rpx;
+  border-radius: 20rpx;
 }
-.content-panel .btn-card .text {
+.content-panel .btn-card .text.data-v-07e72d3c {
   font-size: 32rpx;
   margin: 0 0 25rpx 40rpx;
 }
-.content-panel .btn-card .desc {
+.content-panel .btn-card .desc.data-v-07e72d3c {
   font-size: 20rpx;
   margin: 20rpx 0 0 40rpx;
 }
-.content-panel .btn-card .iconfont {
+.content-panel .btn-card .iconfont.data-v-07e72d3c {
   font-size: 50rpx;
   position: absolute;
   right: 25rpx;
   bottom: 25rpx;
 }
-.content-panel .btn-card .btn-card__main {
+.content-panel .btn-card .btn-card__main.data-v-07e72d3c {
   width: 49%;
   height: 100%;
 }
-.content-panel .btn-card .btn-card__box {
+.content-panel .btn-card .btn-card__box.data-v-07e72d3c {
   width: 49%;
   height: 100%;
   justify-content: space-between;
 }
-.content-panel .btn-card .btn-card__box .btn-card__sub {
+.content-panel .btn-card .btn-card__box .btn-card__sub.data-v-07e72d3c {
   width: 100%;
   height: 49%;
 }
-.content-panel .btn-card .btn-card__box .btn-card__sub .text {
+.content-panel .btn-card .btn-card__box .btn-card__sub .text.data-v-07e72d3c {
   margin: 0 0 10rpx 25rpx;
 }
-.content-panel .btn-card .btn-card__box .btn-card__sub .desc {
+.content-panel .btn-card .btn-card__box .btn-card__sub .desc.data-v-07e72d3c {
   margin: 0 0 0 25rpx;
 }

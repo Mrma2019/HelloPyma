@@ -3,22 +3,23 @@
 		<uni-nav-bar class="nav-bar__component" :title="pageInfo?.navTitle" :align="pageInfo?.navAlgin"
 			:is-back="pageInfo?.isBack" :color="pageInfo?.navColor" @sendNavBarHeight="getNavBarHeight">
 		</uni-nav-bar>
-		<scroll-view id="page-content" scroll-y enable-flex refresher-enabled="true">
+		<scroll-view id="page-content" scroll-y refresher-enabled="true">
 			<view class="content-wrapper">
-				<view class="box flex-row" :style="{height: navBarHeight + 10 + swiperHeight/2 + 'px'}">
-					<swiper class="swiper" :style="{top: navBarHeight + 10 + 'px'}">
+				<view class="box flex-row"
+					:style="{height: navBarHeight + gap + swiperHeight/2 + 'px', marginBottom: swiperHeight / 2 + 'px'}">
+					<swiper class="swiper" :style="{top: navBarHeight + gap + 'px'}">
 						<swiper-item v-for="(item, index) in pageInfo?.swiperImageSrc" :key="index">
 							<image class="image" :src="item" mode="aspectFill"></image>
 						</swiper-item>
 					</swiper>
 				</view>
-				<view class="content-panel"
-					:style="{marginTop: swiperHeight/2 + 10 + 'px', paddingBottom: contentPanelPaddingBottom + 'px'} ">
+				<view class="content-panel" :style="{paddingBottom: contentPanelPaddingBottom + 'px'} ">
 					<view class="weather-card flex-row">
 						<view class="weather-card__info flex-col" data-pagepath='/pages/weather/weather'
 							@click="navigatorTo">
 							<view class="weather-card__icon-row flex-row">
-								<text class="weather-card__weather-icon breath iconfont icon-qingtian"></text>
+								<text
+									:class="['weather-card__weather-icon', 'iconfont', 'qi-' + weatherCardInfo.icon, weatherCardInfo.icon === 100 ? 'rotate':'breath']"></text>
 								<text class="weather-card__temp">{{weatherCardInfo.temp}}</text>
 								<view class="weather-card__time flex-col">
 									<text class="weather-card__temp-icon iconfont icon-sheshidu"></text>
@@ -36,9 +37,10 @@
 								<text>{{weatherCardInfo.dateTitle}}</text>
 							</view>
 							<view class="date flex-row">
-								<view class="date-item" v-for="item, index in formatDate.split(':')" :key="index">
+								<view class="date-item" v-for="item, index in formatDate.split('-')" :key="index">
 									<text class="text">{{item}}</text>
-									<text class="desc">{{ index === 0 ? 'Year' : index === 1 ? 'Month' : 'Day' }}</text>
+									<text
+										class="desc">{{ index === 0 ? 'Year' : index === 1 ? 'Month' : 'Date' }}</text>
 								</view>
 							</view>
 						</view>
@@ -82,6 +84,7 @@
 				navBarHeight: 0,
 				swiperHeight: 0,
 				contentPanelPaddingBottom: 0,
+				gap: 10,
 				pageInfo: {}
 			}
 		},
@@ -126,7 +129,8 @@
 					text: weatherInfo.text,
 					windDir: `${weatherInfo.windDir} ${weatherInfo.windScale}级`,
 					humidity: `空气湿度 ${weatherInfo.humidity}`,
-					dateTitle: '当前日期 年/月/日'
+					dateTitle: '当前日期 年/月/日',
+					icon: weatherInfo.icon
 				}
 			},
 			formatDate() {
@@ -139,10 +143,10 @@
 	}
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 	$panel-width: 95%;
-	$ele-border-radius: 10rpx;
-	$ele-margin: 10px;
+	$ele-border-radius: 20rpx;
+	$ele-margin: 20rpx;
 
 	.box {
 		width: 100%;
@@ -168,6 +172,7 @@
 	}
 
 	.content-panel {
+		margin-top: $ele-margin;
 		width: $panel-width;
 
 		.weather-card {
@@ -191,8 +196,7 @@
 					align-items: flex-end;
 
 					.weather-card__weather-icon {
-						font-size: 90rpx;
-						color: #E6DB74;
+						font-size: 80rpx;
 					}
 
 					.weather-card__temp {
@@ -201,7 +205,7 @@
 					}
 
 					.weather-card__temp-icon {
-						font-size: 35rpx;
+						font-size: 32rpx;
 					}
 
 					.weather-card__time {
@@ -211,7 +215,7 @@
 
 				.weather-card__info-col {
 					align-items: center;
-					font-size: 25rpx;
+					font-size: 22rpx;
 				}
 			}
 
@@ -279,10 +283,25 @@
 				}
 			}
 
+			.rotate {
+				color: #FFC107;
+				animation: rotate 2s linear infinite;
+			}
+
+			@keyframes rotate {
+				from {
+					transform: rotate(0deg)
+				}
+
+				to {
+					transform: rotate(360deg);
+				}
+			}
+
 		}
 
 		.btn-card {
-			height: 250rpx;
+			height: 260rpx;
 			justify-content: space-between;
 			background-color: #fff;
 			margin-top: $ele-margin;

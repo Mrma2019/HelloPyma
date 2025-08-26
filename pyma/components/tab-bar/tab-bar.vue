@@ -30,7 +30,7 @@
 				// console.log(this.tabBarPaddingBottom);
 			}else{
 				this.tabBarPaddingBottom = sysInfo.safeAreaInsets.bottom;
-				this.tabBarPaddingTop = 0;
+				this.tabBarPaddingTop = 5;
 			}
 			
 			const query = uni.createSelectorQuery().in(this);

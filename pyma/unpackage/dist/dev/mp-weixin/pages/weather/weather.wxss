@@ -23,21 +23,110 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.nav-bar__component.data-v-54774d74 {
-  background-color: #1A4190;
-}
-#page-content.data-v-54774d74 {
-  background-color: #1A4190;
-}
-#page-content .content-wrapper.data-v-54774d74 {
+.content-wrapper.data-v-54774d74 {
   color: #fff;
 }
+#page-content.data-v-54774d74 {
+  background: linear-gradient(to bottom, #1A4190, #e8e8e8);
+  box-sizing: border-box;
+  overflow: hidden;
+}
+#page-content .content-center.data-v-54774d74 {
+  align-items: center;
+}
 .addr-card.data-v-54774d74 {
-  width: 100%;
+  width: 90%;
+  height: 80rpx;
   justify-content: space-between;
   align-items: center;
-  padding: 0 20rpx;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 .addr-card .addr.data-v-54774d74 {
   font-size: 40rpx;
+}
+.addr-card .date.data-v-54774d74 {
+  margin-left: 20rpx;
+  font-size: 25rpx;
+}
+.addr-card .update_time.data-v-54774d74 {
+  font-size: 30rpx;
+}
+.temp-card.data-v-54774d74 {
+  width: 90%;
+  font-size: 120rpx;
+  height: 250rpx;
+  justify-content: space-around;
+  align-items: center;
+}
+.temp-card .temp-icon.data-v-54774d74 {
+  font-size: 35rpx;
+}
+.temp-card .text.data-v-54774d74 {
+  font-size: 80rpx;
+}
+.wind-card.data-v-54774d74 {
+  width: 90%;
+  height: 250rpx;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 30rpx;
+  background-color: #1A4190;
+  box-sizing: border-box;
+  overflow: hidden;
+  padding: 0 40rpx;
+  border-radius: 20rpx;
+  opacity: 0.7;
+}
+.grid-weather__card.data-v-54774d74 {
+  margin: 20rpx;
+  width: 90%;
+  background-color: #1A4190;
+  opacity: 0.8;
+  border-radius: 20rpx;
+  box-sizing: border-box;
+  overflow: hidden;
+  padding: 20rpx 40rpx;
+}
+.grid-weather__card .item.data-v-54774d74 {
+  height: 80rpx;
+  justify-content: space-around;
+  align-items: center;
+  border-bottom: 1px solid #fff;
+}
+.grid-weather__card .item.data-v-54774d74:last-child {
+  border-bottom: none;
+}
+.footer.data-v-54774d74 {
+  color: #1A4190;
+  font-size: 20rpx;
+}
+.breath.data-v-54774d74 {
+  animation: breath-54774d74 2s ease-in-out infinite;
+}
+@keyframes breath-54774d74 {
+0% {
+    transform: scale(1);
+    opacity: 1;
+}
+50% {
+    transform: scale(1.1);
+    opacity: 0.6;
+}
+100% {
+    transform: scale(1);
+    opacity: 1;
+}
+}
+.rotate.data-v-54774d74 {
+  color: #FFC107;
+  animation: rotate-54774d74 2s linear infinite;
+}
+@keyframes rotate-54774d74 {
+from {
+    transform: rotate(0deg);
+}
+to {
+    transform: rotate(360deg);
+}
 }

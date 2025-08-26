@@ -17,16 +17,13 @@ const _sfc_main = {
   },
   onShow: function() {
     common_vendor.index.__f__("log", "at App.vue:19", "App Show");
-    this.weatherTimer = setInterval(() => {
-      utils_weather.getWeather();
-    }, 24 * 60 * 60 * 1e3);
+    utils_weather.getWeather();
     this.formatTimer = setInterval(() => {
       utils_format.formatDate();
     }, 600);
   },
   onHide: function() {
-    common_vendor.index.__f__("log", "at App.vue:28", "App Hide");
-    clearInterval(this.weatherTimer);
+    common_vendor.index.__f__("log", "at App.vue:26", "App Hide");
     clearInterval(this.formatTimer);
   },
   methods: {}

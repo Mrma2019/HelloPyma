@@ -3,6 +3,8 @@ import {
 } from 'vue'
 
 export const weatherStore = reactive({
+	icon: null,
 	data: null,
-	loading: true
+	loading: true,
+	location: null
 })

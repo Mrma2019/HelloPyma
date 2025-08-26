@@ -9,6 +9,7 @@ const _sfc_main = {
       navBarHeight: 0,
       swiperHeight: 0,
       contentPanelPaddingBottom: 0,
+      gap: 10,
       pageInfo: {}
     };
   },
@@ -44,7 +45,8 @@ const _sfc_main = {
         text: weatherInfo.text,
         windDir: `${weatherInfo.windDir} ${weatherInfo.windScale}级`,
         humidity: `空气湿度 ${weatherInfo.humidity}`,
-        dateTitle: "当前日期 年/月/日"
+        dateTitle: "当前日期 年/月/日",
+        icon: weatherInfo.icon
       };
     },
     formatDate() {
@@ -81,26 +83,29 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
         b: index
       };
     }),
-    d: $data.navBarHeight + 10 + "px",
-    e: $data.navBarHeight + 10 + $data.swiperHeight / 2 + "px",
-    f: common_vendor.t($options.weatherCardInfo.temp),
-    g: common_vendor.t($options.formatTime),
-    h: common_vendor.t($options.weatherCardInfo.text),
-    i: common_vendor.t($options.weatherCardInfo.windDir),
-    j: common_vendor.t($options.weatherCardInfo.humidity),
-    k: common_vendor.o((...args) => $options.navigatorTo && $options.navigatorTo(...args)),
-    l: common_vendor.t($options.weatherCardInfo.dateTitle),
-    m: common_vendor.f($options.formatDate.split(":"), (item, index, i0) => {
+    d: $data.navBarHeight + $data.gap + "px",
+    e: $data.navBarHeight + $data.gap + $data.swiperHeight / 2 + "px",
+    f: $data.swiperHeight / 2 + "px",
+    g: common_vendor.n("qi-" + $options.weatherCardInfo.icon),
+    h: common_vendor.n($options.weatherCardInfo.icon === 100 ? "rotate" : "breath"),
+    i: common_vendor.t($options.weatherCardInfo.temp),
+    j: common_vendor.t($options.formatTime),
+    k: common_vendor.t($options.weatherCardInfo.text),
+    l: common_vendor.t($options.weatherCardInfo.windDir),
+    m: common_vendor.t($options.weatherCardInfo.humidity),
+    n: common_vendor.o((...args) => $options.navigatorTo && $options.navigatorTo(...args)),
+    o: common_vendor.t($options.weatherCardInfo.dateTitle),
+    p: common_vendor.f($options.formatDate.split("-"), (item, index, i0) => {
       return {
         a: common_vendor.t(item),
-        b: common_vendor.t(index === 0 ? "Year" : index === 1 ? "Month" : "Day"),
+        b: common_vendor.t(index === 0 ? "Year" : index === 1 ? "Month" : "Date"),
         c: index
       };
     }),
-    n: common_vendor.t((_f = $data.pageInfo.mainBtn) == null ? void 0 : _f.text),
-    o: common_vendor.t((_g = $data.pageInfo.mainBtn) == null ? void 0 : _g.desc),
-    p: common_vendor.n((_h = $data.pageInfo.mainBtn) == null ? void 0 : _h.icon),
-    q: common_vendor.f((_i = $data.pageInfo) == null ? void 0 : _i.subBtns, (item, index, i0) => {
+    q: common_vendor.t((_f = $data.pageInfo.mainBtn) == null ? void 0 : _f.text),
+    r: common_vendor.t((_g = $data.pageInfo.mainBtn) == null ? void 0 : _g.desc),
+    s: common_vendor.n((_h = $data.pageInfo.mainBtn) == null ? void 0 : _h.icon),
+    t: common_vendor.f((_i = $data.pageInfo) == null ? void 0 : _i.subBtns, (item, index, i0) => {
       return {
         a: common_vendor.t(item.text),
         b: common_vendor.t(item.desc),
@@ -108,11 +113,10 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
         d: index
       };
     }),
-    r: $data.swiperHeight / 2 + 10 + "px",
-    s: $data.contentPanelPaddingBottom + "px",
-    t: common_vendor.o($options.setContentPanelPaddingBottom)
+    v: $data.contentPanelPaddingBottom + "px",
+    w: common_vendor.o($options.setContentPanelPaddingBottom)
   };
 }
-const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render]]);
+const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-07e72d3c"]]);
 wx.createPage(MiniProgramPage);
 //# sourceMappingURL=../../../.sourcemap/mp-weixin/pages/home/home.js.map

@@ -2,68 +2,240 @@
 	<view class="content">
 		<uni-nav-bar class="nav-bar__component" :align="pageInfo?.navAlgin" :title="pageInfo?.navTitle"
 			:color="pageInfo?.navColor" , :is-back="pageInfo?.isBack" @sendNavBarHeight="getNavHeight"></uni-nav-bar>
-		<scroll-view id="page-content" scroll-y enable-flex>
-			<view class="content-wrapper" :style="{marginTop: navigatorHeight + 'px'}">
-				<view class="addr-card flex-row">
-					<text class="addr">{{weatherStore.location.name}}</text>
-					<text class="update_time">{{weatherStore.data.obsTime}}</text>
+		<view class="content-wrapper fixed-box" :style="{paddingTop: navigatorHeight + 'px'}">
+			<scroll-view id="page-content" scroll-y>
+				<view class="content-center flex-col">
+					<view class="addr-card flex-row">
+						<view class="flex-row" style="height: 100%; align-items: center;">
+							<text class="addr">{{weatherInfo.location?.name}}</text>
+							<text class="date">{{today}}</text>
+						</view>
+						<text class="update_time">{{weatherInfo?.updateTime}}</text>
+					</view>
+					<view class="temp-card flex-row">
+						<view class="flex-row">
+							<text class="temp">{{weatherInfo.data?.temp}}</text>
+							<text class="temp-icon iconfont icon-sheshidu"></text>
+						</view>
+						<text
+							:class="['qi-' + weatherInfo.data?.icon, weatherInfo.data?.icon === 100 ? 'roate':'breath']"></text>
+						<text class="text">{{weatherInfo.data?.text}}</text>
+					</view>
+					<view class="wind-card flex-row">
+						<text>{{weatherInfo?.windDir}}</text>
+						<text>|</text>
+						<text>{{weatherInfo?.humidity}}</text>
+					</view>
+					<view class="grid-weather__card flex-col">
+						<view class="item flex-row" v-for="item, index in weatherInfo?.daily" :key="index">
+							<text>{{item.day}}</text>
+							<text :class="['qi-'+item.iconDay]"></text>
+							<text>{{item.tempMax}}</text>
+						</view>
+					</view>
+					<view class="footer">
+						<text>{{footer}}</text>
+					</view>
 				</view>
-			</view>
-		</scroll-view>
+			</scroll-view>
+		</view>
 	</view>
 </template>
 
 <script>
 	import {
+		weatherStore
+	} from '@/store/weatherStore.js';
+	import {
+		formatStore
+	} from '@/store/formatStore.js';
+	import {
 		getPageInfo
 	} from './index.js';
 	import {
-		weatherStore
-	} from '@/store/weatherStore.js'
+		formatDate
+	} from '@/utils/format.js'
+
 	export default {
 		data() {
 			return {
 				pageInfo: {},
-				navigatorHeight: 0
+				navigatorHeight: 0,
+				footer: '数据来源：和风天气Api',
 			}
 		},
 		methods: {
 			getNavHeight(height) {
-				this.navigatorHeight = height
+				this.navigatorHeight = height;
 			}
 		},
 		async onLoad() {
 			this.pageInfo = await getPageInfo();
 		},
 		computed: {
-			weatherStore() {
-				console.log('天气信息', weatherStore);
-				return weatherStore;
+			weatherInfo() {
+				const data = weatherStore.data;
+				const location = weatherStore.location;
+				const daily = (weatherStore.girdData?.daily).map(item => {
+					const fd = formatDate(item.fxDate);
+					return {
+						...item,
+						day: fd.day
+					}
+				});
+				const updateTimeMatch = data.obsTime?.match(/\d{2}:\d{2}/);
+				const updateTime = updateTimeMatch ? updateTimeMatch[0] + '更新' : '获取更新时间失败';
+
+				return {
+					data,
+					location,
+					updateTime,
+					daily,
+					windDir: `${data.windDir || ''} ${data.windScale || ''}级`,
+					humidity: `空气湿度 ${data.humidity || ''}`
+				};
+			},
+			today() {
+				const data = formatStore.data;
+				return `(${data.prefix}${data.date})`;
 			}
 		}
 	}
 </script>
 
 <style lang="scss" scoped>
-	.nav-bar__component {
-		background-color: $uni-color-primary;
+	$panel-width: 90%;
+	$ele-border-radius: 20rpx;
+	$ele-margin: 20rpx;
+
+	.content-wrapper {
+		color: #fff;
 	}
-	
-	#page-content{
-		background-color: $uni-color-primary;
-		
-		.content-wrapper{
-			color: #fff;
+
+	#page-content {
+		background: linear-gradient(to bottom, $uni-color-primary, #e8e8e8);
+		box-sizing: border-box;
+		overflow: hidden;
+
+		.content-center {
+			align-items: center;
 		}
 	}
-	
-	.addr-card{
-		width: 100%;
+
+	.addr-card {
+		width: $panel-width;
+		height: 80rpx;
 		justify-content: space-between;
 		align-items: center;
-		padding: 0 20rpx;
-		.addr{
+		box-sizing: border-box;
+		overflow: hidden;
+
+		.addr {
 			font-size: 40rpx;
+		}
+
+		.date {
+			margin-left: 20rpx;
+			font-size: 25rpx;
+		}
+
+		.update_time {
+			font-size: 30rpx;
+		}
+	}
+
+	.temp-card {
+		width: $panel-width;
+		font-size: 120rpx;
+		height: 250rpx;
+		justify-content: space-around;
+		align-items: center;
+
+		.temp-icon {
+			font-size: 35rpx;
+		}
+
+		.text {
+			font-size: 80rpx;
+		}
+	}
+
+	.wind-card {
+		width: $panel-width;
+		height: 250rpx;
+		justify-content: space-between;
+		align-items: center;
+		font-size: 30rpx;
+		background-color: $uni-color-primary;
+		box-sizing: border-box;
+		overflow: hidden;
+		padding: 0 40rpx;
+		border-radius: $ele-border-radius;
+		opacity: 0.7;
+	}
+
+	.grid-weather__card {
+		margin: $ele-margin;
+		width: $panel-width;
+		background-color: $uni-color-primary;
+		opacity: 0.8;
+		border-radius: $ele-border-radius;
+		box-sizing: border-box;
+		overflow: hidden;
+		padding: 20rpx 40rpx;
+
+		.item {
+			height: 80rpx;
+			justify-content: space-around;
+			align-items: center;
+
+			border-bottom: 1px solid #fff;
+
+			&:last-child {
+				border-bottom: none;
+			}
+		}
+	}
+
+	.footer {
+		color: $uni-color-primary;
+		font-size: 20rpx;
+	}
+
+	//天气图标动画
+	.breath {
+		animation: breath 2s ease-in-out infinite;
+	}
+
+	@keyframes breath {
+		0% {
+			transform: scale(1);
+			opacity: 1;
+		}
+
+		50% {
+			transform: scale(1.1);
+			opacity: 0.6;
+		}
+
+		100% {
+			transform: scale(1);
+			opacity: 1;
+		}
+	}
+
+	.rotate {
+		color: #FFC107;
+		animation: rotate 2s linear infinite;
+	}
+
+	@keyframes rotate {
+		from {
+			transform: rotate(0deg)
+		}
+
+		to {
+			transform: rotate(360deg);
 		}
 	}
 </style>

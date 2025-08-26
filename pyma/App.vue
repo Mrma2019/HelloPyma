@@ -17,16 +17,13 @@
 		},
 		onShow: function() {
 			console.log('App Show');
-			this.weatherTimer = setInterval(() => {
-				getWeather();
-			}, 24 * 60 * 60 * 1000);
+			getWeather();
 			this.formatTimer = setInterval(()=>{
 				formatDate();
 			}, 600);
 		},
 		onHide: function() {
 			console.log('App Hide');
-			clearInterval(this.weatherTimer);
 			clearInterval(this.formatTimer);
 		},
 		methods: {
@@ -39,4 +36,5 @@
 	/*每个页面公共css */
 	@import "@/common/style.css";
 	@import "@/common/iconfont.css";
+	@import "@/static/stylesheet.css";
 </style>

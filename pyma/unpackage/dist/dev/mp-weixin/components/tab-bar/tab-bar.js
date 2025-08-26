@@ -19,7 +19,7 @@ const _sfc_main = {
       this.tabBarPaddingTop = 5;
     } else {
       this.tabBarPaddingBottom = sysInfo.safeAreaInsets.bottom;
-      this.tabBarPaddingTop = 0;
+      this.tabBarPaddingTop = 5;
     }
     const query = common_vendor.index.createSelectorQuery().in(this);
     query.select(".tab-bar").boundingClientRect((rect) => {
