@@ -86,10 +86,10 @@
 		top: 0;
 		left: 0;
 		right: 0;
-		z-index: 999;
+		z-index: 10;
 		align-items: flex-end;
 		font-weight: bold;
-		font-size: 35rpx;
+		font-size: 32rpx;
 
 		.title-wrapper {
 			width: 100%;

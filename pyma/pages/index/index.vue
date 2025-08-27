@@ -29,9 +29,11 @@
 	})
 	watch(() => weatherStore.loading, (newVal) => {
 		if (!newVal) {
-			uni.switchTab({
-				url: pageInfo.value.pagepath
-			});
+			setTimeout(() => {
+				uni.switchTab({
+					url: pageInfo.value.pagepath
+				});
+			}, 1000)
 		}
 	});
 </script>
@@ -72,8 +74,10 @@
 		}
 
 		.app-name {
-			margin-top: 30rpx;
-			font-size: 35rpx;
+			margin-top: 40rpx;
+			font-size: 30rpx;
+			font-weight: bold;
+			color: $uni-color-primary;
 		}
 	}
 

@@ -19,26 +19,26 @@
 							@click="navigatorTo">
 							<view class="weather-card__icon-row flex-row">
 								<text
-									:class="['weather-card__weather-icon', 'iconfont', 'qi-' + weatherInfo.icon, weatherInfo.icon === 100 ? 'rotate':'breath']"></text>
-								<text class="weather-card__temp">{{weatherInfo.temp}}</text>
+									:class="['weather-card__weather-icon', 'iconfont', 'qi-' + weatherInfo.icon, weatherInfo.icon == 100 ? 'rotate':'breath']"></text>
+								<text class="weather-card__temp">{{weatherInfo.temp || '--'}}</text>
 								<view class="weather-card__time flex-col">
 									<text class="weather-card__temp-icon iconfont icon-sheshidu"></text>
-									<text class="weather-card__time-text">{{time}}</text>
+									<text class="weather-card__time-text">{{time || '--'}}</text>
 								</view>
 							</view>
 							<view class="weather-card__info-col flex-col">
-								<text>{{weatherInfo.text}}</text>
-								<text>{{weatherInfo.windDir}}</text>
-								<text>{{weatherInfo.humidity}}</text>
+								<text>{{weatherInfo?.text || '--'}}</text>
+								<text>{{weatherInfo?.windDir || '--'}}</text>
+								<text>{{weatherInfo?.humidity || '--'}}</text>
 							</view>
 						</view>
 						<view class="weather-card__date flex-col">
 							<view class="title">
-								<text>{{weatherInfo.dateTitle}}</text>
+								<text>{{weatherInfo?.dateTitle || '--'}}</text>
 							</view>
 							<view class="date flex-row">
 								<view class="date-item" v-for="item, index in date.split('-')" :key="index">
-									<text class="text">{{item}}</text>
+									<text class="text">{{item || '--'}}</text>
 									<text
 										class="desc">{{ index === 0 ? 'Year' : index === 1 ? 'Month' : 'Date' }}</text>
 								</view>
@@ -47,15 +47,15 @@
 					</view>
 					<view class="btn-card flex-row">
 						<view class="btn-card__main btn flex-col">
-							<text class="text">{{pageInfo.mainBtn?.text}}</text>
-							<text class="desc">{{pageInfo.mainBtn?.desc}}</text>
+							<text class="text">{{pageInfo.mainBtn?.text || '--'}}</text>
+							<text class="desc">{{pageInfo.mainBtn?.desc || '--'}}</text>
 							<text :class="['iconfont', pageInfo.mainBtn?.icon]"></text>
 						</view>
 						<view class="btn-card__box flex-col">
 							<view class="btn-card__sub btn flex-col" v-for="item, index in pageInfo?.subBtns"
-								:key="index">
-								<text class="text">{{item.text}}</text>
-								<text class="desc">{{item.desc}}</text>
+								:key="index" @click="popup(item)">
+								<text class="text">{{item?.text || '--'}}</text>
+								<text class="desc">{{item?.desc || '--'}}</text>
 								<text :class="['iconfont', item.icon]"></text>
 							</view>
 						</view>
@@ -63,6 +63,7 @@
 				</view>
 			</view>
 		</scroll-view>
+		<uni-popup v-model:show="ispopup"></uni-popup>
 		<uni-tab-bar class="tab-bar__component" @sendTabBarHeight="setContentPanelPaddingBottom" />
 	</view>
 </template>
@@ -85,7 +86,8 @@
 				swiperHeight: 0,
 				contentPanelPaddingBottom: 0,
 				gap: 10,
-				pageInfo: {}
+				pageInfo: {},
+				ispopup: false
 			}
 		},
 
@@ -118,6 +120,13 @@
 				uni.navigateTo({
 					url: `${pagepath}`
 				});
+			},
+			popup(item) {
+				if (item.ispopup) {
+					this.ispopup = true;
+				} else {
+					this.ispopup = false;
+				}
 			}
 		},
 

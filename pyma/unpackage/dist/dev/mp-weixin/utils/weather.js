@@ -26,6 +26,9 @@ async function getWeather() {
               getGridWeatherByAdcode(longitude, latitude).then(
                 resolve
               ).catch(reject);
+              getIndices(longitude, latitude).then(resolve).catch(
+                reject
+              );
             }
           },
           fail: reject
@@ -70,11 +73,34 @@ async function getGridWeatherByAdcode(lon, lat) {
       },
       success: (res) => {
         if (res.data.code == 200) {
-          const weatherInfo = res.data;
-          store_weatherStore.weatherStore.girdData = weatherInfo;
-          resolve(weatherInfo);
+          const girdInfo = res.data;
+          store_weatherStore.weatherStore.girdInfo = girdInfo;
+          resolve(girdInfo);
         } else {
           reject("获取天气信息失败");
+        }
+      },
+      fail: reject
+    });
+  });
+}
+async function getIndices(lon, lat) {
+  return new Promise((resolve, reject) => {
+    common_vendor.index.request({
+      url: `${config_config.config.indicesUrl}`,
+      data: {
+        key: `${config_config.config.apiKey}`,
+        type: 1,
+        location: `${lon},${lat}`
+      },
+      success: (res) => {
+        if (res.data.code == 200) {
+          const indices = res.data;
+          common_vendor.index.__f__("log", "at utils/weather.js:107", indices);
+          store_weatherStore.weatherStore.indices = indices;
+          resolve(indices);
+        } else {
+          reject("获取指数信息失败");
         }
       },
       fail: reject

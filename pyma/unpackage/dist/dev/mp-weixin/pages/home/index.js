@@ -16,11 +16,13 @@ async function getPageInfo() {
     subBtns: [{
       text: "待参加",
       desc: "进入",
-      icon: "icon-liebiao1"
+      icon: "icon-liebiao1",
+      ispopup: false
     }, {
       text: "声明",
       desc: "查看",
-      icon: "icon-guanyuapp"
+      icon: "icon-guanyuapp",
+      ispopup: true
     }]
   };
   return pageInfo;

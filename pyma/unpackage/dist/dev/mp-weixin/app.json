@@ -3,7 +3,8 @@
     "pages/index/index",
     "pages/home/home",
     "pages/info/info",
-    "pages/weather/weather"
+    "pages/weather/weather",
+    "pages/square/square"
   ],
   "window": {
     "navigationBarTextStyle": "black",

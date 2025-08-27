@@ -5,5 +5,6 @@ import {
 export const weatherStore = reactive({
 	data: {},
 	loading: true,
-	girdData: null,
+	girdInfo: null,
+	indices: null
 })

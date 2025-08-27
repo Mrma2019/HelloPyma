@@ -10,7 +10,8 @@ const _sfc_main = {
       swiperHeight: 0,
       contentPanelPaddingBottom: 0,
       gap: 10,
-      pageInfo: {}
+      pageInfo: {},
+      ispopup: false
     };
   },
   async onLoad() {
@@ -35,6 +36,13 @@ const _sfc_main = {
       common_vendor.index.navigateTo({
         url: `${pagepath}`
       });
+    },
+    popup(item) {
+      if (item.ispopup) {
+        this.ispopup = true;
+      } else {
+        this.ispopup = false;
+      }
     }
   },
   computed: {
@@ -59,16 +67,18 @@ const _sfc_main = {
 };
 if (!Array) {
   const _easycom_uni_nav_bar2 = common_vendor.resolveComponent("uni-nav-bar");
+  const _easycom_uni_popup2 = common_vendor.resolveComponent("uni-popup");
   const _easycom_uni_tab_bar2 = common_vendor.resolveComponent("uni-tab-bar");
-  (_easycom_uni_nav_bar2 + _easycom_uni_tab_bar2)();
+  (_easycom_uni_nav_bar2 + _easycom_uni_popup2 + _easycom_uni_tab_bar2)();
 }
 const _easycom_uni_nav_bar = () => "../../components/nav-bar/nav-bar.js";
+const _easycom_uni_popup = () => "../../components/popup/popup.js";
 const _easycom_uni_tab_bar = () => "../../components/tab-bar/tab-bar.js";
 if (!Math) {
-  (_easycom_uni_nav_bar + _easycom_uni_tab_bar)();
+  (_easycom_uni_nav_bar + _easycom_uni_popup + _easycom_uni_tab_bar)();
 }
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
-  var _a, _b, _c, _d, _e, _f, _g, _h, _i;
+  var _a, _b, _c, _d, _e, _f, _g, _h, _i, _j, _k, _l, _m;
   return {
     a: common_vendor.o($options.getNavBarHeight),
     b: common_vendor.p({
@@ -87,34 +97,39 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     e: $data.navBarHeight + $data.gap + $data.swiperHeight / 2 + "px",
     f: $data.swiperHeight / 2 + "px",
     g: common_vendor.n("qi-" + $options.weatherInfo.icon),
-    h: common_vendor.n($options.weatherInfo.icon === 100 ? "rotate" : "breath"),
-    i: common_vendor.t($options.weatherInfo.temp),
-    j: common_vendor.t($options.time),
-    k: common_vendor.t($options.weatherInfo.text),
-    l: common_vendor.t($options.weatherInfo.windDir),
-    m: common_vendor.t($options.weatherInfo.humidity),
+    h: common_vendor.n($options.weatherInfo.icon == 100 ? "rotate" : "breath"),
+    i: common_vendor.t($options.weatherInfo.temp || "--"),
+    j: common_vendor.t($options.time || "--"),
+    k: common_vendor.t(((_f = $options.weatherInfo) == null ? void 0 : _f.text) || "--"),
+    l: common_vendor.t(((_g = $options.weatherInfo) == null ? void 0 : _g.windDir) || "--"),
+    m: common_vendor.t(((_h = $options.weatherInfo) == null ? void 0 : _h.humidity) || "--"),
     n: common_vendor.o((...args) => $options.navigatorTo && $options.navigatorTo(...args)),
-    o: common_vendor.t($options.weatherInfo.dateTitle),
+    o: common_vendor.t(((_i = $options.weatherInfo) == null ? void 0 : _i.dateTitle) || "--"),
     p: common_vendor.f($options.date.split("-"), (item, index, i0) => {
       return {
-        a: common_vendor.t(item),
+        a: common_vendor.t(item || "--"),
         b: common_vendor.t(index === 0 ? "Year" : index === 1 ? "Month" : "Date"),
         c: index
       };
     }),
-    q: common_vendor.t((_f = $data.pageInfo.mainBtn) == null ? void 0 : _f.text),
-    r: common_vendor.t((_g = $data.pageInfo.mainBtn) == null ? void 0 : _g.desc),
-    s: common_vendor.n((_h = $data.pageInfo.mainBtn) == null ? void 0 : _h.icon),
-    t: common_vendor.f((_i = $data.pageInfo) == null ? void 0 : _i.subBtns, (item, index, i0) => {
+    q: common_vendor.t(((_j = $data.pageInfo.mainBtn) == null ? void 0 : _j.text) || "--"),
+    r: common_vendor.t(((_k = $data.pageInfo.mainBtn) == null ? void 0 : _k.desc) || "--"),
+    s: common_vendor.n((_l = $data.pageInfo.mainBtn) == null ? void 0 : _l.icon),
+    t: common_vendor.f((_m = $data.pageInfo) == null ? void 0 : _m.subBtns, (item, index, i0) => {
       return {
-        a: common_vendor.t(item.text),
-        b: common_vendor.t(item.desc),
+        a: common_vendor.t((item == null ? void 0 : item.text) || "--"),
+        b: common_vendor.t((item == null ? void 0 : item.desc) || "--"),
         c: common_vendor.n(item.icon),
-        d: index
+        d: index,
+        e: common_vendor.o(($event) => $options.popup(item), index)
       };
     }),
     v: $data.contentPanelPaddingBottom + "px",
-    w: common_vendor.o($options.setContentPanelPaddingBottom)
+    w: common_vendor.o(($event) => $data.ispopup = $event),
+    x: common_vendor.p({
+      show: $data.ispopup
+    }),
+    y: common_vendor.o($options.setContentPanelPaddingBottom)
   };
 }
 const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-07e72d3c"]]);

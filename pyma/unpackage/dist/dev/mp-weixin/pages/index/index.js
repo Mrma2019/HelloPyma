@@ -18,9 +18,11 @@ const _sfc_main = {
     });
     common_vendor.watch(() => store_weatherStore.weatherStore.loading, (newVal) => {
       if (!newVal) {
-        common_vendor.index.switchTab({
-          url: pageInfo.value.pagepath
-        });
+        setTimeout(() => {
+          common_vendor.index.switchTab({
+            url: pageInfo.value.pagepath
+          });
+        }, 1e3);
       }
     });
     return (_ctx, _cache) => {

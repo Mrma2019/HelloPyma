@@ -1,0 +1,1 @@
+<view class="{{['data-v-4bcd74eb', 'popup', b]}}"><view class="header flex-row data-v-4bcd74eb"><text class="data-v-4bcd74eb" bindtap="{{a}}">关闭</text></view><slot name="content"></slot></view>

@@ -25,9 +25,14 @@ export async function getWeather() {
 							const adcode = location.id;
 
 							weatherStore.data.location = location;
+							//实时天气
 							getWeatherByAdcode(adcode).then(resolve).catch(reject);
+							//格点每日天气
 							getGridWeatherByAdcode(longitude, latitude).then(
 								resolve).catch(reject);
+							//天气指数
+							getIndices(longitude, latitude).then(resolve).catch(
+								reject)
 						}
 					},
 					fail: reject
@@ -75,12 +80,36 @@ export async function getGridWeatherByAdcode(lon, lat) {
 			},
 			success: (res) => {
 				if (res.data.code == 200) {
-					const weatherInfo = res.data;
-
-					weatherStore.girdData = weatherInfo;
-					resolve(weatherInfo);
+					const girdInfo = res.data;
+					weatherStore.girdInfo = girdInfo;
+					resolve(girdInfo);
 				} else {
 					reject('获取天气信息失败')
+				}
+			},
+			fail: reject
+		})
+	})
+}
+
+export async function getIndices(lon, lat) {
+	return new Promise((resolve, reject) => {
+		uni.request({
+			url: `${config.indicesUrl}`,
+			data: {
+				key: `${config.apiKey}`,
+				type: 1,
+				location: `${lon},${lat}`
+			},
+			success: (res) => {
+				if (res.data.code == 200) {
+					const indices = res.data;
+					console.log(indices);
+					weatherStore.indices = indices;
+
+					resolve(indices)
+				} else {
+					reject('获取指数信息失败')
 				}
 			},
 			fail: reject

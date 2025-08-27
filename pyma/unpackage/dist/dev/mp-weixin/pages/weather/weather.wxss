@@ -23,6 +23,15 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
+.border-box.data-v-54774d74 {
+  width: 90%;
+  border-radius: 20rpx;
+  box-sizing: border-box;
+  overflow: hidden;
+  background-color: #1A4190;
+  font-size: 30rpx;
+  padding: 30rpx 40rpx;
+}
 .content-wrapper.data-v-54774d74 {
   color: #fff;
 }
@@ -54,8 +63,8 @@
 }
 .temp-card.data-v-54774d74 {
   width: 90%;
-  font-size: 120rpx;
-  height: 250rpx;
+  font-size: 140rpx;
+  height: 280rpx;
   justify-content: space-around;
   align-items: center;
 }
@@ -63,30 +72,26 @@
   font-size: 35rpx;
 }
 .temp-card .text.data-v-54774d74 {
-  font-size: 80rpx;
+  font-size: 45rpx;
 }
 .wind-card.data-v-54774d74 {
-  width: 90%;
   height: 250rpx;
   justify-content: space-between;
   align-items: center;
-  font-size: 30rpx;
   background-color: #1A4190;
-  box-sizing: border-box;
-  overflow: hidden;
-  padding: 0 40rpx;
-  border-radius: 20rpx;
+  opacity: 0.7;
+}
+.indices-card.data-v-54774d74 {
+  height: -webkit-max-content;
+  height: max-content;
+  justify-content: center;
+  background-color: #1A4190;
+  margin: 20rpx 0;
+  line-height: 45rpx;
   opacity: 0.7;
 }
 .grid-weather__card.data-v-54774d74 {
-  margin: 20rpx;
-  width: 90%;
-  background-color: #1A4190;
   opacity: 0.8;
-  border-radius: 20rpx;
-  box-sizing: border-box;
-  overflow: hidden;
-  padding: 20rpx 40rpx;
 }
 .grid-weather__card .item.data-v-54774d74 {
   height: 80rpx;

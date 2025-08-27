@@ -4,33 +4,39 @@
 			:color="pageInfo?.navColor" , :is-back="pageInfo?.isBack" @sendNavBarHeight="getNavHeight"></uni-nav-bar>
 		<view class="content-wrapper fixed-box" :style="{paddingTop: navigatorHeight + 'px'}">
 			<scroll-view id="page-content" scroll-y>
-				<view class="content-center flex-col">
+				<view class="content-center flex-col" style="padding-bottom: 100rpx;">
 					<view class="addr-card flex-row">
 						<view class="flex-row" style="height: 100%; align-items: center;">
 							<text class="addr">{{weatherInfo.location?.name || '--'}}</text>
-							<text class="date">{{today}}</text>
+							<text class="date">{{today || '--'}}</text>
 						</view>
-						<text class="update_time">{{weatherInfo?.updateTime}}</text>
+						<text class="update_time">{{weatherInfo?.updateTime || '--'}}</text>
 					</view>
 					<view class="temp-card flex-row">
 						<view class="flex-row">
-							<text class="temp">{{weatherInfo.data?.temp}}</text>
+							<text class="temp">{{weatherInfo.data?.temp || '--'}}</text>
 							<text class="temp-icon iconfont icon-sheshidu"></text>
 						</view>
 						<text
-							:class="['qi-' + weatherInfo.data?.icon, weatherInfo.data?.icon === 100 ? 'roate':'breath']"></text>
-						<text class="text">{{weatherInfo.data?.text}}</text>
+							:class="['qi-' + weatherInfo.data?.icon, weatherInfo.data?.icon == 100 ? 'roate':'breath']"></text>
+						<text class="text">{{weatherInfo.data?.text || '--'}}</text>
 					</view>
-					<view class="wind-card flex-row">
-						<text>{{weatherInfo?.windDir}}</text>
+					<view class="wind-card border-box flex-row">
+						<text>{{weatherInfo?.windDir || '--'}}</text>
 						<text>|</text>
-						<text>{{weatherInfo?.humidity}}</text>
+						<text>{{weatherInfo?.humidity || '--'}}</text>
 					</view>
-					<view class="grid-weather__card flex-col">
-						<view class="item flex-row" v-for="item, index in weatherInfo?.daily" :key="index">
-							<text>{{item.day}}</text>
+					<view class="indices-card border-box flex-col" v-for="item, index in weatherInfo?.indices"
+						:key="index">
+						<text>{{item?.name || '--'}}</text>
+						<text>{{item?.category || '--'}}</text>
+						<text>{{item?.text || '--'}}</text>
+					</view>
+					<view class="grid-weather__card border-box flex-col">
+						<view class="item flex-row" v-for="item, index in weatherInfo?.gridInfo" :key="index">
+							<text>{{item.day || '--'}}</text>
 							<text :class="['qi-'+item.iconDay]"></text>
-							<text>{{item.tempMax}}</text>
+							<text>{{item.tempMax || '--'}}</text>
 						</view>
 					</view>
 					<view class="footer">
@@ -75,24 +81,31 @@
 		computed: {
 			weatherInfo() {
 				const data = weatherStore.data;
-				const girdData = weatherStore.girdData;
-				// console.log(data);
+				const girdInfo = weatherStore.girdInfo;
 				const location = data.location;
-				const daily = (girdData?.daily).map(item => {
+				const updateTime = data.obsTime?.match(/\d{2}:\d{2}/)[0] + '更新' || '--';
+				const gridInfo = (girdInfo?.daily).map(item => {
 					const fd = formatDate(item.fxDate);
 					return {
 						...item,
 						day: fd.day
 					}
 				});
-				const updateTimeMatch = data.obsTime?.match(/\d{2}:\d{2}/);
-				const updateTime = updateTimeMatch ? updateTimeMatch[0] + '更新' : '获取更新时间失败';
+
+				const indices = (weatherStore.indices.daily).map(item => {
+					return {
+						name: `类型：${item?.name}`,
+						category: `级别：${item?.category }`,
+						text: item.text
+					}
+				});
 
 				return {
 					data,
 					location,
+					gridInfo,
+					indices,
 					updateTime,
-					daily,
 					windDir: `${data.windDir || ''} ${data.windScale || ''}级`,
 					humidity: `空气湿度 ${data.humidity || ''}`
 				};
@@ -109,6 +122,16 @@
 	$panel-width: 90%;
 	$ele-border-radius: 20rpx;
 	$ele-margin: 20rpx;
+
+	.border-box {
+		width: $panel-width;
+		border-radius: $ele-border-radius;
+		box-sizing: border-box;
+		overflow: hidden;
+		background-color: $uni-color-primary;
+		font-size: 30rpx;
+		padding: 30rpx 40rpx;
+	}
 
 	.content-wrapper {
 		color: #fff;
@@ -148,8 +171,8 @@
 
 	.temp-card {
 		width: $panel-width;
-		font-size: 120rpx;
-		height: 250rpx;
+		font-size: 140rpx;
+		height: 280rpx;
 		justify-content: space-around;
 		align-items: center;
 
@@ -158,33 +181,29 @@
 		}
 
 		.text {
-			font-size: 80rpx;
+			font-size: 45rpx;
 		}
 	}
 
 	.wind-card {
-		width: $panel-width;
 		height: 250rpx;
 		justify-content: space-between;
 		align-items: center;
-		font-size: 30rpx;
 		background-color: $uni-color-primary;
-		box-sizing: border-box;
-		overflow: hidden;
-		padding: 0 40rpx;
-		border-radius: $ele-border-radius;
+		opacity: 0.7;
+	}
+
+	.indices-card {
+		height: max-content;
+		justify-content: center;
+		background-color: $uni-color-primary;
+		margin: $ele-margin 0;
+		line-height: 45rpx;
 		opacity: 0.7;
 	}
 
 	.grid-weather__card {
-		margin: $ele-margin;
-		width: $panel-width;
-		background-color: $uni-color-primary;
 		opacity: 0.8;
-		border-radius: $ele-border-radius;
-		box-sizing: border-box;
-		overflow: hidden;
-		padding: 20rpx 40rpx;
 
 		.item {
 			height: 80rpx;
