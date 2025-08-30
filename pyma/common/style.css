@@ -3,6 +3,7 @@
 	height: 100vh;
 	display: flex;
 	flex-direction: column;
+	font-weight: bold;
 }
 
 #page-content {
@@ -12,7 +13,7 @@
 	background-color: #f8f8f8;
 }
 
-.content-wrapper{
+.content-wrapper {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -27,10 +28,51 @@
 	flex-direction: column;
 }
 
-.fixed-box{
+.border-box{
+	box-sizing: border-box;
+	overflow: hidden;
+}
+
+.fixed-box {
 	position: fixed;
 	top: 0;
 	bottom: 0;
 	left: 0;
 	right: 0;
+}
+
+.breath {
+	animation: breath 2s ease-in-out infinite;
+}
+
+@keyframes breath {
+	0% {
+		transform: scale(1);
+		opacity: 1;
+	}
+
+	50% {
+		transform: scale(1.1);
+		opacity: 0.6;
+	}
+
+	100% {
+		transform: scale(1);
+		opacity: 1;
+	}
+}
+
+.rotate {
+	color: #FFC107;
+	animation: rotate 2s linear infinite;
+}
+
+@keyframes rotate {
+	from {
+		transform: rotate(0deg)
+	}
+
+	to {
+		transform: rotate(360deg);
+	}
 }

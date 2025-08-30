@@ -28,8 +28,8 @@
   align-items: center;
 }
 .content .logo-wrapper.data-v-1cf27b2a {
-  width: 120rpx;
-  height: 120rpx;
+  width: 100rpx;
+  height: 100rpx;
   position: relative;
   border-radius: 50%;
 }
@@ -53,10 +53,9 @@
   box-sizing: border-box;
   animation: spin-1cf27b2a 1s linear infinite;
 }
-.content .app-name.data-v-1cf27b2a {
-  margin-top: 40rpx;
+.content .name.data-v-1cf27b2a {
+  padding: 50rpx 0;
   font-size: 30rpx;
-  font-weight: bold;
   color: #1A4190;
 }
 @keyframes spin-1cf27b2a {

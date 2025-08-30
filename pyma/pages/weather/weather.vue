@@ -3,40 +3,56 @@
 		<uni-nav-bar class="nav-bar__component" :align="pageInfo?.navAlgin" :title="pageInfo?.navTitle"
 			:color="pageInfo?.navColor" , :is-back="pageInfo?.isBack" @sendNavBarHeight="getNavHeight"></uni-nav-bar>
 		<view class="content-wrapper fixed-box" :style="{paddingTop: navigatorHeight + 'px'}">
-			<scroll-view id="page-content" scroll-y>
+			<scroll-view id="page-content" class="border-box" scroll-y>
 				<view class="content-center flex-col" style="padding-bottom: 100rpx;">
-					<view class="addr-card flex-row">
+					<view class="location flex-row">
 						<view class="flex-row" style="height: 100%; align-items: center;">
 							<text class="addr">{{weatherInfo.location?.name || '--'}}</text>
-							<text class="date">{{today || '--'}}</text>
+							<text class="date">{{date || '--'}}</text>
 						</view>
 						<text class="update_time">{{weatherInfo?.updateTime || '--'}}</text>
 					</view>
-					<view class="temp-card flex-row">
+					<view class="now-info flex-row">
 						<view class="flex-row">
-							<text class="temp">{{weatherInfo.data?.temp || '--'}}</text>
+							<text class="temp">{{weatherInfo?.temp || '--'}}</text>
 							<text class="temp-icon iconfont icon-sheshidu"></text>
 						</view>
 						<text
-							:class="['qi-' + weatherInfo.data?.icon, weatherInfo.data?.icon == 100 ? 'roate':'breath']"></text>
-						<text class="text">{{weatherInfo.data?.text || '--'}}</text>
+							:class="['qi-' + weatherInfo?.icon, weatherInfo?.icon == 100 ? 'rotate':'breath']"></text>
+						<text class="text">{{weatherInfo?.text || '--'}}</text>
 					</view>
-					<view class="wind-card border-box flex-row">
-						<text>{{weatherInfo?.windDir || '--'}}</text>
-						<text>|</text>
-						<text>{{weatherInfo?.humidity || '--'}}</text>
+					<view class="info__card card border-box flex-row">
+						<view class="item flex-col">
+							<text class="desc">风速</text>
+							<text class="icon qi-1080"></text>
+							<text class="text">{{weatherInfo?.windSpeed || '--'}}</text>
+						</view>
+						<view class="item flex-col">
+							<text class="desc">云量</text>
+							<text class="icon qi-509"></text>
+							<text class="text">{{weatherInfo?.cloud || '--'}}</text>
+						</view>
+						<view class="item flex-col">
+							<text class="desc">体感温度</text>
+							<text class="icon qi-2396"></text>
+							<text class="text">{{weatherInfo?.feelsLike || '--'}}</text>
+						</view>
 					</view>
-					<view class="indices-card border-box flex-col" v-for="item, index in weatherInfo?.indices"
-						:key="index">
-						<text>{{item?.name || '--'}}</text>
-						<text>{{item?.category || '--'}}</text>
-						<text>{{item?.text || '--'}}</text>
-					</view>
-					<view class="grid-weather__card border-box flex-col">
+					<view class="grid-info__card card border-box flex-col">
 						<view class="item flex-row" v-for="item, index in weatherInfo?.gridInfo" :key="index">
 							<text>{{item.day || '--'}}</text>
 							<text :class="['qi-'+item.iconDay]"></text>
 							<text>{{item.tempMax || '--'}}</text>
+						</view>
+					</view>
+					<view class="indices__card card border-box flex-row">
+						<view class="flex-col" style="justify-content: center; align-items: center;">
+							<text class="item-name">{{weatherInfo?.indices?.name || '--'}}</text>
+							<text class="iconfont icon-tab-height"></text>
+						</view>
+						<view class="flex-col" style="flex: 1; justify-content: center; align-items: flex-start; padding-left: 40rpx;">
+							<text class="item-category">{{weatherInfo?.indices?.category || '--'}}</text>
+							<text class="item-text">{{weatherInfo?.indices?.text || '--'}}</text>
 						</view>
 					</view>
 					<view class="footer">
@@ -81,10 +97,7 @@
 		computed: {
 			weatherInfo() {
 				const data = weatherStore.data;
-				const girdInfo = weatherStore.girdInfo;
-				const location = data.location;
-				const updateTime = data.obsTime?.match(/\d{2}:\d{2}/)[0] + '更新' || '--';
-				const gridInfo = (girdInfo?.daily).map(item => {
+				const gridInfo = (weatherStore.girdInfo?.daily).map(item => {
 					const fd = formatDate(item.fxDate);
 					return {
 						...item,
@@ -92,25 +105,23 @@
 					}
 				});
 
-				const indices = (weatherStore.indices.daily).map(item => {
-					return {
-						name: `类型：${item?.name}`,
-						category: `级别：${item?.category }`,
-						text: item.text
-					}
-				});
-
+				const indices = weatherStore.indices.daily[0];
+				// console.log(indices);
+				
 				return {
-					data,
-					location,
 					gridInfo,
 					indices,
-					updateTime,
-					windDir: `${data.windDir || ''} ${data.windScale || ''}级`,
-					humidity: `空气湿度 ${data.humidity || ''}`
+					icon: data.icon,
+					temp: data.temp,
+					text: data.text,
+					location: data.location,
+					updateTime: data.obsTime?.match(/\d{2}:\d{2}/)[0] + '更新' || '--',
+					cloud: `${data.cloud}%`,
+					windSpeed: `${data.windSpeed}Km/h`,
+					feelsLike: `${data.feelsLike}℃`
 				};
 			},
-			today() {
+			date() {
 				const data = formatStore.data;
 				return `(${data.prefix}${data.date})`;
 			}
@@ -123,31 +134,27 @@
 	$ele-border-radius: 20rpx;
 	$ele-margin: 20rpx;
 
-	.border-box {
+	.content-wrapper {
+		color: #fff;
+	}
+
+	.card {
 		width: $panel-width;
 		border-radius: $ele-border-radius;
-		box-sizing: border-box;
-		overflow: hidden;
 		background-color: $uni-color-primary;
 		font-size: 30rpx;
 		padding: 30rpx 40rpx;
 	}
 
-	.content-wrapper {
-		color: #fff;
-	}
-
 	#page-content {
 		background: linear-gradient(to bottom, $uni-color-primary, #e8e8e8);
-		box-sizing: border-box;
-		overflow: hidden;
 
 		.content-center {
 			align-items: center;
 		}
 	}
 
-	.addr-card {
+	.location {
 		width: $panel-width;
 		height: 80rpx;
 		justify-content: space-between;
@@ -169,10 +176,10 @@
 		}
 	}
 
-	.temp-card {
+	.now-info {
 		width: $panel-width;
-		font-size: 140rpx;
 		height: 280rpx;
+		font-size: 140rpx;
 		justify-content: space-around;
 		align-items: center;
 
@@ -185,25 +192,33 @@
 		}
 	}
 
-	.wind-card {
-		height: 250rpx;
+	.info__card {
 		justify-content: space-between;
 		align-items: center;
 		background-color: $uni-color-primary;
 		opacity: 0.7;
+
+		.item {
+			align-items: center;
+
+			.desc {
+				font-size: 30rpx;
+			}
+
+			.icon {
+				font-size: 100rpx;
+				font-weight: normal;
+			}
+
+			.text {
+				font-size: 30rpx;
+			}
+		}
 	}
 
-	.indices-card {
-		height: max-content;
-		justify-content: center;
-		background-color: $uni-color-primary;
-		margin: $ele-margin 0;
-		line-height: 45rpx;
-		opacity: 0.7;
-	}
-
-	.grid-weather__card {
+	.grid-info__card {
 		opacity: 0.8;
+		margin: $ele-margin 0;
 
 		.item {
 			height: 80rpx;
@@ -218,45 +233,25 @@
 		}
 	}
 
+	.indices__card {
+		justify-content: flex-start;
+		align-items: center;
+		background-color: $uni-color-primary;
+		opacity: 0.8;
+		
+		.item-name{
+			padding: 20rpx 0;
+			font-size: 30rpx;
+		}
+		
+		.iconfont{
+			font-size: 100rpx;
+		}
+	}
+
 	.footer {
 		color: $uni-color-primary;
 		font-size: 20rpx;
-	}
-
-	//天气图标动画
-	.breath {
-		animation: breath 2s ease-in-out infinite;
-	}
-
-	@keyframes breath {
-		0% {
-			transform: scale(1);
-			opacity: 1;
-		}
-
-		50% {
-			transform: scale(1.1);
-			opacity: 0.6;
-		}
-
-		100% {
-			transform: scale(1);
-			opacity: 1;
-		}
-	}
-
-	.rotate {
-		color: #FFC107;
-		animation: rotate 2s linear infinite;
-	}
-
-	@keyframes rotate {
-		from {
-			transform: rotate(0deg)
-		}
-
-		to {
-			transform: rotate(360deg);
-		}
+		padding: 20rpx 0;
 	}
 </style>

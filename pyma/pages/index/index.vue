@@ -4,7 +4,7 @@
 			<image class="logo" :src="pageInfo.logo"></image>
 		</view>
 		<view>
-			<text class="app-name">{{pageInfo.appName}}</text>
+			<text class="name">{{pageInfo.appName}}</text>
 		</view>
 	</view>
 </template>
@@ -45,8 +45,8 @@
 		align-items: center;
 
 		.logo-wrapper {
-			width: 120rpx;
-			height: 120rpx;
+			width: 100rpx;
+			height: 100rpx;
 			position: relative;
 			border-radius: 50%;
 
@@ -73,10 +73,9 @@
 			}
 		}
 
-		.app-name {
-			margin-top: 40rpx;
+		.name {
+			padding: 50rpx 0;
 			font-size: 30rpx;
-			font-weight: bold;
 			color: $uni-color-primary;
 		}
 	}

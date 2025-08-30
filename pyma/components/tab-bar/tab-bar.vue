@@ -70,7 +70,7 @@
 		bottom: 0;
 		justify-content: space-around;
 		background-color: #fff;
-		box-shadow: 0 2px 8px rgb(0, 0, 0, 0.5);
+		box-shadow: 0 2px 5px rgb(0, 0, 0, 0.3);
 
 		.tab-item {
 			align-items: center;

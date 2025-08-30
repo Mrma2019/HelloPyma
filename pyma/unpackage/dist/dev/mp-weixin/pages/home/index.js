@@ -17,12 +17,12 @@ async function getPageInfo() {
       text: "待参加",
       desc: "进入",
       icon: "icon-liebiao1",
-      ispopup: false
+      is_popup: false
     }, {
       text: "声明",
       desc: "查看",
       icon: "icon-guanyuapp",
-      ispopup: true
+      is_popup: true
     }]
   };
   return pageInfo;

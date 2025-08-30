@@ -5,6 +5,7 @@
 	height: 100vh;
 	display: flex;
 	flex-direction: column;
+	font-weight: bold;
 }
 #page-content {
 	flex: 1;
@@ -12,7 +13,7 @@
 	height: 100%;
 	background-color: #f8f8f8;
 }
-.content-wrapper{
+.content-wrapper {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -24,18 +25,51 @@
 	display: flex;
 	flex-direction: column;
 }
-.fixed-box{
+.border-box{
+	box-sizing: border-box;
+	overflow: hidden;
+}
+.fixed-box {
 	position: fixed;
 	top: 0;
 	bottom: 0;
 	left: 0;
 	right: 0;
 }
+.breath {
+	animation: breath 2s ease-in-out infinite;
+}
+@keyframes breath {
+0% {
+		transform: scale(1);
+		opacity: 1;
+}
+50% {
+		transform: scale(1.1);
+		opacity: 0.6;
+}
+100% {
+		transform: scale(1);
+		opacity: 1;
+}
+}
+.rotate {
+	color: #FFC107;
+	animation: rotate 2s linear infinite;
+}
+@keyframes rotate {
+from {
+		transform: rotate(0deg)
+}
+to {
+		transform: rotate(360deg);
+}
+}
 @font-face {
   font-family: "iconfont"; /* Project id 4847973 */
-  src: url('//at.alicdn.com/t/c/font_4847973_4cegslpfti.woff2?t=1755933141699') format('woff2'),
-       url('//at.alicdn.com/t/c/font_4847973_4cegslpfti.woff?t=1755933141699') format('woff'),
-       url('//at.alicdn.com/t/c/font_4847973_4cegslpfti.ttf?t=1755933141699') format('truetype');
+  src: url('//at.alicdn.com/t/c/font_4847973_gjhn05p6hrh.woff2?t=1756561646834') format('woff2'),
+       url('//at.alicdn.com/t/c/font_4847973_gjhn05p6hrh.woff?t=1756561646834') format('woff'),
+       url('//at.alicdn.com/t/c/font_4847973_gjhn05p6hrh.ttf?t=1756561646834') format('truetype');
 }
 .iconfont {
   font-family: "iconfont" !important;
@@ -43,6 +77,12 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+.icon-tab-height:before {
+  content: "\e629";
+}
+.icon-guanbi1:before {
+  content: "\e80f";
 }
 .icon-guanchajilu:before {
   content: "\10211";

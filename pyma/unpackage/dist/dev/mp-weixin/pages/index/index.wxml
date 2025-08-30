@@ -1,1 +1,1 @@
-<view class="content data-v-1cf27b2a"><view class="logo-wrapper data-v-1cf27b2a"><image class="logo data-v-1cf27b2a" src="{{a}}"></image></view><view class="data-v-1cf27b2a"><text class="app-name data-v-1cf27b2a">{{b}}</text></view></view>
+<view class="content data-v-1cf27b2a"><view class="logo-wrapper data-v-1cf27b2a"><image class="logo data-v-1cf27b2a" src="{{a}}"></image></view><view class="data-v-1cf27b2a"><text class="name data-v-1cf27b2a">{{b}}</text></view></view>

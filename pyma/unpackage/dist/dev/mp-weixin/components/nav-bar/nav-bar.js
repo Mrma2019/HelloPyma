@@ -68,11 +68,14 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   } : {}, {
     c: common_vendor.t($props.title),
     d: common_vendor.s($options.titleStyle),
-    e: $data.menuInfo.height + "px",
-    f: $data.titlePaddingLeft + "px",
-    g: $data.navBarHeight + "px",
-    h: $data.navBarHeight - $data.menuInfo.bottom + "px",
-    i: $props.color
+    e: common_vendor.s({
+      lineHeight: $data.menuInfo.height + "px"
+    }),
+    f: $data.menuInfo.height + "px",
+    g: $data.titlePaddingLeft + "px",
+    h: $data.navBarHeight + "px",
+    i: $data.navBarHeight - $data.menuInfo.bottom + "px",
+    j: $props.color
   });
 }
 const Component = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-e9345f2e"]]);

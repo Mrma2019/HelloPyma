@@ -37,10 +37,15 @@
 }
 @media screen and (min-width: 768px) {
 .box .swiper.data-v-07e72d3c {
-    height: 200rpx;
+    height: 250rpx;
 }
 }
-.box .swiper .image.data-v-07e72d3c {
+@media screen and (max-width: 375px) {
+.box .swiper.data-v-07e72d3c {
+    height: 280rpx;
+}
+}
+.box .swiper .swiper-item.data-v-07e72d3c {
   width: 100%;
   height: 100%;
 }
@@ -48,13 +53,11 @@
   margin-top: 20rpx;
   width: 95%;
 }
-.content-panel .weather-card.data-v-07e72d3c {
+.content-panel .info__card.data-v-07e72d3c {
   height: 220rpx;
   justify-content: space-between;
-  box-sizing: border-box;
-  overflow: hidden;
 }
-.content-panel .weather-card .weather-card__info.data-v-07e72d3c {
+.content-panel .info__card .weather-info.data-v-07e72d3c {
   width: 220rpx;
   position: relative;
   padding: 18rpx 28rpx;
@@ -64,27 +67,24 @@
   align-items: center;
   color: #1A4190;
 }
-.content-panel .weather-card .weather-card__info .weather-card__icon-row.data-v-07e72d3c {
-  align-items: flex-end;
-}
-.content-panel .weather-card .weather-card__info .weather-card__icon-row .weather-card__weather-icon.data-v-07e72d3c {
+.content-panel .info__card .weather-info .item-icon__weather.data-v-07e72d3c {
   font-size: 80rpx;
 }
-.content-panel .weather-card .weather-card__info .weather-card__icon-row .weather-card__temp.data-v-07e72d3c {
+.content-panel .info__card .weather-info .item-temp.data-v-07e72d3c {
   font-size: 60rpx;
   padding-left: 10rpx;
 }
-.content-panel .weather-card .weather-card__info .weather-card__icon-row .weather-card__temp-icon.data-v-07e72d3c {
+.content-panel .info__card .weather-info .item-icon__temp.data-v-07e72d3c {
   font-size: 32rpx;
 }
-.content-panel .weather-card .weather-card__info .weather-card__icon-row .weather-card__time.data-v-07e72d3c {
+.content-panel .info__card .weather-info .item-time.data-v-07e72d3c {
   font-size: 22rpx;
 }
-.content-panel .weather-card .weather-card__info .weather-card__info-col.data-v-07e72d3c {
+.content-panel .info__card .weather-info .info-text.data-v-07e72d3c {
   align-items: center;
   font-size: 22rpx;
 }
-.content-panel .weather-card .weather-card__date.data-v-07e72d3c {
+.content-panel .info__card .date-info.data-v-07e72d3c {
   flex: 1;
   margin-left: 20rpx;
   background-color: #fff;
@@ -95,18 +95,18 @@
   padding: 20rpx;
   position: relative;
 }
-.content-panel .weather-card .weather-card__date .title.data-v-07e72d3c {
+.content-panel .info__card .date-info .item-title.data-v-07e72d3c {
   color: #1A4190;
   font-size: 22rpx;
   margin: 20rpx;
   position: absolute;
   top: 0;
 }
-.content-panel .weather-card .weather-card__date .date.data-v-07e72d3c {
+.content-panel .info__card .date-info .item-date.data-v-07e72d3c {
   width: 90%;
   justify-content: space-between;
 }
-.content-panel .weather-card .weather-card__date .date .date-item.data-v-07e72d3c {
+.content-panel .info__card .date-info .item-date .date-item.data-v-07e72d3c {
   width: 28%;
   background-color: #1A4190;
   color: #fff;
@@ -115,40 +115,11 @@
   text-align: center;
   position: relative;
 }
-.content-panel .weather-card .weather-card__date .date .date-item .desc.data-v-07e72d3c {
+.content-panel .info__card .date-info .item-date .date-item .desc.data-v-07e72d3c {
   font-size: 18rpx;
   position: absolute;
   right: 8rpx;
   bottom: 5rpx;
-}
-.content-panel .weather-card .breath.data-v-07e72d3c {
-  animation: breath-07e72d3c 2s ease-in-out infinite;
-}
-@keyframes breath-07e72d3c {
-0% {
-    transform: scale(1);
-    opacity: 1;
-}
-50% {
-    transform: scale(1.1);
-    opacity: 0.6;
-}
-100% {
-    transform: scale(1);
-    opacity: 1;
-}
-}
-.content-panel .weather-card .rotate.data-v-07e72d3c {
-  color: #FFC107;
-  animation: rotate-07e72d3c 2s linear infinite;
-}
-@keyframes rotate-07e72d3c {
-from {
-    transform: rotate(0deg);
-}
-to {
-    transform: rotate(360deg);
-}
 }
 .content-panel .btn-card.data-v-07e72d3c {
   height: 260rpx;
@@ -157,14 +128,10 @@ to {
   margin-top: 20rpx;
   border-radius: 20rpx;
   padding: 20rpx;
-  box-sizing: border-box;
-  overflow: hidden;
   color: #fff;
 }
-.content-panel .btn-card .btn.data-v-07e72d3c {
+.content-panel .btn-card .button.data-v-07e72d3c {
   position: relative;
-  box-sizing: border-box;
-  overflow: hidden;
   justify-content: center;
   background-color: #1A4190;
   border-radius: 20rpx;
@@ -183,22 +150,22 @@ to {
   right: 25rpx;
   bottom: 25rpx;
 }
-.content-panel .btn-card .btn-card__main.data-v-07e72d3c {
+.content-panel .btn-card .main-btn.data-v-07e72d3c {
   width: 49%;
   height: 100%;
 }
-.content-panel .btn-card .btn-card__box.data-v-07e72d3c {
+.content-panel .btn-card .sub-btn__box.data-v-07e72d3c {
   width: 49%;
   height: 100%;
   justify-content: space-between;
 }
-.content-panel .btn-card .btn-card__box .btn-card__sub.data-v-07e72d3c {
+.content-panel .btn-card .sub-btn__box .sub-btn.data-v-07e72d3c {
   width: 100%;
   height: 49%;
 }
-.content-panel .btn-card .btn-card__box .btn-card__sub .text.data-v-07e72d3c {
+.content-panel .btn-card .sub-btn__box .sub-btn .text.data-v-07e72d3c {
   margin: 0 0 10rpx 25rpx;
 }
-.content-panel .btn-card .btn-card__box .btn-card__sub .desc.data-v-07e72d3c {
+.content-panel .btn-card .sub-btn__box .sub-btn .desc.data-v-07e72d3c {
   margin: 0 0 0 25rpx;
 }

@@ -96,7 +96,6 @@ async function getIndices(lon, lat) {
       success: (res) => {
         if (res.data.code == 200) {
           const indices = res.data;
-          common_vendor.index.__f__("log", "at utils/weather.js:107", indices);
           store_weatherStore.weatherStore.indices = indices;
           resolve(indices);
         } else {

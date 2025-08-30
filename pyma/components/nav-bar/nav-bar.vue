@@ -1,9 +1,10 @@
 <template>
-	<view class="nav-bar flex-row"
+	<view class="nav-bar border-box flex-row"
 		:style="{height: navBarHeight + 'px', paddingBottom: navBarHeight - menuInfo.bottom + 'px', color: color}">
-		<view class="title-wrapper flex-row" :style="{height: menuInfo.height + 'px', paddingLeft: titlePaddingLeft + 'px'}">
+		<view class="title-wrapper flex-row"
+			:style="{height: menuInfo.height + 'px', paddingLeft: titlePaddingLeft + 'px'}">
 			<text class="iconfont icon-fanhui1" v-if="isBack" @click="goBack"></text>
-			<text class="title" :style="titleStyle">{{title}}</text>
+			<text class="title" :style="[titleStyle, {lineHeight: menuInfo.height + 'px'}]">{{title}}</text>
 		</view>
 	</view>
 </template>
@@ -50,7 +51,6 @@
 		},
 		computed: {
 			titleStyle() {
-
 				const menuWidth = this.menuInfo.width + 10;
 
 				if (this.align == 'left') {
@@ -68,8 +68,8 @@
 				}
 			}
 		},
-		methods:{
-			goBack(){
+		methods: {
+			goBack() {
 				uni.navigateBack();
 			}
 		}
@@ -80,16 +80,17 @@
 	.nav-bar {
 		width: 100%;
 		background-color: $uni-color-primary;
-		box-sizing: border-box;
-		overflow: hidden;
 		position: fixed;
 		top: 0;
 		left: 0;
 		right: 0;
 		z-index: 10;
 		align-items: flex-end;
-		font-weight: bold;
 		font-size: 32rpx;
+
+		@media screen and (min-width: 768px) {
+			font-size: 22rpx;
+		}
 
 		.title-wrapper {
 			width: 100%;
@@ -98,7 +99,6 @@
 
 			.title {
 				position: absolute;
-				line-height: 1;
 				white-space: nowrap;
 				text-overflow: ellipsis;
 				overflow: hidden;

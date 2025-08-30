@@ -3,57 +3,56 @@
 		<uni-nav-bar class="nav-bar__component" :title="pageInfo?.navTitle" :align="pageInfo?.navAlgin"
 			:is-back="pageInfo?.isBack" :color="pageInfo?.navColor" @sendNavBarHeight="getNavBarHeight">
 		</uni-nav-bar>
-		<scroll-view id="page-content" scroll-y refresher-enabled="true">
+		<scroll-view id="page-content" scroll-y refresher-enabled="true" :refresher-triggered="refresherTriggered"
+			@refresherrefresh="onRefresher">
 			<view class="content-wrapper">
 				<view class="box flex-row"
 					:style="{height: navBarHeight + gap + swiperHeight/2 + 'px', marginBottom: swiperHeight / 2 + 'px'}">
 					<swiper class="swiper" :style="{top: navBarHeight + gap + 'px'}">
 						<swiper-item v-for="(item, index) in pageInfo?.swiperImageSrc" :key="index">
-							<image class="image" :src="item" mode="aspectFill"></image>
+							<image class="swiper-item" :src="item" mode="aspectFill"></image>
 						</swiper-item>
 					</swiper>
 				</view>
 				<view class="content-panel" :style="{paddingBottom: contentPanelPaddingBottom + 'px'} ">
-					<view class="weather-card flex-row">
-						<view class="weather-card__info flex-col" data-pagepath='/pages/weather/weather'
-							@click="navigatorTo">
-							<view class="weather-card__icon-row flex-row">
+					<view class="info__card border-box flex-row">
+						<view class="weather-info flex-col" data-pagepath='/pages/weather/weather' @click="navigatorTo">
+							<view class="flex-row" style="align-items: center;">
 								<text
-									:class="['weather-card__weather-icon', 'iconfont', 'qi-' + weatherInfo.icon, weatherInfo.icon == 100 ? 'rotate':'breath']"></text>
-								<text class="weather-card__temp">{{weatherInfo.temp || '--'}}</text>
+									:class="['item-icon__weather', 'iconfont', 'qi-' + weatherInfo?.icon, weatherInfo?.icon == 100 ? 'rotate':'breath']"></text>
+								<text class="item-temp">{{weatherInfo?.temp || '--'}}</text>
 								<view class="weather-card__time flex-col">
-									<text class="weather-card__temp-icon iconfont icon-sheshidu"></text>
-									<text class="weather-card__time-text">{{time || '--'}}</text>
+									<text class="item-icon__temp iconfont icon-sheshidu"></text>
+									<text class="item-time">{{time || '--'}}</text>
 								</view>
 							</view>
-							<view class="weather-card__info-col flex-col">
+							<view class="info-text flex-col">
 								<text>{{weatherInfo?.text || '--'}}</text>
 								<text>{{weatherInfo?.windDir || '--'}}</text>
 								<text>{{weatherInfo?.humidity || '--'}}</text>
 							</view>
 						</view>
-						<view class="weather-card__date flex-col">
-							<view class="title">
+						<view class="date-info flex-col">
+							<view class="item-title">
 								<text>{{weatherInfo?.dateTitle || '--'}}</text>
 							</view>
-							<view class="date flex-row">
-								<view class="date-item" v-for="item, index in date.split('-')" :key="index">
-									<text class="text">{{item || '--'}}</text>
-									<text
-										class="desc">{{ index === 0 ? 'Year' : index === 1 ? 'Month' : 'Date' }}</text>
+							<view class="item-date flex-row">
+								<view class="date-item" v-for="item, index in date" :key="index">
+									<text class="text">{{item['value'] || '--'}}</text>
+									<text class="desc">{{item['label']}}</text>
 								</view>
 							</view>
 						</view>
 					</view>
-					<view class="btn-card flex-row">
-						<view class="btn-card__main btn flex-col">
+					<view class="btn-card border-box flex-row">
+						<view class="main-btn button flex-col">
 							<text class="text">{{pageInfo.mainBtn?.text || '--'}}</text>
 							<text class="desc">{{pageInfo.mainBtn?.desc || '--'}}</text>
 							<text :class="['iconfont', pageInfo.mainBtn?.icon]"></text>
 						</view>
-						<view class="btn-card__box flex-col">
-							<view class="btn-card__sub btn flex-col" v-for="item, index in pageInfo?.subBtns"
-								:key="index" @click="popup(item)">
+						<view class="sub-btn__box flex-col">
+							<view class="sub-btn button border-box flex-col" v-for="item, index in pageInfo?.subBtns"
+								:key="index" @click="onClick(item)">
 								<text class="text">{{item?.text || '--'}}</text>
 								<text class="desc">{{item?.desc || '--'}}</text>
 								<text :class="['iconfont', item.icon]"></text>
@@ -63,7 +62,11 @@
 				</view>
 			</view>
 		</scroll-view>
-		<uni-popup v-model:show="ispopup"></uni-popup>
+		<uni-popup v-model:show="is_popup" height="65">
+			<view>
+
+			</view>
+		</uni-popup>
 		<uni-tab-bar class="tab-bar__component" @sendTabBarHeight="setContentPanelPaddingBottom" />
 	</view>
 </template>
@@ -87,7 +90,8 @@
 				contentPanelPaddingBottom: 0,
 				gap: 10,
 				pageInfo: {},
-				ispopup: false
+				is_popup: false,
+				refresherTriggered: false
 			}
 		},
 
@@ -103,6 +107,10 @@
 			});
 		},
 
+		onHide() {
+			this.is_popup = false;
+		},
+
 		methods: {
 			getNavBarHeight(height) {
 				this.navBarHeight = height;
@@ -112,7 +120,6 @@
 				// console.log('首页获取到的tab-bar高度：' + height);
 				this.contentPanelPaddingBottom = height;
 			},
-
 			//页面跳转
 			navigatorTo(e) {
 				const pagepath = e.currentTarget.dataset.pagepath;
@@ -121,11 +128,24 @@
 					url: `${pagepath}`
 				});
 			},
-			popup(item) {
-				if (item.ispopup) {
-					this.ispopup = true;
+			async onRefresher() {
+				this.refresherTriggered = true;
+				await this.getData();
+				this.refresherTriggered = false;
+			},
+			getData() {
+				return new Promise(resolve => {
+					setTimeout(() => {
+						resolve();
+					}, 1000);
+				});
+			},
+			onClick(item) {
+				// console.log('popup');
+				if (item.is_popup) {
+					this.is_popup = true;
 				} else {
-					this.ispopup = false;
+					this.is_popup = false;
 				}
 			}
 		},
@@ -143,7 +163,25 @@
 				}
 			},
 			date() {
-				return formatStore.data.date;
+				const date = (formatStore.data.date.split('-')).map((item, index) => {
+					let label = '';
+					switch (index) {
+						case 0:
+							label = 'Year';
+							break;
+						case 1:
+							label = 'Month';
+							break;
+						case 2:
+							label = 'Date';
+							break;
+					}
+					return {
+						value: item,
+						label: label
+					};
+				});
+				return date
 			},
 			time() {
 				return formatStore.data.time;
@@ -170,10 +208,14 @@
 			overflow: hidden;
 
 			@media screen and (min-width:768px) {
-				height: 200rpx;
+				height: 250rpx;
 			}
 
-			.image {
+			@media screen and (max-width:375px) {
+				height: 280rpx;
+			}
+
+			.swiper-item {
 				width: 100%;
 				height: 100%;
 			}
@@ -184,15 +226,12 @@
 		margin-top: $ele-margin;
 		width: $panel-width;
 
-		.weather-card {
+		.info__card {
 			height: 220rpx;
 			justify-content: space-between;
-			box-sizing: border-box;
-			overflow: hidden;
 
-			.weather-card__info {
+			.weather-info {
 				width: 220rpx;
-				;
 				position: relative;
 				padding: 18rpx 28rpx;
 				background-color: #fff;
@@ -201,34 +240,31 @@
 				align-items: center;
 				color: $uni-color-primary;
 
-				.weather-card__icon-row {
-					align-items: flex-end;
 
-					.weather-card__weather-icon {
-						font-size: 80rpx;
-					}
-
-					.weather-card__temp {
-						font-size: 60rpx;
-						padding-left: 10rpx;
-					}
-
-					.weather-card__temp-icon {
-						font-size: 32rpx;
-					}
-
-					.weather-card__time {
-						font-size: 22rpx;
-					}
+				.item-icon__weather {
+					font-size: 80rpx;
 				}
 
-				.weather-card__info-col {
+				.item-temp {
+					font-size: 60rpx;
+					padding-left: 10rpx;
+				}
+
+				.item-icon__temp {
+					font-size: 32rpx;
+				}
+
+				.item-time {
+					font-size: 22rpx;
+				}
+
+				.info-text {
 					align-items: center;
 					font-size: 22rpx;
 				}
 			}
 
-			.weather-card__date {
+			.date-info {
 				flex: 1;
 				margin-left: $ele-margin;
 				background-color: #fff;
@@ -239,7 +275,7 @@
 				padding: 20rpx;
 				position: relative;
 
-				.title {
+				.item-title {
 					color: $uni-color-primary;
 					font-size: 22rpx;
 					margin: 20rpx;
@@ -247,7 +283,7 @@
 					top: 0;
 				}
 
-				.date {
+				.item-date {
 					width: 90%;
 					justify-content: space-between;
 
@@ -269,44 +305,6 @@
 					}
 				}
 			}
-
-			//天气图标动画
-			.breath {
-				animation: breath 2s ease-in-out infinite;
-			}
-
-			@keyframes breath {
-				0% {
-					transform: scale(1);
-					opacity: 1;
-				}
-
-				50% {
-					transform: scale(1.1);
-					opacity: 0.6;
-				}
-
-				100% {
-					transform: scale(1);
-					opacity: 1;
-				}
-			}
-
-			.rotate {
-				color: #FFC107;
-				animation: rotate 2s linear infinite;
-			}
-
-			@keyframes rotate {
-				from {
-					transform: rotate(0deg)
-				}
-
-				to {
-					transform: rotate(360deg);
-				}
-			}
-
 		}
 
 		.btn-card {
@@ -316,14 +314,10 @@
 			margin-top: $ele-margin;
 			border-radius: $ele-border-radius;
 			padding: 20rpx;
-			box-sizing: border-box;
-			overflow: hidden;
 			color: #fff;
 
-			.btn {
+			.button {
 				position: relative;
-				box-sizing: border-box;
-				overflow: hidden;
 				justify-content: center;
 				background-color: $uni-color-primary;
 				border-radius: $ele-border-radius;
@@ -346,17 +340,17 @@
 				bottom: 25rpx;
 			}
 
-			.btn-card__main {
+			.main-btn {
 				width: 49%;
 				height: 100%;
 			}
 
-			.btn-card__box {
+			.sub-btn__box {
 				width: 49%;
 				height: 100%;
 				justify-content: space-between;
 
-				.btn-card__sub {
+				.sub-btn {
 					width: 100%;
 					height: 49%;
 

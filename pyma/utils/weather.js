@@ -104,7 +104,7 @@ export async function getIndices(lon, lat) {
 			success: (res) => {
 				if (res.data.code == 200) {
 					const indices = res.data;
-					console.log(indices);
+					// console.log(indices);
 					weatherStore.indices = indices;
 
 					resolve(indices)

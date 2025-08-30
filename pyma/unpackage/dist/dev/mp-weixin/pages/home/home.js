@@ -11,7 +11,8 @@ const _sfc_main = {
       contentPanelPaddingBottom: 0,
       gap: 10,
       pageInfo: {},
-      ispopup: false
+      is_popup: false,
+      refresherTriggered: false
     };
   },
   async onLoad() {
@@ -22,6 +23,9 @@ const _sfc_main = {
         this.swiperHeight = rect.height;
       }).exec();
     });
+  },
+  onHide() {
+    this.is_popup = false;
   },
   methods: {
     getNavBarHeight(height) {
@@ -37,11 +41,23 @@ const _sfc_main = {
         url: `${pagepath}`
       });
     },
-    popup(item) {
-      if (item.ispopup) {
-        this.ispopup = true;
+    async onRefresher() {
+      this.refresherTriggered = true;
+      await this.getData();
+      this.refresherTriggered = false;
+    },
+    getData() {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve();
+        }, 1e3);
+      });
+    },
+    onClick(item) {
+      if (item.is_popup) {
+        this.is_popup = true;
       } else {
-        this.ispopup = false;
+        this.is_popup = false;
       }
     }
   },
@@ -58,7 +74,25 @@ const _sfc_main = {
       };
     },
     date() {
-      return store_formatStore.formatStore.data.date;
+      const date = store_formatStore.formatStore.data.date.split("-").map((item, index) => {
+        let label = "";
+        switch (index) {
+          case 0:
+            label = "Year";
+            break;
+          case 1:
+            label = "Month";
+            break;
+          case 2:
+            label = "Date";
+            break;
+        }
+        return {
+          value: item,
+          label
+        };
+      });
+      return date;
     },
     time() {
       return store_formatStore.formatStore.data.time;
@@ -78,7 +112,7 @@ if (!Math) {
   (_easycom_uni_nav_bar + _easycom_uni_popup + _easycom_uni_tab_bar)();
 }
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
-  var _a, _b, _c, _d, _e, _f, _g, _h, _i, _j, _k, _l, _m;
+  var _a, _b, _c, _d, _e, _f, _g, _h, _i, _j, _k, _l, _m, _n, _o, _p;
   return {
     a: common_vendor.o($options.getNavBarHeight),
     b: common_vendor.p({
@@ -96,40 +130,43 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     d: $data.navBarHeight + $data.gap + "px",
     e: $data.navBarHeight + $data.gap + $data.swiperHeight / 2 + "px",
     f: $data.swiperHeight / 2 + "px",
-    g: common_vendor.n("qi-" + $options.weatherInfo.icon),
-    h: common_vendor.n($options.weatherInfo.icon == 100 ? "rotate" : "breath"),
-    i: common_vendor.t($options.weatherInfo.temp || "--"),
+    g: common_vendor.n("qi-" + ((_f = $options.weatherInfo) == null ? void 0 : _f.icon)),
+    h: common_vendor.n(((_g = $options.weatherInfo) == null ? void 0 : _g.icon) == 100 ? "rotate" : "breath"),
+    i: common_vendor.t(((_h = $options.weatherInfo) == null ? void 0 : _h.temp) || "--"),
     j: common_vendor.t($options.time || "--"),
-    k: common_vendor.t(((_f = $options.weatherInfo) == null ? void 0 : _f.text) || "--"),
-    l: common_vendor.t(((_g = $options.weatherInfo) == null ? void 0 : _g.windDir) || "--"),
-    m: common_vendor.t(((_h = $options.weatherInfo) == null ? void 0 : _h.humidity) || "--"),
+    k: common_vendor.t(((_i = $options.weatherInfo) == null ? void 0 : _i.text) || "--"),
+    l: common_vendor.t(((_j = $options.weatherInfo) == null ? void 0 : _j.windDir) || "--"),
+    m: common_vendor.t(((_k = $options.weatherInfo) == null ? void 0 : _k.humidity) || "--"),
     n: common_vendor.o((...args) => $options.navigatorTo && $options.navigatorTo(...args)),
-    o: common_vendor.t(((_i = $options.weatherInfo) == null ? void 0 : _i.dateTitle) || "--"),
-    p: common_vendor.f($options.date.split("-"), (item, index, i0) => {
+    o: common_vendor.t(((_l = $options.weatherInfo) == null ? void 0 : _l.dateTitle) || "--"),
+    p: common_vendor.f($options.date, (item, index, i0) => {
       return {
-        a: common_vendor.t(item || "--"),
-        b: common_vendor.t(index === 0 ? "Year" : index === 1 ? "Month" : "Date"),
+        a: common_vendor.t(item["value"] || "--"),
+        b: common_vendor.t(item["label"]),
         c: index
       };
     }),
-    q: common_vendor.t(((_j = $data.pageInfo.mainBtn) == null ? void 0 : _j.text) || "--"),
-    r: common_vendor.t(((_k = $data.pageInfo.mainBtn) == null ? void 0 : _k.desc) || "--"),
-    s: common_vendor.n((_l = $data.pageInfo.mainBtn) == null ? void 0 : _l.icon),
-    t: common_vendor.f((_m = $data.pageInfo) == null ? void 0 : _m.subBtns, (item, index, i0) => {
+    q: common_vendor.t(((_m = $data.pageInfo.mainBtn) == null ? void 0 : _m.text) || "--"),
+    r: common_vendor.t(((_n = $data.pageInfo.mainBtn) == null ? void 0 : _n.desc) || "--"),
+    s: common_vendor.n((_o = $data.pageInfo.mainBtn) == null ? void 0 : _o.icon),
+    t: common_vendor.f((_p = $data.pageInfo) == null ? void 0 : _p.subBtns, (item, index, i0) => {
       return {
         a: common_vendor.t((item == null ? void 0 : item.text) || "--"),
         b: common_vendor.t((item == null ? void 0 : item.desc) || "--"),
         c: common_vendor.n(item.icon),
         d: index,
-        e: common_vendor.o(($event) => $options.popup(item), index)
+        e: common_vendor.o(($event) => $options.onClick(item), index)
       };
     }),
     v: $data.contentPanelPaddingBottom + "px",
-    w: common_vendor.o(($event) => $data.ispopup = $event),
-    x: common_vendor.p({
-      show: $data.ispopup
+    w: $data.refresherTriggered,
+    x: common_vendor.o((...args) => $options.onRefresher && $options.onRefresher(...args)),
+    y: common_vendor.o(($event) => $data.is_popup = $event),
+    z: common_vendor.p({
+      height: "65",
+      show: $data.is_popup
     }),
-    y: common_vendor.o($options.setContentPanelPaddingBottom)
+    A: common_vendor.o($options.setContentPanelPaddingBottom)
   };
 }
 const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-07e72d3c"]]);
