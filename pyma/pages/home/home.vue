@@ -72,6 +72,9 @@
 				</view>
 			</view>
 		</scroll-view>
+		<view class="btn-post flex-row" :style="{bottom: contentPanelPaddingBottom + 20 + 'px', right: 20 + 'px'}">
+			<text class="iconfont icon-fabu-"></text>
+		</view>
 		<uni-popup v-model:show="is_popup" height="65">
 		</uni-popup>
 		<uni-tab-bar class="tab-bar__component" @sendTabBarHeight="setContentPanelPaddingBottom" />
@@ -371,6 +374,19 @@
 				}
 			}
 		}
+	}
+
+	.btn-post {
+		width: 100rpx;
+		height: 100rpx;
+		border-radius: 50%;
+		position: fixed;
+		background-color: $uni-color-primary;
+		justify-content: center;
+		align-items: center;
+		font-size: 80rpx;
+		color: #fff;
+		box-shadow: 0 2px 5px ragb(0, 0, 0, 0.5);
 	}
 
 	.tap-bar {

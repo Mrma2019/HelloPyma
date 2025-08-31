@@ -67,9 +67,9 @@ to {
 }
 @font-face {
   font-family: "iconfont"; /* Project id 4847973 */
-  src: url('//at.alicdn.com/t/c/font_4847973_398pki9puqq.woff2?t=1756622552350') format('woff2'),
-       url('//at.alicdn.com/t/c/font_4847973_398pki9puqq.woff?t=1756622552350') format('woff'),
-       url('//at.alicdn.com/t/c/font_4847973_398pki9puqq.ttf?t=1756622552350') format('truetype');
+  src: url('//at.alicdn.com/t/c/font_4847973_qken3wlg2hk.woff2?t=1756627346112') format('woff2'),
+       url('//at.alicdn.com/t/c/font_4847973_qken3wlg2hk.woff?t=1756627346112') format('woff'),
+       url('//at.alicdn.com/t/c/font_4847973_qken3wlg2hk.ttf?t=1756627346112') format('truetype');
 }
 .iconfont {
   font-family: "iconfont" !important;
@@ -77,6 +77,9 @@ to {
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+.icon-fabu-:before {
+  content: "\e63a";
 }
 .icon-jiaoxuerenwu:before {
   content: "\10213";

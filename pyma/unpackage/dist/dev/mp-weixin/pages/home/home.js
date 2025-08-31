@@ -169,12 +169,14 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     z: $data.contentPanelPaddingBottom + "px",
     A: $data.refresherTriggered,
     B: common_vendor.o((...args) => $options.onRefresher && $options.onRefresher(...args)),
-    C: common_vendor.o(($event) => $data.is_popup = $event),
-    D: common_vendor.p({
+    C: $data.contentPanelPaddingBottom + 20 + "px",
+    D: "20px",
+    E: common_vendor.o(($event) => $data.is_popup = $event),
+    F: common_vendor.p({
       height: "65",
       show: $data.is_popup
     }),
-    E: common_vendor.o($options.setContentPanelPaddingBottom)
+    G: common_vendor.o($options.setContentPanelPaddingBottom)
   };
 }
 const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-07e72d3c"]]);
