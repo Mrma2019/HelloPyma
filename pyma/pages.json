@@ -22,18 +22,16 @@
 			}
 		},
 		{
-			"path" : "pages/weather/weather",
-			"style" : 
-			{
-				"navigationBarTitleText" : "",
+			"path": "pages/weather/weather",
+			"style": {
+				"navigationBarTitleText": "",
 				"navigationStyle": "custom"
 			}
 		},
 		{
-			"path" : "pages/square/square",
-			"style" : 
-			{
-				"navigationBarTitleText" : ""
+			"path": "pages/square/square",
+			"style": {
+				"navigationBarTitleText": ""
 			}
 		}
 	],

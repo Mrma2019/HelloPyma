@@ -179,7 +179,12 @@
   align-items: center;
   font-size: 80rpx;
   color: #fff;
-  box-shadow: 0 2px 5px ragb(0, 0, 0, 0.5);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3 ease;
+}
+.btn-hover.data-v-07e72d3c {
+  transform: scale(1.1);
+  transition: transform 0.1s ease;
 }
 .tap-bar.data-v-07e72d3c {
   margin-top: 20rpx;

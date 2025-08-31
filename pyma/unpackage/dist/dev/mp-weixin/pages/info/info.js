@@ -2,11 +2,11 @@
 const common_vendor = require("../../common/vendor.js");
 const store_systemStore = require("../../store/systemStore.js");
 const pages_info_index = require("./index.js");
+const common_assets = require("../../common/assets.js");
 const _sfc_main = {
   data() {
     return {
-      pageInfo: {},
-      navBarHeight: 0
+      pageInfo: {}
     };
   },
   methods: {},
@@ -16,7 +16,10 @@ const _sfc_main = {
   computed: {
     systemInfo() {
       const data = store_systemStore.systemStore.data;
-      common_vendor.index.__f__("log", "at pages/info/info.vue:33", data);
+      common_vendor.index.__f__("log", "at pages/info/info.vue:48", "inof", data);
+      return {
+        navBarHeight: data.navBarHeight
+      };
     }
   }
 };
@@ -31,15 +34,17 @@ if (!Math) {
   (_easycom_uni_nav_bar + _easycom_uni_tab_bar)();
 }
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
-  var _a, _b, _c;
+  var _a, _b, _c, _d;
   return {
     a: common_vendor.p({
       title: (_a = $data.pageInfo) == null ? void 0 : _a.navTitle,
       align: (_b = $data.pageInfo) == null ? void 0 : _b.navAlgin,
       color: (_c = $data.pageInfo) == null ? void 0 : _c.navColor
-    })
+    }),
+    b: common_assets._imports_0,
+    c: ((_d = $options.systemInfo) == null ? void 0 : _d.navBarHeight) + "px"
   };
 }
-const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-f52d2d81"]]);
+const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render]]);
 wx.createPage(MiniProgramPage);
 //# sourceMappingURL=../../../.sourcemap/mp-weixin/pages/info/info.js.map

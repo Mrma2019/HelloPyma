@@ -30,9 +30,9 @@
 								</view>
 							</view>
 							<view class="info-text flex-col">
-								<text>{{weatherInfo?.text || '--'}}</text>
-								<text>{{weatherInfo?.windDir || '--'}}</text>
-								<text>{{weatherInfo?.humidity || '--'}}</text>
+								<text>{{weatherInfo.text}}</text>
+								<text>{{weatherInfo.windDir}}</text>
+								<text>{{weatherInfo.humidity}}</text>
 							</view>
 						</view>
 						<!-- 日期 -->
@@ -72,7 +72,8 @@
 				</view>
 			</view>
 		</scroll-view>
-		<view class="btn-post flex-row" :style="{bottom: contentPanelPaddingBottom + 20 + 'px', right: 20 + 'px'}">
+		<view class="btn-post flex-row" hover-class="btn-hover"
+			:style="{bottom: contentPanelPaddingBottom + 20 + 'px', right: 20 + 'px'}">
 			<text class="iconfont icon-fabu-"></text>
 		</view>
 		<uni-popup v-model:show="is_popup" height="65">
@@ -166,8 +167,8 @@
 				return {
 					temp: data.temp,
 					text: data.text,
-					windDir: `${data.windDir} ${data.windScale}级`,
-					humidity: `空气湿度 ${data.humidity}`,
+					windDir: `${data?.windDir || '-'} ${data?.windScale || '-'}级`,
+					humidity: `空气湿度 ${data?.humidity || '-'}`,
 					dateTitle: '当前日期 年/月/日',
 					icon: data.icon
 				}
@@ -386,7 +387,13 @@
 		align-items: center;
 		font-size: 80rpx;
 		color: #fff;
-		box-shadow: 0 2px 5px ragb(0, 0, 0, 0.5);
+		box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+		transition: transform 0.3 ease;
+	}
+
+	.btn-hover {
+		transform: scale(1.1);
+		transition: transform 0.1s ease;
 	}
 
 	.tap-bar {

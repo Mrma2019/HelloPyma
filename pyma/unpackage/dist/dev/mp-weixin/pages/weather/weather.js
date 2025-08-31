@@ -35,14 +35,14 @@ const _sfc_main = {
       return {
         gridInfo,
         indices,
-        icon: data.icon,
-        temp: data.temp,
-        text: data.text,
-        location: data.location,
+        icon: (data == null ? void 0 : data.icon) || "--",
+        temp: (data == null ? void 0 : data.temp) || "--",
+        text: (data == null ? void 0 : data.text) || "--",
+        location: (data == null ? void 0 : data.location) || "--",
         updateTime: ((_b = data.obsTime) == null ? void 0 : _b.match(/\d{2}:\d{2}/)[0]) + "更新" || "--",
-        cloud: `${data.cloud}%`,
-        windSpeed: `${data.windSpeed}Km/h`,
-        feelsLike: `${data.feelsLike}℃`
+        cloud: `${(data == null ? void 0 : data.cloud) || "--"}%`,
+        windSpeed: `${(data == null ? void 0 : data.windSpeed) || "--"}Km/h`,
+        feelsLike: `${(data == null ? void 0 : data.feelsLike) || "--"}℃`
       };
     },
     date() {
@@ -77,15 +77,16 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     g: common_vendor.n("qi-" + ((_h = $options.weatherInfo) == null ? void 0 : _h.icon)),
     h: common_vendor.n(((_i = $options.weatherInfo) == null ? void 0 : _i.icon) == 100 ? "rotate" : "breath"),
     i: common_vendor.t(((_j = $options.weatherInfo) == null ? void 0 : _j.text) || "--"),
-    j: common_vendor.t(((_k = $options.weatherInfo) == null ? void 0 : _k.windSpeed) || "--"),
-    k: common_vendor.t(((_l = $options.weatherInfo) == null ? void 0 : _l.cloud) || "--"),
-    l: common_vendor.t(((_m = $options.weatherInfo) == null ? void 0 : _m.feelsLike) || "--"),
+    j: common_vendor.t((_k = $options.weatherInfo) == null ? void 0 : _k.windSpeed),
+    k: common_vendor.t((_l = $options.weatherInfo) == null ? void 0 : _l.cloud),
+    l: common_vendor.t((_m = $options.weatherInfo) == null ? void 0 : _m.feelsLike),
     m: common_vendor.f((_n = $options.weatherInfo) == null ? void 0 : _n.gridInfo, (item, index, i0) => {
       return {
         a: common_vendor.t(item.day || "--"),
         b: common_vendor.n("qi-" + item.iconDay),
-        c: common_vendor.t(item.tempMax || "--"),
-        d: index
+        c: common_vendor.t(item.textDay),
+        d: common_vendor.t(item.tempMax || "--"),
+        e: index
       };
     }),
     n: common_vendor.t(((_p = (_o = $options.weatherInfo) == null ? void 0 : _o.indices) == null ? void 0 : _p.name) || "--"),

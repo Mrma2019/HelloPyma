@@ -8,6 +8,7 @@ export async function getSystemInfo() {
 		const menuInfo = uni.getMenuButtonBoundingClientRect();
 
 		const navBarHeight = menuInfo.top * 2 + menuInfo.height - sysInfo.statusBarHeight;
+		console.log(navBarHeight);
 		systemStore.data.navBarHeight = navBarHeight;
 
 		resolve(navBarHeight);

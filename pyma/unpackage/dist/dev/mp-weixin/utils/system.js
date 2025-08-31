@@ -6,6 +6,7 @@ async function getSystemInfo() {
     const sysInfo = common_vendor.index.getWindowInfo();
     const menuInfo = common_vendor.index.getMenuButtonBoundingClientRect();
     const navBarHeight = menuInfo.top * 2 + menuInfo.height - sysInfo.statusBarHeight;
+    common_vendor.index.__f__("log", "at utils/system.js:11", navBarHeight);
     store_systemStore.systemStore.data.navBarHeight = navBarHeight;
     resolve(navBarHeight);
   });

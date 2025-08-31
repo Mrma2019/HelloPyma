@@ -23,6 +23,39 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.nav-bar__component.data-v-f52d2d81 {
+ .nav-bar {
   background-color: #f8f8f8 !important;
+}
+.info-card {
+  width: 95%;
+  height: 250rpx;
+  background-color: #1A4190;
+  border-radius: 20rpx;
+  color: #fff;
+}
+.info-card .avatar-wrapper {
+  width: 100%;
+  margin-top: 35rpx;
+  padding: 0 35rpx;
+  align-items: center;
+}
+.info-card .avatar {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+}
+.info-card .text {
+  font-size: 30rpx;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.info-card .edit {
+  font-size: 20rpx;
+}
+.info-card .nickname {
+  flex: 1;
+  height: 100rpx;
+  padding-left: 35rpx;
+  justify-content: space-around;
 }

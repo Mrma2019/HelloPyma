@@ -35,13 +35,9 @@ async function getPageInfo() {
       {
         name: "活动",
         list: [{
-          text: "往期活动",
-          desc: "点击进入",
+          text: "开发中...",
+          desc: "敬请期待",
           icon: "icon-jiaoxuerenwu"
-        }, {
-          text: "活动相册",
-          desc: "点击进入",
-          icon: "icon-jiaoyujiaocai"
         }]
       },
       {

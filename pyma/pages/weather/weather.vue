@@ -17,31 +17,33 @@
 							<text class="temp">{{weatherInfo?.temp || '--'}}</text>
 							<text class="temp-icon iconfont icon-sheshidu"></text>
 						</view>
-						<text
-							:class="['qi-' + weatherInfo?.icon, weatherInfo?.icon == 100 ? 'rotate':'breath']"></text>
+						<text :class="['qi-' + weatherInfo?.icon, weatherInfo?.icon == 100 ? 'rotate':'breath']"></text>
 						<text class="text">{{weatherInfo?.text || '--'}}</text>
 					</view>
 					<view class="info__card card border-box flex-row">
 						<view class="item flex-col">
 							<text class="desc">风速</text>
 							<text class="icon qi-1080"></text>
-							<text class="text">{{weatherInfo?.windSpeed || '--'}}</text>
+							<text class="text">{{weatherInfo?.windSpeed}}</text>
 						</view>
 						<view class="item flex-col">
 							<text class="desc">云量</text>
 							<text class="icon qi-509"></text>
-							<text class="text">{{weatherInfo?.cloud || '--'}}</text>
+							<text class="text">{{weatherInfo?.cloud}}</text>
 						</view>
 						<view class="item flex-col">
 							<text class="desc">体感温度</text>
 							<text class="icon qi-2396"></text>
-							<text class="text">{{weatherInfo?.feelsLike || '--'}}</text>
+							<text class="text">{{weatherInfo?.feelsLike}}</text>
 						</view>
 					</view>
 					<view class="grid-info__card card border-box flex-col">
 						<view class="item flex-row" v-for="item, index in weatherInfo?.gridInfo" :key="index">
 							<text>{{item.day || '--'}}</text>
-							<text :class="['qi-'+item.iconDay]"></text>
+							<text>
+								<text :class="['qi-'+item.iconDay]"></text>
+								<text style="margin-left: 8rpx;">{{item.textDay}}</text>
+							</text>
 							<text>{{item.tempMax || '--'}}</text>
 						</view>
 					</view>
@@ -50,7 +52,8 @@
 							<text class="item-name">{{weatherInfo?.indices?.name || '--'}}</text>
 							<text class="iconfont icon-tab-height"></text>
 						</view>
-						<view class="flex-col" style="flex: 1; justify-content: center; align-items: flex-start; padding-left: 40rpx;">
+						<view class="flex-col"
+							style="flex: 1; justify-content: center; align-items: flex-start; padding-left: 40rpx;">
 							<text class="item-category">{{weatherInfo?.indices?.category || '--'}}</text>
 							<text class="item-text">{{weatherInfo?.indices?.text || '--'}}</text>
 						</view>
@@ -104,21 +107,22 @@
 						day: fd.day
 					}
 				});
+				// console.log(gridInfo);
 
 				const indices = weatherStore.indices.daily[0];
 				// console.log(indices);
-				
+
 				return {
 					gridInfo,
 					indices,
-					icon: data.icon,
-					temp: data.temp,
-					text: data.text,
-					location: data.location,
+					icon: data?.icon || '--',
+					temp: data?.temp || '--',
+					text: data?.text || '--',
+					location: data?.location || '--',
 					updateTime: data.obsTime?.match(/\d{2}:\d{2}/)[0] + '更新' || '--',
-					cloud: `${data.cloud}%`,
-					windSpeed: `${data.windSpeed}Km/h`,
-					feelsLike: `${data.feelsLike}℃`
+					cloud: `${data?.cloud || '--'}%`,
+					windSpeed: `${data?.windSpeed || '--'}Km/h`,
+					feelsLike: `${data?.feelsLike || '--'}℃`
 				};
 			},
 			date() {
@@ -238,13 +242,13 @@
 		align-items: center;
 		background-color: $uni-color-primary;
 		opacity: 0.8;
-		
-		.item-name{
+
+		.item-name {
 			padding: 20rpx 0;
 			font-size: 30rpx;
 		}
-		
-		.iconfont{
+
+		.iconfont {
 			font-size: 100rpx;
 		}
 	}
