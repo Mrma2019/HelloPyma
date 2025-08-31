@@ -5,6 +5,6 @@ export async function getPageInfo() {
 		navColor: "white",
 		isBack: true,
 	}
-	
+
 	return pageInfo;
 }

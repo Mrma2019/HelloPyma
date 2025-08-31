@@ -84,7 +84,7 @@
 }
 .info__card .item .icon.data-v-54774d74 {
   font-size: 100rpx;
-  font-weight: normal;
+  font-weight: normal !important;
 }
 .info__card .item .text.data-v-54774d74 {
   font-size: 30rpx;

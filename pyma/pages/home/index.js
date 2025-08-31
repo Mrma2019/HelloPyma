@@ -1,12 +1,13 @@
 export async function getPageInfo() {
 	const pageInfo = {
-		navTitle: "HelloPyMa",
+		navTitle: "HELLOPYMA",
 		navAlgin: "left",
 		navColor: "white",
 		isBack: false,
 		swiperImageSrc: [
 			'/static/pictures/827d7d49-a85d-4c47-8773-8a9c3275c034.jpg'
 		],
+		//按钮配置
 		mainBtn: {
 			text: '找搭子',
 			desc: '进入广场',
@@ -22,7 +23,34 @@ export async function getPageInfo() {
 			desc: '查看',
 			icon: 'icon-guanyuapp',
 			is_popup: true
-		}]
+		}],
+		// 页面跳转配置
+		pages: {
+			info_to: '/pages/weather/weather',
+			mainBtn_to: '/pages/square/square',
+			subBtn_to: ''
+		},
+		taps: [{
+				name: '活动',
+				list: [{
+					text: '往期活动',
+					desc: '点击进入',
+					icon: 'icon-jiaoxuerenwu'
+				}, {
+					text: '活动相册',
+					desc: '点击进入',
+					icon: 'icon-jiaoyujiaocai'
+				}]
+			},
+			{
+				name: '关于',
+				list: [{
+					text: '开发初衷',
+					desc: '进入',
+					icon: 'icon-jiaoyukeben'
+				}]
+			}
+		]
 	}
 	return pageInfo;
 }

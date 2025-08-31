@@ -10,7 +10,7 @@
 					<view class="drag-bar"></view>
 					<text class="iconfont icon-guanbi1" @click="close"></text>
 				</view>
-				<scroll-view class="content" scroll-y>
+				<scroll-view class="content-box" scroll-y>
 					<slot></slot>
 				</scroll-view>
 			</view>
@@ -133,7 +133,7 @@
 		}
 	}
 
-	.content {
+	.content-box {
 		width: 100%;
 		height: calc(100% - #{$header-height});
 	}

@@ -86,7 +86,7 @@
 		right: 0;
 		z-index: 10;
 		align-items: flex-end;
-		font-size: 32rpx;
+		font-size: 35rpx;
 
 		@media screen and (min-width: 768px) {
 			font-size: 22rpx;

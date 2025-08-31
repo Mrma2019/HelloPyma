@@ -8,15 +8,18 @@
 			<view class="content-wrapper">
 				<view class="box flex-row"
 					:style="{height: navBarHeight + gap + swiperHeight/2 + 'px', marginBottom: swiperHeight / 2 + 'px'}">
+					<!-- 轮播图 -->
 					<swiper class="swiper" :style="{top: navBarHeight + gap + 'px'}">
 						<swiper-item v-for="(item, index) in pageInfo?.swiperImageSrc" :key="index">
-							<image class="swiper-item" :src="item" mode="aspectFill"></image>
+							<image class="item" :src="item" mode="aspectFill"></image>
 						</swiper-item>
 					</swiper>
 				</view>
-				<view class="content-panel" :style="{paddingBottom: contentPanelPaddingBottom + 'px'} ">
+				<view class="content-panel" :style="{marginBottom: contentPanelPaddingBottom + 'px'} ">
 					<view class="info__card border-box flex-row">
-						<view class="weather-info flex-col" data-pagepath='/pages/weather/weather' @click="navigatorTo">
+						<!-- 天气信息 -->
+						<view class="weather-info flex-col" :data-pagepath="pageInfo?.pages?.info_to"
+							@click="navigatorTo">
 							<view class="flex-row" style="align-items: center;">
 								<text
 									:class="['item-icon__weather', 'iconfont', 'qi-' + weatherInfo?.icon, weatherInfo?.icon == 100 ? 'rotate':'breath']"></text>
@@ -32,6 +35,7 @@
 								<text>{{weatherInfo?.humidity || '--'}}</text>
 							</view>
 						</view>
+						<!-- 日期 -->
 						<view class="date-info flex-col">
 							<view class="item-title">
 								<text>{{weatherInfo?.dateTitle || '--'}}</text>
@@ -44,8 +48,10 @@
 							</view>
 						</view>
 					</view>
+					<!-- 页面跳转 -->
 					<view class="btn-card border-box flex-row">
-						<view class="main-btn button flex-col">
+						<view class="main-btn button flex-col" :data-pagepath="pageInfo?.pages?.mainBtn_to"
+							@click="navigatorTo">
 							<text class="text">{{pageInfo.mainBtn?.text || '--'}}</text>
 							<text class="desc">{{pageInfo.mainBtn?.desc || '--'}}</text>
 							<text :class="['iconfont', pageInfo.mainBtn?.icon]"></text>
@@ -59,13 +65,14 @@
 							</view>
 						</view>
 					</view>
+					<!-- 标签页 -->
+					<view class="tap-bar border-box">
+						<uni-tap-bar class="tap-bar__component" :taps="pageInfo?.taps"></uni-tap-bar>
+					</view>
 				</view>
 			</view>
 		</scroll-view>
 		<uni-popup v-model:show="is_popup" height="65">
-			<view>
-
-			</view>
 		</uni-popup>
 		<uni-tab-bar class="tab-bar__component" @sendTabBarHeight="setContentPanelPaddingBottom" />
 	</view>
@@ -215,7 +222,7 @@
 				height: 280rpx;
 			}
 
-			.swiper-item {
+			.item {
 				width: 100%;
 				height: 100%;
 			}
@@ -260,7 +267,7 @@
 
 				.info-text {
 					align-items: center;
-					font-size: 22rpx;
+					font-size: 25rpx;
 				}
 			}
 
@@ -364,5 +371,11 @@
 				}
 			}
 		}
+	}
+
+	.tap-bar {
+		margin-top: $ele-margin;
+		border-radius: $ele-border-radius;
+		background-color: #fff;
 	}
 </style>

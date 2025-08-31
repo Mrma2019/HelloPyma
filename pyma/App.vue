@@ -6,6 +6,9 @@
 	import {
 		formatDate
 	} from '@/utils/format.js';
+	import {
+		getSystemInfo
+	} from '@/utils/system.js'
 
 	export default {
 		onLaunch: function() {
@@ -14,11 +17,12 @@
 			getWeather();
 			//时间
 			formatDate();
+			getSystemInfo();
 		},
 		onShow: function() {
 			console.log('App Show');
 			getWeather();
-			this.formatTimer = setInterval(()=>{
+			this.formatTimer = setInterval(() => {
 				formatDate();
 			}, 600);
 		},

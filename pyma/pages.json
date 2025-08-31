@@ -18,7 +18,7 @@
 		{
 			"path": "pages/info/info",
 			"style": {
-				"navigationBarTitleText": "我的"
+				"navigationStyle": "custom"
 			}
 		},
 		{

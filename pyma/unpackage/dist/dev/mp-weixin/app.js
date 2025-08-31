@@ -3,6 +3,7 @@ Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
 const common_vendor = require("./common/vendor.js");
 const utils_weather = require("./utils/weather.js");
 const utils_format = require("./utils/format.js");
+const utils_system = require("./utils/system.js");
 if (!Math) {
   "./pages/index/index.js";
   "./pages/home/home.js";
@@ -12,19 +13,20 @@ if (!Math) {
 }
 const _sfc_main = {
   onLaunch: function() {
-    common_vendor.index.__f__("log", "at App.vue:12", "App Launch");
+    common_vendor.index.__f__("log", "at App.vue:15", "App Launch");
     utils_weather.getWeather();
     utils_format.formatDate();
+    utils_system.getSystemInfo();
   },
   onShow: function() {
-    common_vendor.index.__f__("log", "at App.vue:19", "App Show");
+    common_vendor.index.__f__("log", "at App.vue:23", "App Show");
     utils_weather.getWeather();
     this.formatTimer = setInterval(() => {
       utils_format.formatDate();
     }, 600);
   },
   onHide: function() {
-    common_vendor.index.__f__("log", "at App.vue:26", "App Hide");
+    common_vendor.index.__f__("log", "at App.vue:30", "App Hide");
     clearInterval(this.formatTimer);
   },
   methods: {}

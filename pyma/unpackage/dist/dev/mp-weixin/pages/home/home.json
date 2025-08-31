@@ -2,6 +2,7 @@
   "navigationStyle": "custom",
   "usingComponents": {
     "uni-nav-bar": "../../components/nav-bar/nav-bar",
+    "uni-tap-bar": "../../components/tap-bar/tap-bar",
     "uni-popup": "../../components/popup/popup",
     "uni-tab-bar": "../../components/tab-bar/tab-bar"
   }

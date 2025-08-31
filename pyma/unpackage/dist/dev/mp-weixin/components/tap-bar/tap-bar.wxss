@@ -23,50 +23,55 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.popup-box.data-v-4bcd74eb {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-  background-color: #fff;
-  border-top-right-radius: 50rpx;
-  border-top-left-radius: 50rpx;
-  transition: transform 0.3s ease;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
-}
-.overlay.data-v-4bcd74eb {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  z-index: 999;
-}
-.header.data-v-4bcd74eb {
-  width: 100%;
-  height: 80rpx;
-  justify-content: center;
-  align-items: center;
-  font-size: 30rpx;
+.tap-bar.data-v-6c5c0562 {
   color: #1A4190;
-  position: relative;
 }
-.header .drag-bar.data-v-4bcd74eb {
-  width: 72rpx;
-  height: 8rpx;
-  background: #ccc;
-  border-radius: 4rpx;
-  margin: 0 auto;
-}
-.header .iconfont.data-v-4bcd74eb {
-  position: absolute;
-  right: calc(80rpx / 2);
-}
-.content-box.data-v-4bcd74eb {
+.tap-list.data-v-6c5c0562 {
   width: 100%;
-  height: calc(100% - 80rpx);
+  height: 70rpx;
+  align-items: center;
+  padding: 0 20rpx;
+}
+.tap-list .item.data-v-6c5c0562 {
+  height: 100%;
+  align-items: center;
+  margin: 0 10rpx;
+}
+.content-panel.data-v-6c5c0562 {
+  padding: 0 20rpx;
+  font-weight: normal !important;
+}
+.content-panel .swiper-item.data-v-6c5c0562 {
+  height: -webkit-max-content;
+  height: max-content;
+}
+.content-panel .item.data-v-6c5c0562 {
+  width: 100%;
+  border-bottom: 1px solid #eee;
+  position: relative;
+  align-items: center;
+  padding: 15rpx 0;
+}
+.content-panel .item.data-v-6c5c0562:last-child {
+  border-bottom: none;
+}
+.content-panel .iconfont.data-v-6c5c0562 {
+  font-size: 70rpx;
+  padding: 0 20rpx;
+}
+.content-panel .text.data-v-6c5c0562 {
+  font-size: 32rpx;
+  font-weight: bold;
+}
+.content-panel .desc.data-v-6c5c0562 {
+  font-size: 24rpx;
+  color: #aaa;
+}
+.content-panel .enter.data-v-6c5c0562 {
+  position: absolute;
+  right: 0;
+  font-size: 32rpx !important;
+}
+.active.data-v-6c5c0562 {
+  border-bottom: 6rpx solid #1A4190;
 }

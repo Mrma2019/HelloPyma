@@ -207,7 +207,7 @@
 
 			.icon {
 				font-size: 100rpx;
-				font-weight: normal;
+				font-weight: normal !important;
 			}
 
 			.text {

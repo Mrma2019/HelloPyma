@@ -45,7 +45,7 @@
     height: 280rpx;
 }
 }
-.box .swiper .swiper-item.data-v-07e72d3c {
+.box .swiper .item.data-v-07e72d3c {
   width: 100%;
   height: 100%;
 }
@@ -82,7 +82,7 @@
 }
 .content-panel .info__card .weather-info .info-text.data-v-07e72d3c {
   align-items: center;
-  font-size: 22rpx;
+  font-size: 25rpx;
 }
 .content-panel .info__card .date-info.data-v-07e72d3c {
   flex: 1;
@@ -168,4 +168,9 @@
 }
 .content-panel .btn-card .sub-btn__box .sub-btn .desc.data-v-07e72d3c {
   margin: 0 0 0 25rpx;
+}
+.tap-bar.data-v-07e72d3c {
+  margin-top: 20rpx;
+  border-radius: 20rpx;
+  background-color: #fff;
 }

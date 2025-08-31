@@ -67,9 +67,9 @@ to {
 }
 @font-face {
   font-family: "iconfont"; /* Project id 4847973 */
-  src: url('//at.alicdn.com/t/c/font_4847973_gjhn05p6hrh.woff2?t=1756561646834') format('woff2'),
-       url('//at.alicdn.com/t/c/font_4847973_gjhn05p6hrh.woff?t=1756561646834') format('woff'),
-       url('//at.alicdn.com/t/c/font_4847973_gjhn05p6hrh.ttf?t=1756561646834') format('truetype');
+  src: url('//at.alicdn.com/t/c/font_4847973_398pki9puqq.woff2?t=1756622552350') format('woff2'),
+       url('//at.alicdn.com/t/c/font_4847973_398pki9puqq.woff?t=1756622552350') format('woff'),
+       url('//at.alicdn.com/t/c/font_4847973_398pki9puqq.ttf?t=1756622552350') format('truetype');
 }
 .iconfont {
   font-family: "iconfont" !important;
@@ -77,6 +77,15 @@ to {
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+.icon-jiaoxuerenwu:before {
+  content: "\10213";
+}
+.icon-jiaoyukeben:before {
+  content: "\10214";
+}
+.icon-jiaoyujiaocai:before {
+  content: "\10215";
 }
 .icon-tab-height:before {
   content: "\e629";
