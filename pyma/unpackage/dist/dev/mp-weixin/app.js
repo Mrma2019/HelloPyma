@@ -5,7 +5,6 @@ const utils_weather = require("./utils/weather.js");
 const utils_format = require("./utils/format.js");
 const utils_system = require("./utils/system.js");
 if (!Math) {
-  "./pages/index/index.js";
   "./pages/home/home.js";
   "./pages/info/info.js";
   "./pages/weather/weather.js";

@@ -6,7 +6,8 @@ const common_assets = require("../../common/assets.js");
 const _sfc_main = {
   data() {
     return {
-      pageInfo: {}
+      pageInfo: {},
+      gap: 10
     };
   },
   methods: {},
@@ -42,7 +43,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       color: (_c = $data.pageInfo) == null ? void 0 : _c.navColor
     }),
     b: common_assets._imports_0,
-    c: ((_d = $options.systemInfo) == null ? void 0 : _d.navBarHeight) + "px"
+    c: ((_d = $options.systemInfo) == null ? void 0 : _d.navBarHeight) + $data.gap + "px"
   };
 }
 const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render]]);

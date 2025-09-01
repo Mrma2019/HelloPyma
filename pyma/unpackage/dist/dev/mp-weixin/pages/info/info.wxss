@@ -28,34 +28,47 @@
 }
 .info-card {
   width: 95%;
-  height: 250rpx;
-  background-color: #1A4190;
+  background-color: #fff;
   border-radius: 20rpx;
   color: #fff;
+  padding: 20rpx;
 }
-.info-card .avatar-wrapper {
+.info-card .info-wrapper {
   width: 100%;
-  margin-top: 35rpx;
-  padding: 0 35rpx;
-  align-items: center;
+  height: 300rpx;
+  margin-top: calc(120rpx / 2);
+  background-color: #1A4190;
+  border-radius: 20rpx;
+  position: relative;
 }
 .info-card .avatar {
-  width: 100rpx;
-  height: 100rpx;
-  border-radius: 50%;
+  position: absolute;
+  top: calc(120rpx / -2);
+  left: calc(120rpx / 2);
 }
-.info-card .text {
+.info-card .avatar .item-img {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+  border: 2px solid #fff;
+}
+.info-card .nickname {
+  width: 100%;
+  height: calc(120rpx / 2);
+  align-items: flex-end;
+  padding: 0 calc(120rpx/ 2) 0 calc(120rpx * 1.5 + 20rpx);
   font-size: 30rpx;
+  box-sizing: border-box;
+  position: relative;
+}
+.info-card .nickname .text {
+  flex: 1;
+  min-width: 0;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
 }
 .info-card .edit {
-  font-size: 20rpx;
-}
-.info-card .nickname {
-  flex: 1;
-  height: 100rpx;
-  padding-left: 35rpx;
-  justify-content: space-around;
+  position: absolute;
+  right: 20rpx;
 }

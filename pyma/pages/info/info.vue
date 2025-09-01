@@ -4,15 +4,14 @@
 			:color="pageInfo?.navColor"></uni-nav-bar>
 		<scroll-view id="page-content" scroll-y>
 			<view class="content-wrapper">
-				<view class="info-card border-box flex-col" :style="{marginTop: systemInfo?.navBarHeight + 'px'}">
-					<view class="avatar-wrapper border-box flex-row">
-						<image class="avatar" src="/static/logo.jpg" mode="widthFix"></image>
-						<view class="nickname border-box flex-col">
-							<text class="text">昵称:PyMa</text>
-							<view class="edit flex-row" style="align-items: center;">
-								<text class="iconfont icon-bianji" style="color: #ddd;"></text>
-								<text>编辑资料</text>
-							</view>
+				<view class="info-card border-box flex-col" :style="{marginTop: systemInfo?.navBarHeight + gap + 'px'}">
+					<view class="info-wrapper flex-col">
+						<view class="avatar">
+							<image class="item-img" src="/static/logo.jpg" mode="widthFix"></image>
+						</view>
+						<view class="nickname flex-row">
+							<text class="text">昵称：PyMa </text>
+							<text class="edit iconfont icon-bianji1"></text>
 						</view>
 					</view>
 				</view>
@@ -33,7 +32,8 @@
 	export default {
 		data() {
 			return {
-				pageInfo: {}
+				pageInfo: {},
+				gap: 10
 			}
 		},
 		methods: {
@@ -56,6 +56,7 @@
 
 <style lang="scss">
 	$ele-border-radius: 20rpx;
+	$avatar-width: 120rpx;
 
 	::v-deep(.nav-bar) {
 		background-color: $uni-page-bg-color !important;
@@ -63,40 +64,54 @@
 
 	.info-card {
 		width: 95%;
-		height: 250rpx;
-		background-color: $uni-color-primary;
+		background-color: #fff;
 		border-radius: $ele-border-radius;
 		color: #fff;
+		padding: 20rpx;
 
-		.avatar-wrapper {
+		.info-wrapper {
 			width: 100%;
-			margin-top: 35rpx;
-			padding: 0 35rpx;
-			align-items: center;
+			height: 300rpx;
+			margin-top: calc(#{$avatar-width} / 2);
+			background-color: $uni-color-primary;
+			border-radius: $ele-border-radius;
+			position: relative;
 		}
 
 		.avatar {
-			width: 100rpx;
-			height: 100rpx;
-			border-radius: 50%;
-		}
+			position: absolute;
+			top: calc(#{$avatar-width} / -2);
+			left: calc(#{$avatar-width} / 2);
 
-		.text {
-			font-size: 30rpx;
-			white-space: nowrap;
-			text-overflow: ellipsis;
-			overflow: hidden;
-		}
-
-		.edit {
-			font-size: 20rpx;
+			.item-img {
+				width: $avatar-width;
+				height: $avatar-width;
+				border-radius: 50%;
+				border: 2px solid #fff;
+			}
 		}
 
 		.nickname {
-			flex: 1;
-			height: 100rpx;
-			padding-left: 35rpx;
-			justify-content: space-around;
+			width: 100%;
+			height: calc(#{$avatar-width} / 2);
+			align-items: flex-end;
+			padding: 0 calc(#{$avatar-width}/ 2) 0 calc(#{$avatar-width} * 1.5 + 20rpx);
+			font-size: 30rpx;
+			box-sizing: border-box;
+			position: relative;
+
+			.text {
+				flex: 1;
+				min-width: 0;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+				overflow: hidden;
+			}
+		}
+
+		.edit {
+			position: absolute;
+			right: 20rpx;
 		}
 	}
 </style>

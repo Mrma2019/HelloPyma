@@ -388,12 +388,12 @@
 		font-size: 80rpx;
 		color: #fff;
 		box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
-		transition: transform 0.3 ease;
+		transition: transform 0.25s ease-out;
+		will-change: transform;
 	}
 
 	.btn-hover {
-		transform: scale(1.1);
-		transition: transform 0.1s ease;
+		transform: scale(1.2);
 	}
 
 	.tap-bar {
