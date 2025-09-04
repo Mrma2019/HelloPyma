@@ -114,7 +114,7 @@ if (!Math) {
   (_easycom_uni_nav_bar + _easycom_uni_tap_bar + _easycom_uni_popup + _easycom_uni_tab_bar)();
 }
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
-  var _a, _b, _c, _d, _e, _f, _g, _h, _i, _j, _k, _l, _m, _n, _o, _p, _q, _r;
+  var _a, _b, _c, _d, _e, _f, _g, _h, _i, _j, _k, _l, _m, _n, _o, _p;
   return {
     a: common_vendor.o($options.getNavBarHeight),
     b: common_vendor.p({
@@ -139,9 +139,9 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     k: common_vendor.t($options.weatherInfo.text),
     l: common_vendor.t($options.weatherInfo.windDir),
     m: common_vendor.t($options.weatherInfo.humidity),
-    n: (_j = (_i = $data.pageInfo) == null ? void 0 : _i.pages) == null ? void 0 : _j.info_to,
+    n: (_i = $data.pageInfo.pages) == null ? void 0 : _i.info_to,
     o: common_vendor.o((...args) => $options.navigatorTo && $options.navigatorTo(...args)),
-    p: common_vendor.t(((_k = $options.weatherInfo) == null ? void 0 : _k.dateTitle) || "--"),
+    p: common_vendor.t(((_j = $options.weatherInfo) == null ? void 0 : _j.dateTitle) || "--"),
     q: common_vendor.f($options.date, (item, index, i0) => {
       return {
         a: common_vendor.t(item["value"] || "--"),
@@ -149,12 +149,12 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
         c: index
       };
     }),
-    r: common_vendor.t(((_l = $data.pageInfo.mainBtn) == null ? void 0 : _l.text) || "--"),
-    s: common_vendor.t(((_m = $data.pageInfo.mainBtn) == null ? void 0 : _m.desc) || "--"),
-    t: common_vendor.n((_n = $data.pageInfo.mainBtn) == null ? void 0 : _n.icon),
-    v: (_p = (_o = $data.pageInfo) == null ? void 0 : _o.pages) == null ? void 0 : _p.mainBtn_to,
+    r: common_vendor.t(((_k = $data.pageInfo.mainBtn) == null ? void 0 : _k.text) || "--"),
+    s: common_vendor.t(((_l = $data.pageInfo.mainBtn) == null ? void 0 : _l.desc) || "--"),
+    t: common_vendor.n((_m = $data.pageInfo.mainBtn) == null ? void 0 : _m.icon),
+    v: (_n = $data.pageInfo.pages) == null ? void 0 : _n.mainBtn_to,
     w: common_vendor.o((...args) => $options.navigatorTo && $options.navigatorTo(...args)),
-    x: common_vendor.f((_q = $data.pageInfo) == null ? void 0 : _q.subBtns, (item, index, i0) => {
+    x: common_vendor.f((_o = $data.pageInfo) == null ? void 0 : _o.subBtns, (item, index, i0) => {
       return {
         a: common_vendor.t((item == null ? void 0 : item.text) || "--"),
         b: common_vendor.t((item == null ? void 0 : item.desc) || "--"),
@@ -164,7 +164,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       };
     }),
     y: common_vendor.p({
-      taps: (_r = $data.pageInfo) == null ? void 0 : _r.taps
+      taps: (_p = $data.pageInfo) == null ? void 0 : _p.taps
     }),
     z: $data.contentPanelPaddingBottom + "px",
     A: $data.refresherTriggered,

@@ -127,7 +127,7 @@
 			},
 			date() {
 				const data = formatStore.data;
-				return `(${data.prefix}${data.date})`;
+				return `(${data.prefix}${data.date} ${data.day})`;
 			}
 		}
 	}

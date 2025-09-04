@@ -18,7 +18,7 @@
 				<view class="content-panel" :style="{marginBottom: contentPanelPaddingBottom + 'px'} ">
 					<view class="info__card border-box flex-row">
 						<!-- 天气信息 -->
-						<view class="weather-info flex-col" :data-pagepath="pageInfo?.pages?.info_to"
+						<view class="weather-info flex-col" :data-pagepath="pageInfo.pages?.info_to"
 							@click="navigatorTo">
 							<view class="flex-row" style="align-items: center;">
 								<text
@@ -50,7 +50,7 @@
 					</view>
 					<!-- 页面跳转 -->
 					<view class="btn-card border-box flex-row">
-						<view class="main-btn button flex-col" :data-pagepath="pageInfo?.pages?.mainBtn_to"
+						<view class="main-btn button flex-col" :data-pagepath="pageInfo.pages?.mainBtn_to"
 							@click="navigatorTo">
 							<text class="text">{{pageInfo.mainBtn?.text || '--'}}</text>
 							<text class="desc">{{pageInfo.mainBtn?.desc || '--'}}</text>
@@ -72,7 +72,7 @@
 				</view>
 			</view>
 		</scroll-view>
-		<view class="btn-post flex-row" hover-class="btn-hover"
+		<view class="btn-post flex-row" hover-class="btn-post__hover"
 			:style="{bottom: contentPanelPaddingBottom + 20 + 'px', right: 20 + 'px'}">
 			<text class="iconfont icon-fabu-"></text>
 		</view>
@@ -392,7 +392,7 @@
 		will-change: transform;
 	}
 
-	.btn-hover {
+	.btn-post__hover {
 		transform: scale(1.2);
 	}
 

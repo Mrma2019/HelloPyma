@@ -15,13 +15,11 @@
 			console.log('App Launch');
 			//天气
 			getWeather();
-			//时间
 			formatDate();
 			getSystemInfo();
 		},
 		onShow: function() {
 			console.log('App Show');
-			getWeather();
 			this.formatTimer = setInterval(() => {
 				formatDate();
 			}, 600);

@@ -43,6 +43,7 @@ export async function getWeather() {
 	})
 }
 
+// 获取实时天气
 export async function getWeatherByAdcode(code) {
 	return new Promise((resolve, reject) => {
 		uni.request({
@@ -70,6 +71,7 @@ export async function getWeatherByAdcode(code) {
 	})
 }
 
+// 获取格点天气
 export async function getGridWeatherByAdcode(lon, lat) {
 	return new Promise((resolve, reject) => {
 		uni.request({
@@ -92,6 +94,7 @@ export async function getGridWeatherByAdcode(lon, lat) {
 	})
 }
 
+// 获取指标
 export async function getIndices(lon, lat) {
 	return new Promise((resolve, reject) => {
 		uni.request({

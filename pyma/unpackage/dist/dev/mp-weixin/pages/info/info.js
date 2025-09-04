@@ -17,7 +17,7 @@ const _sfc_main = {
   computed: {
     systemInfo() {
       const data = store_systemStore.systemStore.data;
-      common_vendor.index.__f__("log", "at pages/info/info.vue:48", "inof", data);
+      common_vendor.index.__f__("log", "at pages/info/info.vue:43", "inof", data);
       return {
         navBarHeight: data.navBarHeight
       };

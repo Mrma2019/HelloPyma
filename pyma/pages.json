@@ -31,7 +31,8 @@
 		{
 			"path": "pages/square/square",
 			"style": {
-				"navigationBarTitleText": ""
+				"navigationBarTitleText": "",
+				"navigationStyle": "custom"
 			}
 		}
 	],

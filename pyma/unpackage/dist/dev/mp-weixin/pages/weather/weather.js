@@ -47,7 +47,7 @@ const _sfc_main = {
     },
     date() {
       const data = store_formatStore.formatStore.data;
-      return `(${data.prefix}${data.date})`;
+      return `(${data.prefix}${data.date} ${data.day})`;
     }
   }
 };
