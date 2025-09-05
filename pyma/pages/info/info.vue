@@ -7,7 +7,9 @@
 					<view class="avatar-wrapper flex-row">
 						<image class="avatar" src="/static/logo.jpg" mode="widthFix"></image>
 						<text class="nickname">PyMa</text>
-						<text class="menu-btn iconfont icon-a-xiala2"></text>
+						<view class="menu-btn flex-row" hover-class="menu-btn__hover">
+							<text class="iconfont icon-a-xiala2"></text>
+						</view>
 					</view>
 				</view>
 			</view>
@@ -84,21 +86,20 @@
 		.menu-btn {
 			width: 40rpx;
 			height: 40rpx;
-			display: inline-block;
 			position: absolute;
 			right: 40rpx;
 			background-color: #fff;
 			border-radius: 50%;
 			color: $uni-color-primary;
-			text-align: center;
-			line-height: 40rpx;
+			justify-content: center;
+			align-items: center;
 			box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
 			transition: transform 0.25s ease-out;
 			will-change: transform;
+		}
 
-			&:hover {
-				transform: scale(1.2);
-			}
+		.menu-btn__hover {
+			transform: scale(1.2);
 		}
 
 

@@ -15,10 +15,15 @@ export function formatDate(dateStr) {
 	const hours = date.getHours().toString().padStart(2, "0");
 	const minutes = date.getMinutes().toString().padStart(2, "0");
 
-	return formatStore.data = {
+	// console.log('format', `${date_} ${hours} ${minutes}`);
+	const data = {
 		date: `${year}-${month}-${date_}`,
 		time: `${hours}:${minutes}`,
 		day,
 		prefix
-	};
+	}
+
+	formatStore.setData(data);
+
+	return data;
 }

@@ -14,14 +14,14 @@ const _sfc_main = {
   onLaunch: function() {
     common_vendor.index.__f__("log", "at App.vue:15", "App Launch");
     utils_weather.getWeather();
-    utils_format.formatDate();
     utils_system.getSystemInfo();
-  },
-  onShow: function() {
-    common_vendor.index.__f__("log", "at App.vue:22", "App Show");
+    utils_format.formatDate();
     this.formatTimer = setInterval(() => {
       utils_format.formatDate();
     }, 600);
+  },
+  onShow: function() {
+    common_vendor.index.__f__("log", "at App.vue:25", "App Show");
   },
   onHide: function() {
     common_vendor.index.__f__("log", "at App.vue:28", "App Hide");

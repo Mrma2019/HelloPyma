@@ -71,9 +71,9 @@
 	import {
 		weatherStore
 	} from '@/store/weatherStore.js';
-	import {
-		formatStore
-	} from '@/store/formatStore.js';
+	// import {
+	// 	formatStore
+	// } from '@/store/formatStore.js';
 	import {
 		getPageInfo
 	} from './index.js';
@@ -87,6 +87,7 @@
 				pageInfo: {},
 				navigatorHeight: 0,
 				footer: '数据来源：和风天气Api',
+				date: '2025-08-31 周五'
 			}
 		},
 		methods: {
@@ -96,6 +97,10 @@
 		},
 		async onLoad() {
 			this.pageInfo = await getPageInfo();
+		},
+
+		onShow() {
+			console.log(this.date);
 		},
 		computed: {
 			weatherInfo() {
@@ -125,10 +130,10 @@
 					feelsLike: `${data?.feelsLike || '--'}℃`
 				};
 			},
-			date() {
-				const data = formatStore.data;
-				return `(${data.prefix}${data.date} ${data.day})`;
-			}
+			// date() {
+			// 	const data = formatStore.store.data;
+			// 	return `(${data.prefix}${data.date} ${data.day})`;
+			// }
 		}
 	}
 </script>

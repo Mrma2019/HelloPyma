@@ -10,12 +10,14 @@ function formatDate(dateStr) {
   const day = days[date.getDay()];
   const hours = date.getHours().toString().padStart(2, "0");
   const minutes = date.getMinutes().toString().padStart(2, "0");
-  return store_formatStore.formatStore.data = {
+  const data = {
     date: `${year}-${month}-${date_}`,
     time: `${hours}:${minutes}`,
     day,
     prefix
   };
+  store_formatStore.formatStore.setData(data);
+  return data;
 }
 exports.formatDate = formatDate;
 //# sourceMappingURL=../../.sourcemap/mp-weixin/utils/format.js.map

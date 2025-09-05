@@ -15,14 +15,14 @@
 			console.log('App Launch');
 			//天气
 			getWeather();
-			formatDate();
 			getSystemInfo();
-		},
-		onShow: function() {
-			console.log('App Show');
+			formatDate();
 			this.formatTimer = setInterval(() => {
 				formatDate();
 			}, 600);
+		},
+		onShow: function() {
+			console.log('App Show');
 		},
 		onHide: function() {
 			console.log('App Hide');

@@ -1,15 +1,15 @@
 "use strict";
+const common_vendor = require("../../common/vendor.js");
 const store_weatherStore = require("../../store/weatherStore.js");
-const store_formatStore = require("../../store/formatStore.js");
 const pages_weather_index = require("./index.js");
 const utils_format = require("../../utils/format.js");
-const common_vendor = require("../../common/vendor.js");
 const _sfc_main = {
   data() {
     return {
       pageInfo: {},
       navigatorHeight: 0,
-      footer: "数据来源：和风天气Api"
+      footer: "数据来源：和风天气Api",
+      date: "2025-08-31 周五"
     };
   },
   methods: {
@@ -19,6 +19,9 @@ const _sfc_main = {
   },
   async onLoad() {
     this.pageInfo = await pages_weather_index.getPageInfo();
+  },
+  onShow() {
+    common_vendor.index.__f__("log", "at pages/weather/weather.vue:103", this.date);
   },
   computed: {
     weatherInfo() {
@@ -44,11 +47,11 @@ const _sfc_main = {
         windSpeed: `${(data == null ? void 0 : data.windSpeed) || "--"}Km/h`,
         feelsLike: `${(data == null ? void 0 : data.feelsLike) || "--"}℃`
       };
-    },
-    date() {
-      const data = store_formatStore.formatStore.data;
-      return `(${data.prefix}${data.date} ${data.day})`;
     }
+    // date() {
+    // 	const data = formatStore.store.data;
+    // 	return `(${data.prefix}${data.date} ${data.day})`;
+    // }
   }
 };
 if (!Array) {
@@ -71,7 +74,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       ["is-back"]: (_d = $data.pageInfo) == null ? void 0 : _d.isBack
     }),
     c: common_vendor.t(((_e = $options.weatherInfo.location) == null ? void 0 : _e.name) || "--"),
-    d: common_vendor.t($options.date || "--"),
+    d: common_vendor.t($data.date || "--"),
     e: common_vendor.t(((_f = $options.weatherInfo) == null ? void 0 : _f.updateTime) || "--"),
     f: common_vendor.t(((_g = $options.weatherInfo) == null ? void 0 : _g.temp) || "--"),
     g: common_vendor.n("qi-" + ((_h = $options.weatherInfo) == null ? void 0 : _h.icon)),

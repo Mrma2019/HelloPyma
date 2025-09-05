@@ -74,7 +74,8 @@ const _sfc_main = {
       };
     },
     date() {
-      const date = store_formatStore.formatStore.data.date.split("-").map((item, index) => {
+      const data = store_formatStore.formatStore.store.data;
+      const date = data.date.split("-").map((item, index) => {
         let label = "";
         switch (index) {
           case 0:
@@ -95,7 +96,8 @@ const _sfc_main = {
       return date;
     },
     time() {
-      return store_formatStore.formatStore.data.time;
+      const data = store_formatStore.formatStore.store.data;
+      return data.time;
     }
   }
 };

@@ -174,7 +174,9 @@
 				}
 			},
 			date() {
-				const date = (formatStore.data.date.split('-')).map((item, index) => {
+				const data = formatStore.store.data;
+				// console.log(data);
+				const date = (data.date.split('-')).map((item, index) => {
 					let label = '';
 					switch (index) {
 						case 0:
@@ -195,7 +197,8 @@
 				return date
 			},
 			time() {
-				return formatStore.data.time;
+				const data = formatStore.store.data;
+				return data.time;
 			}
 		}
 	}
