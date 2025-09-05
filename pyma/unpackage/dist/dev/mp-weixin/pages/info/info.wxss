@@ -38,6 +38,7 @@
   align-items: center;
   padding: 20rpx;
   position: relative;
+  border-bottom: 1px solid #aaa;
 }
 .profile-card .avatar {
   width: 100rpx;
@@ -65,4 +66,22 @@
 }
 .profile-card .menu-btn__hover {
   transform: scale(1.2);
+}
+.profile-card .popup-solt {
+  width: 100% px;
+  height: -webkit-max-content;
+  height: max-content;
+}
+.profile-card .avatar-img {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  overflow: hidden;
+  display: block;
+  /* 防止 button 默认布局影响 */
+}
+.profile-card .choose-avatar {
+  padding: 0;
+  border: none;
+  background: transparent;
 }

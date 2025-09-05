@@ -5,8 +5,7 @@
 			<view v-if="show" class="overlay" @click="close"></view>
 			<!-- 弹窗 -->
 			<view :class="['popup-box']" :style="[style]">
-				<view class="header border-box flex-row" @touchstart="onTouchStart"
-					@touchmove.stop.prevent="onTouchMove" @touchend="onTouchEnd">
+				<view class="header border-box flex-row" @touchmove.stop.prevent>
 					<view class="drag-bar"></view>
 					<text class="iconfont icon-guanbi1" @click="close"></text>
 				</view>
@@ -23,7 +22,6 @@
 		name: "popup",
 		data() {
 			return {
-				startY: 0,
 				translateY: 0
 			};
 		},
@@ -40,28 +38,6 @@
 		methods: {
 			close() {
 				this.$emit('update:show', false);
-			},
-			onTouchStart(e) {
-				if (!this.show) return;
-				this.startY = e.touches[0].clientY;
-			},
-			onTouchMove(e) {
-				if (!this.show) return;
-				const currentY = e.touches[0].clientY;
-				const deltaY = currentY - this.startY;
-				if (deltaY > 0) { // 只允许下拉
-					this.translateY = deltaY;
-				}
-			},
-			onTouchEnd() {
-				const threshold = 100; // 下拉超过100px关闭
-				if (this.translateY > threshold) {
-					this.close();
-					console.log(this.translateY);
-				} else {
-					this.translateY = 0; // 回弹
-					console.log(this.translateY);
-				}
 			}
 		},
 		computed: {

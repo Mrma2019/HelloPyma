@@ -7,13 +7,26 @@
 					<view class="avatar-wrapper flex-row">
 						<image class="avatar" src="/static/logo.jpg" mode="widthFix"></image>
 						<text class="nickname">PyMa</text>
-						<view class="menu-btn flex-row" hover-class="menu-btn__hover">
+						<view class="menu-btn flex-row" hover-class="menu-btn__hover" @click="onClick">
 							<text class="iconfont icon-a-xiala2"></text>
 						</view>
+					</view>
+					<view>
+
 					</view>
 				</view>
 			</view>
 		</scroll-view>
+		<uni-popup v-model:show="is_popup" height="40">
+			<view class="popup-solt flex-col">
+				<button class="choose-avatar" open-type="chooseAvatar" @chooseavatar="onChooseAvatar">
+					<image class="avatar-img" :src="avaterUrl || defaultAvaterUrl" mode="widthFix"></image>
+				</button>
+				<view v-for="item, index in 100" :key="index">
+					<text>{{item}}</text>
+				</view>
+			</view>
+		</uni-popup>
 		<uni-tab-bar></uni-tab-bar>
 	</view>
 </template>
@@ -30,11 +43,23 @@
 		data() {
 			return {
 				pageInfo: {},
-				gap: 10
+				gap: 10,
+				is_popup: false,
+				avaterUrl: '',
+				defaultAvaterUrl: '/static/logo.jpg'
 			}
 		},
 		methods: {
-
+			onClick() {
+				this.is_popup = true
+			},
+			onChooseAvatar(e) {
+				const {
+					avaterUrl
+				} = e.detail;
+				console.log('avatarUrl', avaterUrl);
+				this.avaterUrl = avaterUrl;
+			}
 		},
 		async mounted() {
 			this.pageInfo = await getPageInfo();
@@ -69,6 +94,7 @@
 			align-items: center;
 			padding: 20rpx;
 			position: relative;
+			border-bottom: 1px solid #aaa;
 		}
 
 		.avatar {
@@ -102,6 +128,24 @@
 			transform: scale(1.2);
 		}
 
+		.popup-solt {
+			width: 100%px;
+			height: max-content;
+		}
 
+		.avatar-img {
+			width: 100rpx;
+			height: 100rpx;
+			border-radius: 50%;
+			overflow: hidden;
+			display: block;
+			/* 防止 button 默认布局影响 */
+		}
+
+		.choose-avatar {
+			padding: 0;
+			border: none;
+			background: transparent;
+		}
 	}
 </style>
